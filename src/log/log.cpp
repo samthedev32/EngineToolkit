@@ -1,16 +1,28 @@
 #include <EngineToolkit/log/log.hpp>
+#include <bits/types/time_t.h>
 #include <cstdarg>
 #include <cstdio>
+#include <ctime>
 
 namespace Log {
+
+void stime(char *str) {
+  time_t rawtime;
+  struct tm *timeinfo;
+  time(&rawtime);
+  timeinfo = localtime(&rawtime);
+
+  sprintf(str, "%d.%d.%d %d:%d:%d", timeinfo->tm_year + 1900,
+          timeinfo->tm_mon + 1, timeinfo->tm_mday, timeinfo->tm_hour,
+          timeinfo->tm_min, timeinfo->tm_sec);
+}
 
 void vcustom(char type, const char *tag, const char *message, va_list args) {
   // TODO: tag cutting
 
   char msg[1024];
   char date[32];
-  // stime(date);
-  // TODO
+  stime(date);
 
   sprintf(msg, "[%s] %s [%c]  %s\n", date, tag, type, message);
 
