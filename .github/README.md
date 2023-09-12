@@ -6,7 +6,7 @@
 
 ### Features
 
-- [1, 2, 3 & 4 Dimensional Vectors](../include/EngineToolkit/vector)
+- [1, 2, 3, 4 & X Dimensional Vectors](../include/EngineToolkit/vector)
 - [3x3 & 4x4 Matrices](../include/EngineToolkit/matrix)
 - [Logger](../include/EngineToolkit/log)
 
