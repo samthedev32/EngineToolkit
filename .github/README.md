@@ -6,8 +6,8 @@
 
 ### Features
 
-- [1, 2, 3 & 4 Dimensional Vectors](include/EngineToolkit/vector)
-- [3x3 & 4x4 Matrices](include/EngineToolkit/matrix)
+- [1, 2, 3 & 4 Dimensional Vectors](../include/EngineToolkit/vector)
+- [3x3 & 4x4 Matrices](../include/EngineToolkit/matrix)
 
 ## Documentation
 
