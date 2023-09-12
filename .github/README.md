@@ -8,7 +8,26 @@
 
 ### Setup
 
+<details>
+<summary>Linux (Debian Based)</summary>
+
 > TODO
+
+</details>
+
+<details>
+<summary>Linux (Arch Based)</summary>
+
+> TODO
+
+</details>
+
+<details>
+<summary>Windows</summary>
+
+> TODO
+
+</details>
 
 ### Usage
 
