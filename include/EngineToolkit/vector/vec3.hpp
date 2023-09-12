@@ -28,59 +28,28 @@ struct vec3 {
 
   // ---- Constructors
 
-  // vec3(x, y, z) Constructor
   vec3(vec1 x, vec1 y, vec1 z = 0.0f);
-
-  // vec3({x, y, z}) Constructor
   vec3(vec1 xyz[3]);
-
-  // vec3(xyz) Constructor
   vec3(vec1 xyz = 0.0f);
-
-  // vec3(vec2) Constructor
   vec3(vec2 v);
 
   // ---- Operator Overloading
 
-  // [+] Operator
   vec3 operator+(const vec3 v) const;
-
-  // [-] Operator
   vec3 operator-(const vec3 v) const;
-
-  // [*] Operator
   vec3 operator*(const vec3 v) const;
-
-  // [/] Operator
   vec3 operator/(const vec3 v) const;
 
-  // [+=] Operator
   void operator+=(const vec3 v);
-
-  // [-=] Operator
   void operator-=(const vec3 v);
-
-  // [*=] Operator
   void operator*=(const vec3 v);
-
-  // [/=] Operator
   void operator/=(const vec3 v);
 
-  // [=] Operator
   void operator=(const vec3 v);
-
-  // [==] Operator
   bool operator==(const vec3 v) const;
-
-  // [!=] Operator
   bool operator!=(const vec3 v) const;
 
-  // ---- Indexing
-
-  // vec2[id] Get Operator
   vec1 operator[](int i) const;
-
-  // vec2[id] Set Operator
   vec1 &operator[](int i);
 
   // ---- Functions (Instance Methods)

@@ -24,56 +24,29 @@ struct vec2 {
 
   // ---- Constructors
 
-  // vec2(x, y) Constructor
   vec2(vec1 x, vec1 y);
-
-  // vec2({x, y}) Constructor
   vec2(vec1 xy[2]);
-
-  // vec2(xy) Constructor
   vec2(vec1 xy = 0.0f);
 
   // ---- Operator Overloading
 
-  // [+] Operator
   vec2 operator+(const vec2 v) const;
-
-  // [-] Operator
   vec2 operator-(const vec2 v) const;
-
-  // [*] Operator
   vec2 operator*(const vec2 v) const;
-
-  // [/] Operator
   vec2 operator/(const vec2 v) const;
 
-  // [+=] Operator
   void operator+=(const vec2 v);
-
-  // [-=] Operator
   void operator-=(const vec2 v);
-
-  // [*=] Operator
   void operator*=(const vec2 v);
-
-  // [/=] Operator
   void operator/=(const vec2 v);
 
-  // [=] Operator
   void operator=(const vec2 v);
-
-  // [==] Operator
   bool operator==(const vec2 v) const;
-
-  // [!=] Operator
   bool operator!=(const vec2 v) const;
 
   // ---- Indexing
 
-  // vec2[id] Get Operator
   vec1 operator[](int i) const;
-
-  // vec2[id] Set Operator
   vec1 &operator[](int i);
 
   // ---- Functions (Instance Methods)

@@ -115,7 +115,7 @@ vec1 vec4::length() { return sqrtf(vec4::dot(*this, *this)); }
 
 // Distance
 vec1 vec4::distance(vec4 v) {
-  vec4 dist = *this - b;
+  vec4 dist = *this - v;
   return sqrt(dist.x * dist.x + dist.y * dist.y + dist.z * dist.z);
 }
 

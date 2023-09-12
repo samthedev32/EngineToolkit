@@ -24,62 +24,31 @@ struct vec4 {
 
   // ---- Constructors
 
-  // vec4(x, y, z, w) Constructor
   vec4(vec1 x, vec1 y, vec1 z, vec1 w = 0.0f);
-
-  // vec4({x, y, z, w}) Constructor
   vec4(vec1 xyzw[4]);
-
-  // vec4(xyzw) Constructor
   vec4(vec1 xyzw = 0.0f);
-
-  // vec4(vec2) Constructor
   vec4(vec2 v);
-
-  // vec4(vec3) Constructor
   vec4(vec3 v);
 
   // ---- Operator Overloading
 
-  // [+] Operator
   vec4 operator+(const vec4 v) const;
-
-  // [-] Operator
   vec4 operator-(const vec4 v) const;
-
-  // [*] Operator
   vec4 operator*(const vec4 v) const;
-
-  // [/] Operator
   vec4 operator/(const vec4 v) const;
 
-  // [+=] Operator
   void operator+=(const vec4 v);
-
-  // [-=] Operator
   void operator-=(const vec4 v);
-
-  // [*=] Operator
   void operator*=(const vec4 v);
-
-  // [/=] Operator
   void operator/=(const vec4 v);
 
-  // [=] Operator
   void operator=(const vec4 v);
-
-  // [==] Operator
   bool operator==(const vec4 v) const;
-
-  // [!=] Operator
   bool operator!=(const vec4 v) const;
 
   // ---- Indexing
 
-  // vec2[id] Get Operator
   vec1 operator[](int i) const;
-
-  // vec2[id] Set Operator
   vec1 &operator[](int i);
 
   // ---- Functions (Instance Methods)

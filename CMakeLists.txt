@@ -9,6 +9,7 @@ set(SOURCES
     src/log/log.cpp
 
     # Vector
+    src/vector/vec.cpp
     src/vector/vec1.cpp
     src/vector/vec2.cpp
     src/vector/vec3.cpp
