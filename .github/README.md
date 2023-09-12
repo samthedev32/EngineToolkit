@@ -35,7 +35,6 @@
 
 ### Macros
 
-
 | Macro  | Description |
 | --- | --- |
 | `ETK_VECTOR_DOUBLE_PRECISION`  | Use Double-Precision Floating-Point Values for Vectors  |
