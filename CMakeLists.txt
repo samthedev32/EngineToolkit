@@ -5,6 +5,9 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 
 # Source Files
 set(SOURCES
+    # Log
+    src/log/log.cpp
+
     # Vector
     src/vector/vec1.cpp
     src/vector/vec2.cpp
