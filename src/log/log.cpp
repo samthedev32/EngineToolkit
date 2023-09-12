@@ -4,6 +4,8 @@
 #include <cstdio>
 #include <ctime>
 
+namespace EngineToolkit {
+
 namespace Log {
 
 void stime(char *str) {
@@ -72,20 +74,4 @@ void error(const char *tag, const char *message, ...) {
 
 } // namespace Log
 
-// #include <Cutil/log.h>
-
-// #include <stdio.h>
-// #include <string.h>
-// #include <time.h>
-
-// // Get Time as String
-// void stime(char *str) {
-//   time_t rawtime;
-//   struct tm *timeinfo;
-//   time(&rawtime);
-//   timeinfo = localtime(&rawtime);
-
-//   sprintf(str, "%d.%d.%d %d:%d:%d", timeinfo->tm_year + 1900,
-//           timeinfo->tm_mon + 1, timeinfo->tm_mday, timeinfo->tm_hour,
-//           timeinfo->tm_min, timeinfo->tm_sec);
-// }
+} // namespace EngineToolkit

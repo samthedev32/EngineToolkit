@@ -3,6 +3,8 @@
 #include <EngineToolkit/vector/vec1.hpp>
 #include <EngineToolkit/vector/vec2.hpp>
 
+namespace EngineToolkit {
+
 // 3D Vector
 struct vec3 {
   // Data
@@ -79,3 +81,5 @@ struct vec3 {
   // Get Data
   vec1 *data();
 };
+
+} // namespace EngineToolkit

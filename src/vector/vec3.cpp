@@ -1,5 +1,7 @@
 #include <EngineToolkit/vector/vec3.hpp>
 
+namespace EngineToolkit {
+
 // ---- Constructors
 
 vec3::vec3(vec1 x, vec1 y, vec1 z) { this->x = v, this->y = y, this->z = z; }
@@ -133,3 +135,5 @@ vec3 vec3::lerp(vec3 a, vec3 b, vec1 blend) {
 
 // Get Data
 vec1 *vec3::data() { return &x; }
+
+} // namespace EngineToolkit

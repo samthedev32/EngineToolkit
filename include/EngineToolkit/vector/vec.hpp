@@ -2,6 +2,8 @@
 
 #include <EngineToolkit/vector/vec1.hpp>
 
+namespace EngineToolkit {
+
 // XD Vector (X Dimension Vector)
 // This is not meant to be used, only for fun/experimental purposes
 template <unsigned int dimensions> struct vec {
@@ -48,3 +50,5 @@ template <unsigned int dimensions> struct vec {
   // Linearly Interpolate
   static vec lerp(vec a, vec b, vec1 blend);
 };
+
+} // namespace EngineToolkit

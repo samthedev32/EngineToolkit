@@ -1,3 +1,7 @@
 #include <EngineToolkit/vector/vec1.hpp>
 
-// NOTHING
+namespace EngineToolkit {
+
+// TODO: something
+
+} // namespace EngineToolkit

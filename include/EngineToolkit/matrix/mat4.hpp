@@ -2,6 +2,8 @@
 
 #include <EngineToolkit/vector/vector.hpp>
 
+namespace EngineToolkit {
+
 // 4 by 4 Matrix
 struct mat4 {
   // Data
@@ -38,3 +40,5 @@ struct mat4 {
 
   static mat4 lookat(vec3 pos, vec3 target, vec3 up = {0.0f, 1.0f, 0.0f});
 };
+
+} // namespace EngineToolkit

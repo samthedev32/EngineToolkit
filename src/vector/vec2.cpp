@@ -2,6 +2,8 @@
 
 #include <emmintrin.h>
 
+namespace EngineToolkit {
+
 // ---- Constructors
 
 vec2::vec2(vec1 x, vec1 y) { this->x = x, this->y = y; }
@@ -119,3 +121,5 @@ vec2 vec2::lerp(vec2 a, vec2 b, vec1 blend) {
 
 // Get Data
 vec1 *vec2::data() { return &x; }
+
+} // namespace EngineToolkit

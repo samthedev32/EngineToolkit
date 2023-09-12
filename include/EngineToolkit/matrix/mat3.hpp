@@ -4,6 +4,8 @@
 
 #warning 3 by 3 Matrices are not implemented YET!
 
+namespace EngineToolkit {
+
 // 4 by 4 Matrix
 struct mat3 {
   // Data
@@ -92,3 +94,5 @@ struct mat3 {
 // mat3 lookat(vec3 pos, vec3 target, vec3 up);
 
 // }; // namespace matrix
+
+} // namespace EngineToolkit

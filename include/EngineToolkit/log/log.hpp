@@ -1,5 +1,7 @@
 #pragma once
 
+namespace EngineToolkit {
+
 // Logger
 namespace Log {
 
@@ -15,4 +17,6 @@ void warning(const char *tag, const char *message, ...);
 // Log Error Message, usually "unrecoverable"
 void error(const char *tag, const char *message, ...);
 
-}; // namespace Log
+} // namespace Log
+
+} // namespace EngineToolkit

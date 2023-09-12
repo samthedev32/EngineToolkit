@@ -2,6 +2,8 @@
 
 #include <EngineToolkit/vector/vec1.hpp>
 
+namespace EngineToolkit {
+
 // 2D Vector
 struct vec2 {
   union {
@@ -73,3 +75,5 @@ struct vec2 {
   // Get Data
   vec1 *data();
 };
+
+} // namespace EngineToolkit

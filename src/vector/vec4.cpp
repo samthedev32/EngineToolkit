@@ -1,5 +1,7 @@
 #include <EngineToolkit/vector/vec4.hpp>
 
+namespace EngineToolkit {
+
 // ---- Constructors
 
 vec4::vec4(vec1 x, vec1 y, vec1 z, vec1 w) {
@@ -137,3 +139,5 @@ vec4 vec4::lerp(vec4 a, vec4 b, vec1 blend) {
 
 // Get Data
 vec1 *vec4::data() { return &x; }
+
+} // namespace EngineToolkit

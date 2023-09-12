@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+namespace EngineToolkit {
+
 // TODO: implement
 
 // ---- Constructors
@@ -223,3 +225,5 @@ mat3 mat3::identity() {
 //     result.m[3][2] = vec3::dot(f, pos);
 //     return result;
 //   }
+
+} // namespace EngineToolkit

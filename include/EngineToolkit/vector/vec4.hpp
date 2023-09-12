@@ -4,6 +4,8 @@
 #include <EngineToolkit/vector/vec2.hpp>
 #include <EngineToolkit/vector/vec3.hpp>
 
+namespace EngineToolkit {
+
 // 3D Vector
 struct vec4 {
   // Data
@@ -75,3 +77,5 @@ struct vec4 {
   // Get Data
   vec1 *data();
 };
+
+} // namespace EngineToolkit

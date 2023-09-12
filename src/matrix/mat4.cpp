@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+namespace EngineToolkit {
+
 // ---- Constructors
 
 // mat4(v) Constructor
@@ -208,3 +210,5 @@ mat4 mat4::lookat(vec3 pos, vec3 target, vec3 up) {
   result.m[3][2] = vec3::dot(f, pos);
   return result;
 }
+
+} // namespace EngineToolkit

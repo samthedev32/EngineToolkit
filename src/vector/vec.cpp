@@ -1,5 +1,7 @@
 #include <EngineToolkit/vector/vec.hpp>
 
+namespace EngineToolkit {
+
 // ---- Constructors
 // TODO
 
@@ -120,3 +122,5 @@ vec<dimensions> vec<dimensions>::lerp(vec<dimensions> a, vec<dimensions> b,
   return {a.x + (b.x - a.x) * blend, a.y + (b.y - a.y) * blend,
           a.z + (b.z - a.z) * blend};
 }
+
+} // namespace EngineToolkit
