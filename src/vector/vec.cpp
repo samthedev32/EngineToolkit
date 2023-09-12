@@ -6,6 +6,7 @@ namespace EngineToolkit {
 // TODO
 
 // ---- Operator Overloading
+
 template <unsigned int dimensions>
 vec<dimensions> vec<dimensions>::operator+(const vec<dimensions> v) const {
   vec<dimensions> ret;
@@ -101,7 +102,10 @@ template <unsigned int dimensions> vec1 vec<dimensions>::length() {
 template <unsigned int dimensions>
 vec1 vec<dimensions>::distance(vec<dimensions> v) {
   vec<dimensions> dist = *this - v;
-  return sqrt(dist.x * dist.x + dist.y * dist.y + dist.z * dist.z);
+  vec1 out;
+  for (int i = 0; i < dimensions; i++)
+    out += dist[i] * dist[i];
+  return sqrt(out);
 }
 
 template <unsigned int dimensions>
@@ -113,14 +117,19 @@ vec<dimensions> vec<dimensions>::normalize() {
 
 template <unsigned int dimensions>
 vec1 vec<dimensions>::dot(vec<dimensions> a, vec<dimensions> b) {
-  return a.x * b.x + a.y * b.y + a.z * b.z;
+  vec1 out;
+  for (int i = 0; i < dimensions; i++)
+    out += a[i] * b[i];
+  return out;
 }
 
 template <unsigned int dimensions>
 vec<dimensions> vec<dimensions>::lerp(vec<dimensions> a, vec<dimensions> b,
                                       vec1 blend) {
-  return {a.x + (b.x - a.x) * blend, a.y + (b.y - a.y) * blend,
-          a.z + (b.z - a.z) * blend};
+  vec<dimensions> out;
+  for (int i = 0; i < dimensions; i++)
+    out[i] = a[i] + (b[i] - a[i]) * blend;
+  return out;
 }
 
 } // namespace EngineToolkit
