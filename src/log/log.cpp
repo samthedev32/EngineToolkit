@@ -33,12 +33,14 @@ void vcustom(char type, const char *tag, const char *message, va_list args) {
 }
 
 void debug(const char *tag, const char *message, ...) {
+#ifndef NDEBUG
   va_list args;
   va_start(args, message);
 
   vcustom('D', tag, message, args);
 
   va_end(args);
+#endif
 }
 
 void verbose(const char *tag, const char *message, ...) {

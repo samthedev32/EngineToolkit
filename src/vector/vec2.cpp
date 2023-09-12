@@ -1,5 +1,7 @@
 #include <EngineToolkit/vector/vec2.hpp>
 
+#include <emmintrin.h>
+
 // ---- Constructors
 
 vec2::vec2(vec1 x, vec1 y) { this->x = x, this->y = y; }

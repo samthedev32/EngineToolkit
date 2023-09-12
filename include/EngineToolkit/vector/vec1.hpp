@@ -3,7 +3,11 @@
 #include <math.h>
 
 // 1D Vector
+#ifdef ETK_VECTOR_DOUBLE_PRECISION
+typedef double vec1;
+#else
 typedef float vec1;
+#endif
 
 // Radian-Degree Conversion Functions
 #define rads(d) (d * M_PI / 180.0f)
