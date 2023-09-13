@@ -45,6 +45,21 @@
 | --- | --- |
 | `ETK_VECTOR_DOUBLE_PRECISION`  | Use Double-Precision Floating-Point Values for Vectors  |
 
+## To-Do
+
+- Quaternions
+- Interpolation & RNG-s
+- Noise Functions (Perlin Noise, etc)
+- Simple Collision Detection
+- Image/Texture Functions
+- Model/Mesh Functions
+- UI Builder (Jetpack Compose-like)
+- Networking Library
+- Timer, Profiler
+- SIMD for Vectors & Matrices
+- Tests & Examples
+- More Documentation
+
 ## License
 
 This Project is licensed under the [zlib License](https://opensource.org/license/zlib-license-php/)

@@ -18,16 +18,9 @@ struct mat3 {
 
   // ---- Operator Overloading
 
-  // [=] Operator
   void operator=(const mat3 m);
-
-  // [==] Operator
   bool operator==(const mat3 m);
-
-  // [*] Operator
   mat3 operator*(const mat3 m);
-
-  // [*] Operator
   vec3 operator*(const vec3 v);
 
   // ---- Static

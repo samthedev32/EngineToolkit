@@ -10,7 +10,9 @@ template <unsigned int dimensions> struct vec {
   vec1 data[dimensions];
 
   // ---- Constructors
-  //   vec(vec v);
+
+  vec(vec1 v[dimensions] = {});
+  vec(vec const &v);
 
   // ---- Operator Overloading
 

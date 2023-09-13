@@ -3,7 +3,25 @@
 namespace EngineToolkit {
 
 // ---- Constructors
-// TODO
+
+template <unsigned int dimensions> vec<dimensions>::vec(vec1 v[dimensions]) {
+  for (int i = 0; i < dimensions; i++)
+    this[i] = v[i];
+}
+
+template <unsigned int dimensions>
+vec<dimensions>::vec(vec<dimensions> const &v) {
+  for (int i = 0; i < dimensions; i++)
+    this[i] = v[i];
+}
+
+// template <unsigned int dimensions>
+// vec<dimensions> vec<dimensions>::vec(vec<dimensions> v) const {
+//   vec<dimensions> ret;
+//   for (int i = 0; i < dimensions; i++)
+//     ret.p[i] = this->p[i] + v.p[i];
+//   return ret;
+// }
 
 // ---- Operator Overloading
 
