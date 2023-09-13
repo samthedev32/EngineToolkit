@@ -21,18 +21,23 @@ struct vec4 {
     };
 
     // Point
-    vec1 p[4];
+    vec1 data[4];
   };
 
   // ---- Constructors
 
   vec4(vec1 x, vec1 y, vec1 z, vec1 w = 0.0f);
   vec4(vec1 xyzw[4]);
+
   vec4(vec1 xyzw = 0.0f);
   vec4(vec2 v);
   vec4(vec3 v);
 
-  // ---- Operator Overloading
+  // ---- Destructor
+
+  ~vec4();
+
+  // ---- Operators
 
   vec4 operator+(const vec4 v) const;
   vec4 operator-(const vec4 v) const;
@@ -58,24 +63,19 @@ struct vec4 {
   // Length
   vec1 length();
 
-  // Distance
-  vec1 distance(vec4 v);
-
   // Normalize
   vec4 normalize();
 
   // ---- Functions (Static)
+
+  // Distance
+  vec1 distance(vec4 a, vec4 b);
 
   // Dot Product
   static vec1 dot(vec4 a, vec4 b);
 
   // Linearly Interpolate
   static vec4 lerp(vec4 a, vec4 b, vec1 blend);
-
-  // ---- MISC
-
-  // Get Data
-  vec1 *data();
 };
 
 } // namespace EngineToolkit

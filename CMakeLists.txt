@@ -18,6 +18,12 @@ set(SOURCES
     # Matrix
     src/matrix/mat3.cpp
     src/matrix/mat4.cpp
+
+    # Mesh
+    # src/mesh/mesh.cpp
+
+    # Image
+    src/image/image.cpp
 )
 
 # Libraries

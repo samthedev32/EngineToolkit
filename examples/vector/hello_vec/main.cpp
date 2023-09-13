@@ -1,12 +1,12 @@
-#include <EngineToolkit/vector/vec.hpp>
+#include <EngineToolkit/vector/vector.hpp>
 #include <cstdio>
 
 using namespace EngineToolkit;
 
 int main() {
-  vec<5> v;
-  v[0] = 1;
-  v[1] = 3;
+  vec2 v;
+
+  v += vec2(1, 2);
 
   printf("%f %f %f\n", v[0], v[1], v[2]);
 }

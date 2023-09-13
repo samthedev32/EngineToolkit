@@ -57,8 +57,6 @@
 - Networking Library
 - Timer, Profiler
 - SIMD for Vectors & Matrices
-- Tests & Examples
-- More Documentation
 
 ## License
 

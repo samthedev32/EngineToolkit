@@ -25,17 +25,22 @@ struct vec3 {
     };
 
     // Point
-    vec1 p[3];
+    vec1 data[3];
   };
 
   // ---- Constructors
 
   vec3(vec1 x, vec1 y, vec1 z = 0.0f);
   vec3(vec1 xyz[3]);
+
   vec3(vec1 xyz = 0.0f);
   vec3(vec2 v);
 
-  // ---- Operator Overloading
+  // ---- Destructor
+
+  ~vec3();
+
+  // ---- Operators
 
   vec3 operator+(const vec3 v) const;
   vec3 operator-(const vec3 v) const;
@@ -59,13 +64,13 @@ struct vec3 {
   // Length
   vec1 length();
 
-  // Distance
-  vec1 distance(vec3 v);
-
   // Normalize
   vec3 normalize();
 
   // ---- Functions (Static)
+
+  // Distance
+  vec1 distance(vec3 a, vec3 b);
 
   // Dot Product
   static vec1 dot(vec3 a, vec3 b);
@@ -75,11 +80,6 @@ struct vec3 {
 
   // Linearly Interpolate
   static vec3 lerp(vec3 a, vec3 b, vec1 blend);
-
-  // ---- MISC
-
-  // Get Data
-  vec1 *data();
 };
 
 } // namespace EngineToolkit

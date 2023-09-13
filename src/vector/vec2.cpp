@@ -1,7 +1,5 @@
 #include <EngineToolkit/vector/vec2.hpp>
 
-#include <emmintrin.h>
-
 namespace EngineToolkit {
 
 // ---- Constructors
@@ -11,115 +9,63 @@ vec2::vec2(vec1 v[2]) { this->x = v[0], this->y = v[1]; }
 
 vec2::vec2(vec1 v) { this->x = v, this->y = v; }
 
-// vec2 ---- Operator Overloading
+// ---- Destructor
 
-// [+] vec2::operator
+vec2::~vec2() { *this = 0.0f; }
+
+// ---- Operators
+
 vec2 vec2::operator+(const vec2 v) const {
-  vec2 ret;
-  ret.p[0] = this->p[0] + v.p[0];
-  ret.p[1] = this->p[1] + v.p[1];
-  return ret;
+  return {this->x + v.x, this->y + v.y};
 }
 
-// [-] vec2::operator
 vec2 vec2::operator-(const vec2 v) const {
-  vec2 ret;
-  ret.p[0] = this->p[0] - v.p[0];
-  ret.p[1] = this->p[1] - v.p[1];
-  return ret;
+  return {this->x - v.x, this->y - v.y};
 }
 
-// [*] vec2::operator
 vec2 vec2::operator*(const vec2 v) const {
-  vec2 ret;
-  ret.p[0] = this->p[0] * v.p[0];
-  ret.p[1] = this->p[1] * v.p[1];
-  return ret;
+  return {this->x * v.x, this->y * v.y};
 }
 
-// [/] vec2::operator
 vec2 vec2::operator/(const vec2 v) const {
-  vec2 ret;
-  ret.p[0] = this->p[0] / v.p[0];
-  ret.p[1] = this->p[1] / v.p[1];
-  return ret;
+  return {this->x / v.x, this->y / v.y};
 }
 
-// [+=] vec2::operator
-void vec2::operator+=(const vec2 v) {
-  this->p[0] += v.p[0];
-  this->p[1] += v.p[1];
-}
+void vec2::operator+=(const vec2 v) { *this = *this + v; }
+void vec2::operator-=(const vec2 v) { *this = *this - v; }
+void vec2::operator*=(const vec2 v) { *this = *this * v; }
+void vec2::operator/=(const vec2 v) { *this = *this / v; }
 
-// [-=] vec2::operator
-void vec2::operator-=(const vec2 v) {
-  this->p[0] -= v.p[0];
-  this->p[1] -= v.p[1];
-}
-
-// [*=] vec2::operator
-void vec2::operator*=(const vec2 v) {
-  this->p[0] *= v.p[0];
-  this->p[1] *= v.p[1];
-}
-
-// [/=] vec2::operator
-void vec2::operator/=(const vec2 v) {
-  this->p[0] /= v.p[0];
-  this->p[1] /= v.p[1];
-}
-
-// [=] vec2::operator
 void vec2::operator=(const vec2 v) {
-  this->p[0] = v.p[0];
-  this->p[1] = v.p[1];
+  this->x = v.x;
+  this->y = v.y;
 }
 
-// [==] vec2::operator
 bool vec2::operator==(const vec2 v) const {
-  return this->p[0] == v.p[0] && this->p[1] == v.p[1];
+  return this->x == v.x && this->y == v.y;
 }
 
-// [!=] vec2::operator
-bool vec2::operator!=(const vec2 v) const {
-  return this->p[0] != v.p[0] || this->p[1] != v.p[1];
-}
+bool vec2::operator!=(const vec2 v) const { return !(*this == v); }
 
-// vec2 ---- Indexing
+// ---- Indexing
 
-// vec2[id] Get Operator
-vec1 vec2::operator[](int i) const { return this->p[i % 2]; }
+vec1 vec2::operator[](int i) const { return this->data[i % 2]; }
+vec1 &vec2::operator[](int i) { return this->data[i % 2]; }
 
-// vec2[id] Set Operator
-vec1 &vec2::operator[](int i) { return this->p[i % 2]; }
+// ---- Functions (Instance Methods)
 
-// vec2 ---- Functions (Instance Methods)
+vec1 vec2::length() { return sqrtf(dot(*this, *this)); }
 
-// Length
-vec1 vec2::length() { return sqrtf(vec2::dot(*this, *this)); }
-
-// Normalize
 vec2 vec2::normalize() { return *this / this->length(); }
 
-// vec2 ---- Functions (Static)
+// ---- Functions (Static)
 
-// Distance
-vec1 vec2::distance(vec2 a, vec2 b) {
-  vec2 dist = a - b;
-  return sqrt(dist.x * dist.x + dist.y * dist.y);
-}
+vec1 vec2::distance(vec2 a, vec2 b) { return sqrt(dot(a - b, a - b)); }
 
-// Dot Product
 vec1 vec2::dot(vec2 a, vec2 b) { return a.x * b.x + a.y * b.y; }
 
-// Linearly Interpolate
 vec2 vec2::lerp(vec2 a, vec2 b, vec1 blend) {
   return {a.x + (b.x - a.x) * blend, a.y + (b.y - a.y) * blend};
 }
-
-// ---- MISC
-
-// Get Data
-vec1 *vec2::data() { return &x; }
 
 } // namespace EngineToolkit

@@ -20,7 +20,7 @@ struct vec2 {
       };
 
       // Point
-      vec1 p[2];
+      vec1 data[2];
     };
   };
 
@@ -28,9 +28,14 @@ struct vec2 {
 
   vec2(vec1 x, vec1 y);
   vec2(vec1 xy[2]);
+
   vec2(vec1 xy = 0.0f);
 
-  // ---- Operator Overloading
+  // ---- Destructor
+
+  ~vec2();
+
+  // ---- Operators
 
   vec2 operator+(const vec2 v) const;
   vec2 operator-(const vec2 v) const;
@@ -69,11 +74,6 @@ struct vec2 {
 
   // Linearly Interpolate
   static vec2 lerp(vec2 a, vec2 b, vec1 blend);
-
-  // ---- MISC
-
-  // Get Data
-  vec1 *data();
 };
 
 } // namespace EngineToolkit

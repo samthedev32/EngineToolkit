@@ -19,125 +19,68 @@ vec4::vec4(vec3 v) {
   this->x = v.x, this->y = v.y, this->z = v.z, this->w = 0.0f;
 }
 
-// vec4 ---- Operator Overloading
+// ---- Destructor
 
-// [+] Operator
+vec4::~vec4() { *this = 0.0f; }
+
+// ---- Operators
+
 vec4 vec4::operator+(const vec4 v) const {
-  vec4 ret;
-  ret.p[0] = this->p[0] + v.p[0];
-  ret.p[1] = this->p[1] + v.p[1];
-  ret.p[2] = this->p[2] + v.p[2];
-  return ret;
+  return {this->x + v.x, this->y + v.y, this->z + v.z, this->w + v.w};
 }
 
-// [-] Operator
 vec4 vec4::operator-(const vec4 v) const {
-  vec4 ret;
-  ret.p[0] = this->p[0] - v.p[0];
-  ret.p[1] = this->p[1] - v.p[1];
-  ret.p[2] = this->p[2] - v.p[2];
-  return ret;
+  return {this->x - v.x, this->y - v.y, this->z - v.z, this->w - v.w};
 }
 
-// [*] Operator
 vec4 vec4::operator*(const vec4 v) const {
-  vec4 ret;
-  ret.p[0] = this->p[0] * v.p[0];
-  ret.p[1] = this->p[1] * v.p[1];
-  ret.p[2] = this->p[2] * v.p[2];
-  return ret;
+  return {this->x * v.x, this->y * v.y, this->z * v.z, this->w * v.w};
 }
 
-// [/] Operator
 vec4 vec4::operator/(const vec4 v) const {
-  vec4 ret;
-  ret.p[0] = this->p[0] / v.p[0];
-  ret.p[1] = this->p[1] / v.p[1];
-  ret.p[2] = this->p[2] / v.p[2];
-  return ret;
+  return {this->x / v.x, this->y / v.y, this->z / v.z, this->w / v.w};
 }
 
-// [+=] Operator
-void vec4::operator+=(const vec4 v) {
-  this->p[0] += v.p[0];
-  this->p[1] += v.p[1];
-  this->p[2] += v.p[2];
-}
+void vec4::operator+=(const vec4 v) { *this = *this + v; }
+void vec4::operator-=(const vec4 v) { *this = *this - v; }
+void vec4::operator*=(const vec4 v) { *this = *this * v; }
+void vec4::operator/=(const vec4 v) { *this = *this / v; }
 
-// [-=] Operator
-void vec4::operator-=(const vec4 v) {
-  this->p[0] -= v.p[0];
-  this->p[1] -= v.p[1];
-  this->p[2] -= v.p[2];
-}
-
-// [*=] Operator
-void vec4::operator*=(const vec4 v) {
-  this->p[0] *= v.p[0];
-  this->p[1] *= v.p[1];
-  this->p[2] *= v.p[2];
-}
-
-// [/=] Operator
-void vec4::operator/=(const vec4 v) {
-  this->p[0] /= v.p[0];
-  this->p[1] /= v.p[1];
-  this->p[2] /= v.p[2];
-}
-
-// [=] Operator
 void vec4::operator=(const vec4 v) {
-  this->p[0] = v.p[0];
-  this->p[1] = v.p[1];
-  this->p[2] = v.p[2];
+  this->x = v.x;
+  this->y = v.y;
+  this->z = v.z;
+  this->w = v.w;
 }
 
-// [==] Operator
 bool vec4::operator==(const vec4 v) const {
-  return this->p[0] == v.p[0] && this->p[1] == v.p[1] && this->p[2] == v.p[2];
+  return this->x == v.x && this->y == v.y && this->z == v.z && this->w == v.w;
 }
 
-// [!=] Operator
-bool vec4::operator!=(const vec4 v) const {
-  return this->p[0] != v.p[0] || this->p[1] != v.p[1] || this->p[2] != v.p[2];
-}
+bool vec4::operator!=(const vec4 v) const { return !(*this == v); }
 
-// vec4 ---- Indexing
+// ---- Indexing
 
-// vec2[id] Get Operator
-vec1 vec4::operator[](int i) const { return this->p[i % 3]; }
+vec1 vec4::operator[](int i) const { return this->data[i % 4]; }
+vec1 &vec4::operator[](int i) { return this->data[i % 4]; }
 
-// vec2[id] Set Operator
-vec1 &vec4::operator[](int i) { return this->p[i % 3]; }
+// ---- Functions (Instance Methods)
 
-// vec4 ---- Functions (Instance Methods)
+vec1 vec4::length() { return sqrtf(dot(*this, *this)); }
 
-// Length
-vec1 vec4::length() { return sqrtf(vec4::dot(*this, *this)); }
-
-// Distance
-vec1 vec4::distance(vec4 v) {
-  vec4 dist = *this - v;
-  return sqrt(dist.x * dist.x + dist.y * dist.y + dist.z * dist.z);
-}
-
-// Normalize
 vec4 vec4::normalize() { return *this / this->length(); }
 
-// vec4 ---- Functions (Static)
+// ---- Functions (Static)
 
-// Dot Product
-vec1 vec4::dot(vec4 a, vec4 b) { return a.x * b.x + a.y * b.y + a.z * b.z; }
+vec1 vec4::distance(vec4 a, vec4 b) { return sqrt(dot(a - b, a - b)); }
 
-// Linearly Interpolate
-vec4 vec4::lerp(vec4 a, vec4 b, vec1 blend) {
-  return {a.x + (b.x - a.x) * blend, a.y + (b.y - a.y) * blend,
-          a.z + (b.z - a.z) * blend};
+vec1 vec4::dot(vec4 a, vec4 b) {
+  return a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w;
 }
 
-// ---- MISC
-
-// Get Data
-vec1 *vec4::data() { return &x; }
+vec4 vec4::lerp(vec4 a, vec4 b, vec1 blend) {
+  return {a.x + (b.x - a.x) * blend, a.y + (b.y - a.y) * blend,
+          a.z + (b.z - a.z) * blend, a.w + (b.w - a.w) * blend};
+}
 
 } // namespace EngineToolkit
