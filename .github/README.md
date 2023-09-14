@@ -6,8 +6,8 @@
 
 ### Features
 
-- [1, 2, 3, 4 & X Dimensional Vectors](../include/EngineToolkit/vector)
-- [3x3 & 4x4 Matrices](../include/EngineToolkit/matrix)
+- [X Dimensional Vectors](../include/EngineToolkit/vector)
+- [X Dimensional Matrices](../include/EngineToolkit/matrix)
 - [Logger](../include/EngineToolkit/log)
 
 ## Documentation
@@ -43,22 +43,7 @@
 
 | Macro  | Description |
 | --- | --- |
-| `ETK_VECTOR_DOUBLE_PRECISION`  | Use Double-Precision Floating-Point Values for Vectors  |
-
-## To-Do
-
-- Quaternions
-- Interpolation & RNG-s
-- Noise Functions (Perlin Noise, etc)
-- Simple Collision Detection
-- Image/Texture Functions
-- Model/Mesh Functions
-- UI Builder (Jetpack Compose-like)
-- Networking Library
-- Timer, Profiler
-- SIMD for Vectors & Matrices
-
-private [trello page](https://trello.com/b/wo8B1Xg3/enginetoolkit-todo)
+| `TODO` | TODO |
 
 ## License
 
