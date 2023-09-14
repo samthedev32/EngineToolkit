@@ -3,6 +3,6 @@
 using namespace EngineToolkit;
 
 int main() {
-  Image img = Image::load("test.im2");
+  Image img = Image::load("test.im1");
   return 0;
 }

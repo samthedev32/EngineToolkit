@@ -11,7 +11,7 @@ vec2::vec2(vec1 v) { this->x = v, this->y = v; }
 
 // ---- Destructor
 
-vec2::~vec2() { *this = 0.0f; }
+vec2::~vec2() {}
 
 // ---- Operators
 

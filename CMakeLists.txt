@@ -9,15 +9,15 @@ set(SOURCES
     src/log/log.cpp
 
     # Vector
-    src/vector/vec.cpp
-    src/vector/vec1.cpp
-    src/vector/vec2.cpp
-    src/vector/vec3.cpp
-    src/vector/vec4.cpp
+    # src/vector/vec1.cpp
+    # src/vector/vec2.cpp
+    # src/vector/vec3.cpp
+    # src/vector/vec4.cpp
 
     # Matrix
-    src/matrix/mat3.cpp
-    src/matrix/mat4.cpp
+    # src/matrix/mat2.cpp
+    # src/matrix/mat3.cpp
+    # src/matrix/mat4.cpp
 
     # Mesh
     # src/mesh/mesh.cpp

@@ -12,7 +12,7 @@ vec3::vec3(vec2 v) { this->x = v.x, this->y = v.y, this->z = 0.0f; }
 
 // ---- Destructor
 
-vec3::~vec3() { *this = 0.0f; }
+vec3::~vec3() {}
 
 // ---- Operators
 

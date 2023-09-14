@@ -1,4 +1,9 @@
 #pragma once
 
-#include <EngineToolkit/matrix/mat3.hpp>
-#include <EngineToolkit/matrix/mat4.hpp>
+namespace EngineToolkit {
+
+template <unsigned int R, unsigned int C, typename T = float> struct mat {
+  T data[R][C];
+};
+
+} // namespace EngineToolkit
