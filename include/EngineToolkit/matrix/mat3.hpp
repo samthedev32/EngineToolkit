@@ -2,24 +2,28 @@
 
 #include <EngineToolkit/vector/vector.hpp>
 
-#warning 3 by 3 Matrices are not implemented YET!
-
 namespace EngineToolkit {
 
-// 4 by 4 Matrix
+// 3 by 3 Matrix
 struct mat3 {
   // Data
   vec1 m[3][3] = {};
 
   // ---- Constructors
 
-  // mat3(m) Constructor
   mat3(float m = 0);
+  mat3(mat3 const &m);
 
-  // ---- Operator Overloading
+  // ---- Destructor
+
+  ~mat3();
+
+  // ---- Operators
 
   void operator=(const mat3 m);
-  bool operator==(const mat3 m);
+  bool operator==(const mat3 m) const;
+  bool operator!=(const mat3 m) const;
+
   mat3 operator*(const mat3 m);
   vec3 operator*(const vec3 v);
 

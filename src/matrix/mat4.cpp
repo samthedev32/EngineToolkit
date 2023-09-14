@@ -7,23 +7,22 @@ namespace EngineToolkit {
 
 // ---- Constructors
 
-// mat4(v) Constructor
-mat4::mat4(float v) {
-  for (int i = 0; i < 4; i++)
-    this->m[i][i] = v;
-}
+mat4::mat4(float v) { *this = v; }
+mat4::mat4(mat4 const &m) { *this = m; }
 
-// ---- Operator Overloading (mat4)
+// ---- Destructor
 
-// [=] Operator (mat4)
+mat4::~mat4() { *this = 0.0f; }
+
+// ---- Operators
+
 void mat4::operator=(const mat4 m) {
-  for (int c = 0; c < 4; c++)
-    for (int r = 0; r < 4; r++)
-      this->m[r][c] = m.m[r][c];
+  for (int i = 0; i < 4; i++)
+    for (int j = 0; j < 4; j++)
+      this->m[i][j] = m.m[i][j];
 }
 
-// [==] Operator (mat4)
-bool mat4::operator==(const mat4 m) {
+bool mat4::operator==(const mat4 m) const {
   for (int c = 0; c < 4; c++)
     for (int r = 0; r < 4; r++)
       if (this->m[r][c] != m.m[r][c])
@@ -31,8 +30,9 @@ bool mat4::operator==(const mat4 m) {
   return true;
 }
 
-// [*] Operator (mat4)
-mat4 mat4::operator*(const mat4 m) {
+bool mat4::operator!=(const mat4 m) const { return !(*this == m); }
+
+mat4 mat4::operator*(const mat4 m) const {
   mat4 matrix;
   for (int c = 0; c < 4; c++)
     for (int r = 0; r < 4; r++)
@@ -41,10 +41,7 @@ mat4 mat4::operator*(const mat4 m) {
   return matrix;
 }
 
-// ---- Operator Overloading (vec3)
-
-// [*] Operator (vec3)
-vec3 mat4::operator*(const vec3 v) {
+vec3 mat4::operator*(const vec3 v) const {
   return vec3(v.x * this->m[0][0] + v.y * this->m[1][0] + v.z * this->m[2][0] +
                   1 * this->m[3][0],
               v.x * this->m[0][1] + v.y * this->m[1][1] + v.z * this->m[2][1] +
@@ -53,19 +50,17 @@ vec3 mat4::operator*(const vec3 v) {
                   1 * this->m[3][2]);
 }
 
-// Create an Identity Matrix
+void mat4::operator*=(const mat4 m) { *this = *this * m; }
+
 mat4 mat4::identity() {
   mat4 matrix;
 
-  matrix.m[0][0] = 1.0f;
-  matrix.m[1][1] = 1.0f;
-  matrix.m[2][2] = 1.0f;
-  matrix.m[3][3] = 1.0f;
+  for (int i = 0; i < 4; i++)
+    matrix.m[i][i] = 1.0f;
 
   return matrix;
 }
 
-// Inverse a Matrix
 mat4 mat4::inverse(mat4 m) {
   mat4 matrix;
   matrix.m[0][0] = m.m[0][0];
@@ -90,33 +85,6 @@ mat4 mat4::inverse(mat4 m) {
   return matrix;
 }
 
-// Create a Perspective Matrix
-mat4 mat4::perspective(float fovrads, float aspect, float near, float far) {
-  float tanHalfFov = tan(fovrads / 2.0f);
-
-  mat4 result;
-  result.m[0][0] = 1.0f / (aspect * tanHalfFov);
-  result.m[1][1] = 1.0f / (tanHalfFov);
-  result.m[2][2] = -(far + near) / (far - near);
-  result.m[2][3] = -1.0f;
-  result.m[3][2] = -(2.0f * far * near) / (far - near);
-  return result;
-}
-
-// Create an Orthographic Projection Matrix
-mat4 mat4::ortho(float left, float right, float bottom, float top, float near,
-                 float far) {
-  mat4 result = identity();
-  result.m[0][0] = 2.0f / (right - left);
-  result.m[1][1] = 2.0f / (top - bottom);
-  result.m[2][2] = -2.0f / (far - near);
-  result.m[3][0] = -(right + left) / (right - left);
-  result.m[3][1] = -(top + bottom) / (top - bottom);
-  result.m[3][2] = -(far + near) / (far - near);
-  return result;
-}
-
-// Create an X Rotation Matrix
 mat4 mat4::rotationX(float rad) {
   mat4 matrix;
   matrix.m[0][0] = 1.0f;
@@ -128,7 +96,6 @@ mat4 mat4::rotationX(float rad) {
   return matrix;
 }
 
-// Create a Y Rotation Matrix
 mat4 mat4::rotationY(float rad) {
   mat4 matrix;
   matrix.m[0][0] = cosf(rad);
@@ -140,7 +107,6 @@ mat4 mat4::rotationY(float rad) {
   return matrix;
 }
 
-// Create a Z Rotation Matrix
 mat4 mat4::rotationZ(float rad) {
   mat4 matrix;
   matrix.m[0][0] = cosf(rad);
@@ -152,7 +118,6 @@ mat4 mat4::rotationZ(float rad) {
   return matrix;
 }
 
-// Create a Rotation Matrix
 mat4 mat4::rotation(vec3 rad) {
   mat4 matrix, x, y, z;
 
@@ -167,7 +132,6 @@ mat4 mat4::rotation(vec3 rad) {
   return matrix;
 }
 
-// Create a Translation Matrix
 mat4 mat4::translation(vec3 v) {
   mat4 matrix;
   matrix.m[0][0] = 1.0f;
@@ -189,7 +153,30 @@ mat4 mat4::scale(vec3 v) {
   return matrix;
 }
 
-// Create a Look-At Matrix
+mat4 mat4::perspective(float fovrads, float aspect, float near, float far) {
+  float tanHalfFov = tan(fovrads / 2.0f);
+
+  mat4 result;
+  result.m[0][0] = 1.0f / (aspect * tanHalfFov);
+  result.m[1][1] = 1.0f / (tanHalfFov);
+  result.m[2][2] = -(far + near) / (far - near);
+  result.m[2][3] = -1.0f;
+  result.m[3][2] = -(2.0f * far * near) / (far - near);
+  return result;
+}
+
+mat4 mat4::ortho(float left, float right, float bottom, float top, float near,
+                 float far) {
+  mat4 result = identity();
+  result.m[0][0] = 2.0f / (right - left);
+  result.m[1][1] = 2.0f / (top - bottom);
+  result.m[2][2] = -2.0f / (far - near);
+  result.m[3][0] = -(right + left) / (right - left);
+  result.m[3][1] = -(top + bottom) / (top - bottom);
+  result.m[3][2] = -(far + near) / (far - near);
+  return result;
+}
+
 mat4 mat4::lookat(vec3 pos, vec3 target, vec3 up) {
   vec3 f = (target - pos).normalize();
   vec3 s = vec3::cross(f, up).normalize();

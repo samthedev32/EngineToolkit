@@ -5,27 +5,24 @@
 
 namespace EngineToolkit {
 
-// TODO: implement
-
 // ---- Constructors
 
-// mat3(v) Constructor
-mat3::mat3(float v) {
-  for (int i = 0; i < 3; i++)
-    this->m[i][i] = v;
-}
+mat3::mat3(float v) { *this = v; }
+mat3::mat3(mat3 const &m) { *this = m; }
 
-// ---- Operator Overloading (mat3)
+// ---- Destructor
 
-// [=] Operator (mat3)
+mat3::~mat3() { *this = 0.0f; }
+
+// ---- Operators
+
 void mat3::operator=(const mat3 m) {
   for (int c = 0; c < 3; c++)
     for (int r = 0; r < 3; r++)
       this->m[r][c] = m.m[r][c];
 }
 
-// [==] Operator (mat3)
-bool mat3::operator==(const mat3 m) {
+bool mat3::operator==(const mat3 m) const {
   for (int c = 0; c < 3; c++)
     for (int r = 0; r < 3; r++)
       if (this->m[r][c] != m.m[r][c])
@@ -33,7 +30,8 @@ bool mat3::operator==(const mat3 m) {
   return true;
 }
 
-// [*] Operator (mat3)
+bool mat3::operator!=(const mat3 m) const { return !(*this == m); }
+
 // TODO
 // mat3 mat3::operator*(const mat3 m) {
 //   mat3 matrix;
@@ -65,9 +63,8 @@ bool mat3::operator==(const mat3 m) {
 mat3 mat3::identity() {
   mat3 matrix;
 
-  matrix.m[0][0] = 1.0f;
-  matrix.m[1][1] = 1.0f;
-  matrix.m[2][2] = 1.0f;
+  for (int i = 0; i < 3; i++)
+    matrix.m[i][i] = 1.0f;
 
   return matrix;
 }

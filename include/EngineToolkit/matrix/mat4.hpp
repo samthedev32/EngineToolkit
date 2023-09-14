@@ -12,13 +12,21 @@ struct mat4 {
   // ---- Constructors
 
   mat4(float m = 0);
+  mat4(mat4 const &m);
 
-  // ---- Operator Overloading
+  // ---- Destructor
+
+  ~mat4();
+
+  // ---- Operators
 
   void operator=(const mat4 m);
-  bool operator==(const mat4 m);
-  mat4 operator*(const mat4 m);
-  vec3 operator*(const vec3 v);
+  bool operator==(const mat4 m) const;
+  bool operator!=(const mat4 m) const;
+  mat4 operator*(const mat4 m) const;
+  vec3 operator*(const vec3 v) const;
+
+  void operator*=(const mat4 m);
 
   // ---- Static
 
@@ -34,7 +42,6 @@ struct mat4 {
   static mat4 scale(vec3 v);
 
   static mat4 perspective(float fovrads, float aspect, float near, float far);
-
   static mat4 ortho(float left, float right, float bottom, float top,
                     float fnear, float ffar);
 
