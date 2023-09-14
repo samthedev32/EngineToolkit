@@ -27,10 +27,13 @@ struct mat3 {
   mat3 operator*(const mat3 m);
   vec3 operator*(const vec3 v);
 
-  // ---- Static
+  // ---- Functions (Instance Methods)
+
+  void inverse();
+
+  // ---- Functions (Static)
 
   static mat3 identity();
-  static mat3 inverse(mat3 m);
 
   static mat3 rotationX(float rad);
   static mat3 rotationY(float rad);

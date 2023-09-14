@@ -28,10 +28,13 @@ struct mat4 {
 
   void operator*=(const mat4 m);
 
-  // ---- Static
+  // ---- Functions (Instance Methods)
+
+  void inverse();
+
+  // ---- Functions (Static)
 
   static mat4 identity();
-  static mat4 inverse(mat4 m);
 
   static mat4 rotationX(float rad);
   static mat4 rotationY(float rad);

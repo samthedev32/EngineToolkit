@@ -52,36 +52,39 @@ vec3 mat4::operator*(const vec3 v) const {
 
 void mat4::operator*=(const mat4 m) { *this = *this * m; }
 
+// TODO: test
+void mat4::inverse() {
+  mat4 matrix = *this;
+  this->m[0][0] = matrix.m[0][0];
+  this->m[0][1] = matrix.m[1][0];
+  this->m[0][2] = matrix.m[2][0];
+  this->m[0][3] = 0.0f;
+  this->m[1][0] = matrix.m[0][1];
+  this->m[1][1] = matrix.m[1][1];
+  this->m[1][2] = matrix.m[2][1];
+  this->m[1][3] = 0.0f;
+  this->m[2][0] = matrix.m[0][2];
+  this->m[2][1] = matrix.m[1][2];
+  this->m[2][2] = matrix.m[2][2];
+  this->m[2][3] = 0.0f;
+  this->m[3][0] =
+      -(matrix.m[3][0] * this->m[0][0] + matrix.m[3][1] * this->m[1][0] +
+        matrix.m[3][2] * this->m[2][0]);
+  this->m[3][1] =
+      -(matrix.m[3][0] * this->m[0][1] + matrix.m[3][1] * this->m[1][1] +
+        matrix.m[3][2] * this->m[2][1]);
+  this->m[3][2] =
+      -(matrix.m[3][0] * this->m[0][2] + matrix.m[3][1] * this->m[1][2] +
+        matrix.m[3][2] * this->m[2][2]);
+  this->m[3][3] = 1.0f;
+}
+
 mat4 mat4::identity() {
   mat4 matrix;
 
   for (int i = 0; i < 4; i++)
     matrix.m[i][i] = 1.0f;
 
-  return matrix;
-}
-
-mat4 mat4::inverse(mat4 m) {
-  mat4 matrix;
-  matrix.m[0][0] = m.m[0][0];
-  matrix.m[0][1] = m.m[1][0];
-  matrix.m[0][2] = m.m[2][0];
-  matrix.m[0][3] = 0.0f;
-  matrix.m[1][0] = m.m[0][1];
-  matrix.m[1][1] = m.m[1][1];
-  matrix.m[1][2] = m.m[2][1];
-  matrix.m[1][3] = 0.0f;
-  matrix.m[2][0] = m.m[0][2];
-  matrix.m[2][1] = m.m[1][2];
-  matrix.m[2][2] = m.m[2][2];
-  matrix.m[2][3] = 0.0f;
-  matrix.m[3][0] = -(m.m[3][0] * matrix.m[0][0] + m.m[3][1] * matrix.m[1][0] +
-                     m.m[3][2] * matrix.m[2][0]);
-  matrix.m[3][1] = -(m.m[3][0] * matrix.m[0][1] + m.m[3][1] * matrix.m[1][1] +
-                     m.m[3][2] * matrix.m[2][1]);
-  matrix.m[3][2] = -(m.m[3][0] * matrix.m[0][2] + m.m[3][1] * matrix.m[1][2] +
-                     m.m[3][2] * matrix.m[2][2]);
-  matrix.m[3][3] = 1.0f;
   return matrix;
 }
 
