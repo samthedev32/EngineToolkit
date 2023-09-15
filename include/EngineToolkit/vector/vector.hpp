@@ -75,8 +75,6 @@ template <uint8_t D, typename T = float> struct vec {
   static vec<3> cross(vec<3> a, vec<3> b);
 };
 
-// -------- Implementation
-
 // ---- Constructors
 
 ETK_VECTOR_TEMPLATE vec<D, T>::vec(T v) {

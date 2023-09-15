@@ -6,9 +6,9 @@
 
 ### Features
 
+- [Logger](../include/EngineToolkit/log)
 - [X Dimensional Vectors](../include/EngineToolkit/vector)
 - [X Dimensional Matrices](../include/EngineToolkit/matrix)
-- [Logger](../include/EngineToolkit/log)
 
 ## Documentation
 

@@ -1,5 +1,4 @@
 #include <EngineToolkit/vector/vector.hpp>
-#include <chrono>
 #include <cstdio>
 
 using namespace EngineToolkit;
