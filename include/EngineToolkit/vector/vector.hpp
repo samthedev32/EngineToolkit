@@ -2,6 +2,7 @@
 
 #include <cstdarg>
 #include <cstdint>
+#include <vector>
 
 namespace EngineToolkit {
 
@@ -14,7 +15,7 @@ template <uint8_t D, typename T = float> struct vec {
   // ---- Constructors
 
   vec(T v = 0);
-  vec(T value[D]);
+  vec(std::vector<T> v);
   vec(vec const &v);
 
   // ---- Destructor
@@ -34,6 +35,7 @@ template <uint8_t D, typename T = float> struct vec {
   void operator/=(const vec v);
 
   void operator=(const vec v);
+
   bool operator==(const vec v) const;
   bool operator!=(const vec v) const;
 
@@ -41,6 +43,14 @@ template <uint8_t D, typename T = float> struct vec {
   T &operator[](int i);
 
   // ---- Functions (Instance Methods)
+
+  // Convert to Different Dimension
+  template <uint8_t nD> vec<nD, T> to() {
+    vec<nD, T> out;
+    for (uint8_t i = 0; i < std::min(D, nD); i++)
+      out.data[i] = this->data[i];
+    return out;
+  }
 
   // Length
   T length();
@@ -74,24 +84,18 @@ ETK_VECTOR_TEMPLATE vec<D, T>::vec(T v) {
     this->data[i] = v;
 }
 
-ETK_VECTOR_TEMPLATE vec<D, T>::vec(T value[D]) { memcpy(this->data, value, D); }
+ETK_VECTOR_TEMPLATE vec<D, T>::vec(std::vector<T> v) {
+  memcpy(this->data, v.data(), std::min(D, v.size()));
+}
 
 ETK_VECTOR_TEMPLATE vec<D, T>::vec(vec<D, T> const &v) {
   for (int i = 0; i < D; i++)
-    this[i] = v[i];
+    this->data[i] = v[i];
 }
 
 // ---- Destructor
 
 ETK_VECTOR_TEMPLATE vec<D, T>::~vec() {}
-
-// ETK_VECTOR_TEMPLATE
-// vec<D, T> vec<D, T>::vec(vec<D, T> v) const {
-//   vec<D, T> ret;
-//   for (int i = 0; i < D; i++)
-//     ret.p[i] = this->p[i] + v.p[i];
-//   return ret;
-// }
 
 // ---- Operators
 
@@ -99,7 +103,7 @@ ETK_VECTOR_TEMPLATE
 vec<D, T> vec<D, T>::operator+(const vec<D, T> v) const {
   vec<D, T> ret;
   for (int i = 0; i < D; i++)
-    ret.p[i] = this->p[i] + v.p[i];
+    ret.p[i] = this->data[i] + v.p[i];
   return ret;
 }
 
@@ -107,7 +111,7 @@ ETK_VECTOR_TEMPLATE
 vec<D, T> vec<D, T>::operator-(const vec<D, T> v) const {
   vec<D, T> ret;
   for (int i = 0; i < D; i++)
-    ret.p[i] = this->p[i] - v.p[i];
+    ret.p[i] = this->data[i] - v.p[i];
   return ret;
 }
 
@@ -115,7 +119,7 @@ ETK_VECTOR_TEMPLATE
 vec<D, T> vec<D, T>::operator*(const vec<D, T> v) const {
   vec<D, T> ret;
   for (int i = 0; i < D; i++)
-    ret.p[i] = this->p[i] * v.p[i];
+    ret.p[i] = this->data[i] * v.p[i];
   return ret;
 }
 
@@ -123,44 +127,44 @@ ETK_VECTOR_TEMPLATE
 vec<D, T> vec<D, T>::operator/(const vec<D, T> v) const {
   vec<D, T> ret;
   for (int i = 0; i < D; i++)
-    ret.p[i] = this->p[i] / v.p[i];
+    ret.p[i] = this->data[i] / v.p[i];
   return ret;
 }
 
 ETK_VECTOR_TEMPLATE
 void vec<D, T>::operator+=(const vec<D, T> v) {
   for (int i = 0; i < D; i++)
-    this->p[i] += v.p[i];
+    this->data[i] += v.p[i];
 }
 
 ETK_VECTOR_TEMPLATE
 void vec<D, T>::operator-=(const vec<D, T> v) {
   for (int i = 0; i < D; i++)
-    this->p[i] -= v.p[i];
+    this->data[i] -= v.p[i];
 }
 
 ETK_VECTOR_TEMPLATE
 void vec<D, T>::operator*=(const vec<D, T> v) {
   for (int i = 0; i < D; i++)
-    this->p[i] *= v.p[i];
+    this->data[i] *= v.p[i];
 }
 
 ETK_VECTOR_TEMPLATE
 void vec<D, T>::operator/=(const vec<D, T> v) {
   for (int i = 0; i < D; i++)
-    this->p[i] /= v.p[i];
+    this->data[i] /= v.p[i];
 }
 
 ETK_VECTOR_TEMPLATE
 void vec<D, T>::operator=(const vec<D, T> v) {
   for (int i = 0; i < D; i++)
-    this->p[i] = v.p[i];
+    this->data[i] = v.p[i];
 }
 
 ETK_VECTOR_TEMPLATE
 bool vec<D, T>::operator==(const vec<D, T> v) const {
   for (int i = 0; i < D; i++)
-    if (this->p[i] != v.p[i])
+    if (this->data[i] != v.p[i])
       return false;
   return true;
 }
@@ -171,10 +175,12 @@ bool vec<D, T>::operator!=(const vec<D, T> v) const { return *this != v; }
 // ---- Indexing
 
 ETK_VECTOR_TEMPLATE T vec<D, T>::operator[](int i) const {
-  return this->p[i % D];
+  return this->data[i % D];
 }
 
-ETK_VECTOR_TEMPLATE T &vec<D, T>::operator[](int i) { return this->p[i % D]; }
+ETK_VECTOR_TEMPLATE T &vec<D, T>::operator[](int i) {
+  return this->data[i % D];
+}
 
 // ---- Functions (Instance Methods)
 

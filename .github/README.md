@@ -43,7 +43,7 @@
 
 | Macro  | Description |
 | --- | --- |
-| `TODO` | TODO |
+| `ETK_VECTOR_TEMPLATE` | Internal Template for the `vec` type |
 
 ## License
 
