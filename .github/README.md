@@ -5,11 +5,17 @@
 > [!IMPORTANT]
 > This project is **still under development**, and is not ready just yet
 
+This Library is made to be at the core of my Game Engines
+
+It replaces a lot of libraries, like:
+- [GLM](https://github.com/g-truc/glm) (vectors & matrices)
+- [stb_image](https://github.com/nothings/stb/blob/master/stb_image.h) (image loading)
+
 ### Features
 
 - [Logger](../include/EngineToolkit/log)
-- [X Dimensional Vectors](../include/EngineToolkit/vector)
-- [X Dimensional Matrices](../include/EngineToolkit/matrix)
+- [Variable Dimensional Vectors](../include/EngineToolkit/vector)
+- [Variable Dimensional Matrices](../include/EngineToolkit/matrix)
 
 ## Documentation
 

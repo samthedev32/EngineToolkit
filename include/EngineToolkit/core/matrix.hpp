@@ -5,7 +5,7 @@
 #include <cstdio>
 #include <vector>
 
-#include <EngineToolkit/vector/vector.hpp>
+#include "vector.hpp"
 
 #define MAX(a, b) a < b ? b : a
 
