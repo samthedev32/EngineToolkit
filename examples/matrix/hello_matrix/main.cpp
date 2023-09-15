@@ -5,6 +5,7 @@ using namespace EngineToolkit;
 
 int main() {
   mat<4> a;
-  mat<3> b;
-  mat<3, 2> c;
+  mat<3> b = a.to<3>();
+
+  mat<4> c = a * b;
 }

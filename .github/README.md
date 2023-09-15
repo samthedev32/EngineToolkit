@@ -2,7 +2,8 @@
 
 ## About
 
-> TODO
+> [!IMPORTANT]
+> This project is **still under development**, and is not ready just yet
 
 ### Features
 
@@ -38,12 +39,6 @@
 ### Usage
 
 > TODO
-
-### Macros
-
-| Macro  | Description |
-| --- | --- |
-| `ETK_VECTOR_TEMPLATE` | Internal Template for the `vec` type |
 
 ## License
 

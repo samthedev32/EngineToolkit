@@ -4,12 +4,13 @@
 using namespace EngineToolkit;
 
 int main() {
-  vec<3> a;
+  vec<3> a(0);
   for (int i = 0; i < 3; i++)
     a[i] = (i + 1) * 2;
 
-  vec<4> c = a.to<4>();
+  vec<2> b = a;
+  b += a * b;
+  // b += 3.0f;
 
-  for (int i = 0; i < 4; i++)
-    printf("%f\n", c[i]);
+  printf("%f %f %i\n", b[0], b[1], a > b);
 }
