@@ -5,7 +5,12 @@ using namespace EngineToolkit;
 
 int main() {
   mat<4> a;
-  mat<3> b = a.to<3>();
 
-  mat<4> c = a * b;
+  a = mat<4>::identity();
+
+  for (int i = 0; i < 4; i++) {
+    for (int j = 0; j < 4; j++)
+      printf("%f ", a(i, j));
+    printf("\n");
+  }
 }

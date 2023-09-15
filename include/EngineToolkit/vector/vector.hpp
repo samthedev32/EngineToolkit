@@ -94,7 +94,7 @@ template <uint8_t D> template <uint8_t inD> vec<D>::vec(vec<inD> v) {
 
 template <uint8_t D> vec<D>::~vec() {}
 
-// Arithmetic Vector Operators
+// Arithmetic Operators
 
 template <uint8_t D>
 template <uint8_t inD>
@@ -141,15 +141,7 @@ vec<D> vec<D>::operator%(const vec<inD> &v) const {
   return ret;
 }
 
-// Arithmetic vecT Operators
-
-// vec<D> operator+(const vecT &v) const;
-// vec<D> operator-(const vecT &v) const;
-// vec<D> operator*(const vecT &v) const;
-// vec<D> operator/(const vecT &v) const;
-// vec<D> operator%(const vecT &v) const;
-
-// Assignment Vector Operators
+// Assignment Operators
 
 template <uint8_t D>
 template <uint8_t inD>
@@ -188,16 +180,7 @@ void vec<D>::operator%=(const vec<inD> &v) {
   *this = *this % v;
 }
 
-// Assignment vecT Operators
-
-// void operator=(const vecT &v);
-// void operator+=(const vecT &v);
-// void operator-=(const vecT &v);
-// void operator*=(const vecT &v);
-// void operator/=(const vecT &v);
-// void operator%=(const vecT &v);
-
-// Relational Vector Operators
+// Relational Operators
 
 template <uint8_t D>
 template <uint8_t inD>
@@ -240,15 +223,6 @@ template <uint8_t inD>
 bool vec<D>::operator<=(const vec<inD> &v) const {
   return false;
 }
-
-// Relational vecT Operators
-
-// bool operator==(const vecT &v) const;
-// bool operator!=(const vecT &v) const;
-// bool operator>(const vecT &v) const;
-// bool operator<(const vecT &v) const;
-// bool operator>=(const vecT &v) const;
-// bool operator<=(const vecT &v) const;
 
 // Other Operators
 
