@@ -244,14 +244,12 @@ template <uint8_t D> vecT vec<D>::length() const {
   return sqrtf(dot(*this, *this));
 }
 
-// Normalize
 template <uint8_t D> vec<D> vec<D>::normalize() const {
   return *this / this->length();
 }
 
-// ---- Functions (Static)
+// Functions (Static)
 
-// Distance
 template <uint8_t D> vecT vec<D>::distance(vec a, vec b) {
   vecT out;
 
@@ -262,7 +260,6 @@ template <uint8_t D> vecT vec<D>::distance(vec a, vec b) {
   return sqrt(out);
 }
 
-// Dot Product
 template <uint8_t D> vecT vec<D>::dot(vec a, vec b) {
   vecT out;
 
@@ -272,7 +269,6 @@ template <uint8_t D> vecT vec<D>::dot(vec a, vec b) {
   return out;
 }
 
-// Linearly Interpolate
 template <uint8_t D> vec<D> vec<D>::lerp(vec<D> a, vec<D> b, vecT blend) {
   vec<D> out;
 
@@ -282,9 +278,8 @@ template <uint8_t D> vec<D> vec<D>::lerp(vec<D> a, vec<D> b, vecT blend) {
   return out;
 }
 
-// ---- Functions (Dimension-Specific)
+// Functions (Dimension-Specific)
 
-// Cross Product
 template <uint8_t D> vec<3> vec<D>::cross(vec<3> a, vec<3> b) {
   return std::vector<vecT>({a.data[1] * b.data[2] - a.data[2] * b.data[1],
                             a.data[2] * b.data[0] - a.data[0] * b.data[2],
