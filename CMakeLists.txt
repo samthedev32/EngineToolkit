@@ -29,6 +29,7 @@ set(SOURCES
 # Libraries
 set(LIBRARIES
     m
+    z
 )
 
 # Project (Library)

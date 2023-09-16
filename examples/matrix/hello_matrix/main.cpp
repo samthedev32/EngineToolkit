@@ -1,4 +1,4 @@
-#include <EngineToolkit/matrix/matrix.hpp>
+#include <EngineToolkit/core/matrix.hpp>
 #include <cstdio>
 
 using namespace EngineToolkit;

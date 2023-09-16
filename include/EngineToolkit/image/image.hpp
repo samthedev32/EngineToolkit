@@ -1,17 +1,16 @@
 #pragma once
 
+#include "stb_image.h"
+
 #include <cstdint>
 
 namespace EngineToolkit {
 
 struct Image {
-  // Image's Size
   uint32_t width, height;
-
-  // Image Channels
   uint8_t channels;
+  uint32_t size;
 
-  // RAW Image Data
   unsigned char *data;
 
   // ---- Constructors
@@ -26,13 +25,7 @@ struct Image {
 
   void operator=(const Image image);
 
-  // Load BMP Image
-  static Image loadBMP(const char *path);
-
-  // Load PNG Image
-  static Image loadPNG(const char *path);
-
-  // Load Image (auto-detect)
+  // Load Image
   static Image load(const char *path);
 };
 
