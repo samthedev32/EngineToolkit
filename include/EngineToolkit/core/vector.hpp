@@ -10,9 +10,32 @@ namespace EngineToolkit {
 // Vector Type
 typedef float vecT;
 
+// Vector Components
+template <uint8_t D> struct vecC {};
+
+template <> struct vecC<1> {
+  float x;
+};
+
+template <> struct vecC<2> {
+  float x, y;
+};
+
+template <> struct vecC<3> {
+  float x, y, z;
+};
+
+template <> struct vecC<4> {
+  float x, y, z, w;
+};
+
 // Variable Dimension Vector
 template <uint8_t D = 3> struct vec {
-  vecT data[D];
+  union {
+    vecT data[D];
+
+    vecC<D> component;
+  };
 
   // Constructors & Destructor
 
@@ -55,6 +78,8 @@ template <uint8_t D = 3> struct vec {
 
   void operator++();
   void operator--();
+
+  vecC<D> *operator->() { return &component; }
 
   // Functions (Instance Methods)
 
