@@ -12,5 +12,5 @@ int main() {
   b += a * b;
   // b += 3.0f;
 
-  printf("%f %f %f %i\n", b[0], b[1], b->x, a > b);
+  printf("%f %f %i\n", b->x, b->y, a > b);
 }
