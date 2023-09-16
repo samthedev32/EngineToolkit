@@ -1,4 +1,4 @@
-#include <EngineToolkit/image/image.hpp>
+#include <EngineToolkit/media/image.hpp>
 
 using namespace EngineToolkit;
 

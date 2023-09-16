@@ -1,10 +1,8 @@
 #pragma once
 
-#include <EngineToolkit/matrix/matrix.hpp>
-#include <EngineToolkit/vector/vector.hpp>
+#include <EngineToolkit/core/matrix.hpp>
+#include <EngineToolkit/core/vector.hpp>
 
-namespace EngineToolkit {
+#include <EngineToolkit/media/image.hpp>
 
-// TODO: SIMD (SSE 2 & ARM Neon) support for matrix & vector
-
-} // namespace EngineToolkit
+namespace EngineToolkit {} // namespace EngineToolkit

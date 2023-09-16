@@ -22,8 +22,8 @@ set(SOURCES
     # Mesh
     # src/mesh/mesh.cpp
 
-    # Image
-    src/image/image.cpp
+    # Media
+    src/media/image.cpp
 )
 
 # Libraries

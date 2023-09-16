@@ -13,3 +13,4 @@ Rules:
 - everything should be under the namespace of the project
 - features have to be tested and should have an associated example
 - you should document what you've changed/made, noone else wants to do it
+- if possible, implement **operator overloading** for your feature
