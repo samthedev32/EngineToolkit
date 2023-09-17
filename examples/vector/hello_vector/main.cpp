@@ -18,7 +18,5 @@ int main() {
     c->x = 5;
     c->y = sig(6);
 
-    b *= c;
-
     printf("%f %f %lu\n", b->x, b->y, sizeof(b));
 }

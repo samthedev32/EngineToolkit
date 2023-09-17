@@ -139,6 +139,9 @@ template <uint8_t D = 3, typename T = float> struct vec {
     void operator++();
     void operator--();
 
+    vec &operator=(T v);
+    operator T() const { return this->length(); }
+
     internal::vecC<D, T> *operator->() { return &component; }
 
     // Functions (Instance Methods)
@@ -203,8 +206,8 @@ template <uint8_t D, typename T>
 template <typename... Args>
 vec<D, T>::vec(Args... args) {
     T values[] = {static_cast<T>(args)...};
-    for (uint8_t i = 0; i < MIN(D, sizeof...(args)); i++)
-        this->data[i] = values[i];
+    for (uint8_t i = 0; i < D; i++)
+        this->data[i] = i < sizeof...(args) ? values[i] : 0;
 }
 
 template <uint8_t D, typename T>
@@ -358,6 +361,12 @@ template <uint8_t D, typename T> T &vec<D, T>::operator[](uint8_t i) {
 template <uint8_t D, typename T> void vec<D, T>::operator++() { *this += 1.0f; }
 
 template <uint8_t D, typename T> void vec<D, T>::operator--() { *this -= 1.0f; }
+
+template <uint8_t D, typename T> vec<D, T> &vec<D, T>::operator=(T v) {
+    for (uint8_t i = 0; i < D; ++i)
+        data[i] = v;
+    return *this;
+}
 
 // Functions (Instance Methods)
 
