@@ -46,6 +46,18 @@ It replaces a lot of libraries, like:
 
 > TODO
 
+### For Devs
+
+<details>
+<summary>Namespaces</summary>
+
+| Namespace | Description |
+| --------- | ----------- |
+| `EngineToolkit` | Library-Level Namespace |
+| `EngineToolkit::internal` | Internal Types, Functions, etc |
+
+</details>
+
 ## License
 
 This Project is licensed under the [zlib License](https://opensource.org/license/zlib-license-php/)

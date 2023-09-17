@@ -1,6 +1,8 @@
 #include <EngineToolkit/core/vector.hpp>
 #include <cstdio>
 
+#include <EngineToolkit/math/math.hpp>
+
 using namespace EngineToolkit;
 
 int main() {
@@ -12,5 +14,11 @@ int main() {
   b += a * b;
   // b += 3.0f;
 
-  printf("%f %f %i\n", b->x, b->y, a > b);
+  fvec2 c;
+  c->x = 5;
+  c->y = sig(6);
+
+  b *= c;
+
+  printf("%f %f %lu\n", b->x, b->y, sizeof(b));
 }
