@@ -10,66 +10,9 @@
 
 namespace EngineToolkit {
 
-namespace internal {
-
 // Vector Components
+namespace internal {
 template <uint8_t D, typename T> struct vecC {};
-
-// 1D Vector Component
-template <typename T> struct vecC<1, T> {
-  T x;
-};
-
-// 2D Vector Components
-template <typename T> struct vecC<2, T> {
-  union {
-    // Position
-    struct {
-      T x, y;
-    };
-
-    // TexCoord
-    struct {
-      T u, v;
-    };
-  };
-};
-
-// 3D Vector Components
-template <typename T> struct vecC<3, T> {
-  union {
-    // Position
-    struct {
-      T x, y, z;
-    };
-
-    // Color
-    struct {
-      T r, g, b;
-    };
-
-    // TexCoord
-    struct {
-      T u, v, w;
-    };
-  };
-};
-
-// 4D Vector Components
-template <typename T> struct vecC<4, T> {
-  union {
-    // Position
-    struct {
-      T x, y, z, w;
-    };
-
-    // Color
-    struct {
-      T r, g, b, a;
-    };
-  };
-};
-
 } // namespace internal
 
 // Variable Dimension Vector
@@ -189,6 +132,65 @@ typedef vec<3> Euler;
 typedef vec<3, float> fEuler;
 typedef vec<3, double> dEuler;
 typedef vec<3, int> iEuler;
+
+namespace internal {
+
+// 1D Vector Component
+template <typename T> struct vecC<1, T> {
+  T x;
+};
+
+// 2D Vector Components
+template <typename T> struct vecC<2, T> {
+  union {
+    // Position
+    struct {
+      T x, y;
+    };
+
+    // TexCoord
+    struct {
+      T u, v;
+    };
+  };
+};
+
+// 3D Vector Components
+template <typename T> struct vecC<3, T> {
+  union {
+    // Position
+    struct {
+      T x, y, z;
+    };
+
+    // Color
+    struct {
+      T r, g, b;
+    };
+
+    // TexCoord
+    struct {
+      T u, v, w;
+    };
+  };
+};
+
+// 4D Vector Components
+template <typename T> struct vecC<4, T> {
+  union {
+    // Position
+    struct {
+      T x, y, z, w;
+    };
+
+    // Color
+    struct {
+      T r, g, b, a;
+    };
+  };
+};
+
+} // namespace internal
 
 // Constructors & Destructor
 
