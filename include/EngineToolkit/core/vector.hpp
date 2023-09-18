@@ -17,6 +17,8 @@ template <uint8_t D, typename T> struct vecC {};
 
 // Variable Dimension Vector
 template <uint8_t D = 3, typename T = float> struct vec {
+  static_assert(D != 0, "Null-Vectors are not supported");
+
   union {
     T data[D];
 
