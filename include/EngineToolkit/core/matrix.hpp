@@ -144,8 +144,6 @@ mat<R, C, T>::operator*(mat<inR, inC, inT> m) const {
             for (uint8_t k = 0; k < C; k++)
                 out.data[r][c] += this->data[r][k] * m.data[k][c];
 
-    // TODO: bugfix
-
     return out;
 }
 
@@ -225,10 +223,61 @@ void inverse();
 template <uint8_t R, uint8_t C, typename T> mat<R, R> mat<R, C, T>::identity() {
     mat<R> out;
 
-    for (uint8_t rc = 0; rc < R; rc++)
+    for (uint8_t rc = 0; rc < MIN(R, C); rc++)
         out.data[rc][rc] = 1;
 
     return out;
+}
+
+template <uint8_t R, uint8_t C, typename T>
+mat<4> mat<R, C, T>::rotationX(float rad) {
+    mat<4> matrix;
+    matrix(0, 0) = 1.0f;
+    matrix(1, 1) = cosf(rad);
+    matrix(1, 2) = sinf(rad);
+    matrix(2, 1) = -sinf(rad);
+    matrix(2, 2) = cosf(rad);
+    matrix(3, 3) = 1.0f;
+    return matrix;
+}
+
+template <uint8_t R, uint8_t C, typename T>
+mat<4> mat<R, C, T>::rotationY(float rad) {
+    mat<4> matrix;
+    matrix(0, 0) = cosf(rad);
+    matrix(0, 2) = sinf(rad);
+    matrix(2, 0) = -sinf(rad);
+    matrix(1, 1) = 1.0f;
+    matrix(2, 2) = cosf(rad);
+    matrix(3, 3) = 1.0f;
+    return matrix;
+}
+
+template <uint8_t R, uint8_t C, typename T>
+mat<4> mat<R, C, T>::rotationZ(float rad) {
+    mat<4> matrix;
+    matrix(0, 0) = cosf(rad);
+    matrix(0, 1) = sinf(rad);
+    matrix(1, 0) = -sinf(rad);
+    matrix(1, 1) = cosf(rad);
+    matrix(2, 2) = 1.0f;
+    matrix(3, 3) = 1.0f;
+    return matrix;
+}
+
+template <uint8_t R, uint8_t C, typename T>
+mat<4> mat<R, C, T>::rotation(vec<3> rad) {
+    mat<4> matrix, x, y, z;
+
+    x = rotationX(rad->x);
+    y = rotationY(rad->y);
+    z = rotationZ(rad->z);
+
+    matrix = identity();
+    matrix = x * y;
+    matrix = matrix * z;
+
+    return matrix;
 }
 
 // Functions (Dimension-Specific)
