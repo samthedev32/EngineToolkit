@@ -9,53 +9,53 @@
 
 namespace EngineToolkit {
 
-// Matrix Type
-typedef float matT;
-
 // Variable Dimension Matrix
-template <uint8_t R, uint8_t C = R> struct mat {
-    matT data[R][C];
+template <uint8_t R, uint8_t C = R, typename T = float> struct mat {
+    T data[R][C];
 
     // Constructors & Destructor
 
-    mat(matT v = 0);
-    mat(std::vector<std::vector<matT>> m);
-    template <uint8_t inR, uint8_t inC = inR> mat(mat<inR, inC> m);
+    mat(T v = 0);
+    mat(std::vector<std::vector<T>> m);
+    template <uint8_t inR, uint8_t inC, typename inT> mat(mat<inR, inC, inT> m);
 
     ~mat();
 
     // Arithmetic Operators
 
-    mat<R, C> operator+(mat<R, C> m) const;
-    mat<R, C> operator-(mat<R, C> m) const;
+    mat<R, C, T> operator+(mat<R, C, T> m) const;
+    mat<R, C, T> operator-(mat<R, C, T> m) const;
     // matrix division is not a standard operation; TODO
-    template <uint8_t inR, uint8_t inC = inR>
-    mat<MAX(R, inR), MAX(C, inC)> operator*(mat<inR, inC> m) const;
+    template <uint8_t inR, uint8_t inC, typename inT>
+    mat<MAX(R, inR), MAX(C, inC)> operator*(mat<inR, inC, inT> m) const;
 
-    template <uint8_t inD> vec<inD> operator*(vec<inD> v) const;
+    template <uint8_t inD, typename inT>
+    vec<inD, inT> operator*(vec<inD, inT> v) const;
 
     // Assignment Operators
 
-    template <uint8_t inR, uint8_t inC = inR> void operator=(mat<inR, inC> m);
-    template <uint8_t inR, uint8_t inC = inR> void operator*=(mat<inR, inC> m);
+    template <uint8_t inR, uint8_t inC, typename inT>
+    void operator=(mat<inR, inC, inT> m);
+    template <uint8_t inR, uint8_t inC, typename inT>
+    void operator*=(mat<inR, inC, inT> m);
 
     // Relational Operators
 
-    template <uint8_t inR, uint8_t inC = inR>
-    bool operator==(mat<inR, inC> m) const;
-    template <uint8_t inR, uint8_t inC = inR>
-    bool operator!=(mat<inR, inC> m) const;
+    template <uint8_t inR, uint8_t inC, typename inT>
+    bool operator==(mat<inR, inC, inT> m) const;
+    template <uint8_t inR, uint8_t inC, typename inT>
+    bool operator!=(mat<inR, inC, inT> m) const;
 
     // Other Operators
 
-    matT operator()(uint8_t row, uint8_t col) const;
-    matT &operator()(uint8_t row, uint8_t col);
+    T operator()(uint8_t row, uint8_t col) const;
+    T &operator()(uint8_t row, uint8_t col);
 
     // Functions (Instance Methods)
 
     bool isSquare() const;
     void inverse();
-    matT sum() const;
+    T sum() const;
 
     // Functions (Static)
 
@@ -83,32 +83,32 @@ template <uint8_t R, uint8_t C = R> struct mat {
 
 // Constructors & Destructor
 
-template <uint8_t R, uint8_t C> mat<R, C>::mat(matT v) {
+template <uint8_t R, uint8_t C, typename T> mat<R, C, T>::mat(T v) {
     for (int r = 0; r < R; r++)
         for (int c = 0; c < C; c++)
             this->data[r][c] = v;
 }
 
-template <uint8_t R, uint8_t C>
-mat<R, C>::mat(std::vector<std::vector<matT>> m) {
+template <uint8_t R, uint8_t C, typename T>
+mat<R, C, T>::mat(std::vector<std::vector<T>> m) {
     for (uint8_t r = 0; r < R; r++)
         for (uint8_t c = 0; c < C; c++)
             this->data[r][c] = r < m.size() && c < m[r].size() ? m[r][c] : 0;
 }
 
-template <uint8_t R, uint8_t C>
-template <uint8_t inR, uint8_t inC>
-mat<R, C>::mat(mat<inR, inC> m) {
+template <uint8_t R, uint8_t C, typename T>
+template <uint8_t inR, uint8_t inC, typename inT>
+mat<R, C, T>::mat(mat<inR, inC, inT> m) {
     *this = m;
 }
 
-template <uint8_t R, uint8_t C> mat<R, C>::~mat() {}
+template <uint8_t R, uint8_t C, typename T> mat<R, C, T>::~mat() {}
 
 // Arithmetic Operators
 
-template <uint8_t R, uint8_t C>
-mat<R, C> mat<R, C>::operator+(mat<R, C> m) const {
-    mat<R, C> out;
+template <uint8_t R, uint8_t C, typename T>
+mat<R, C, T> mat<R, C, T>::operator+(mat<R, C, T> m) const {
+    mat<R, C, T> out;
 
     for (uint8_t r = 0; r < R; r++)
         for (uint8_t c = 0; c < C; c++)
@@ -117,9 +117,9 @@ mat<R, C> mat<R, C>::operator+(mat<R, C> m) const {
     return out;
 }
 
-template <uint8_t R, uint8_t C>
-mat<R, C> mat<R, C>::operator-(mat<R, C> m) const {
-    mat<R, C> out;
+template <uint8_t R, uint8_t C, typename T>
+mat<R, C, T> mat<R, C, T>::operator-(mat<R, C, T> m) const {
+    mat<R, C, T> out;
 
     for (uint8_t r = 0; r < R; r++)
         for (uint8_t c = 0; c < C; c++)
@@ -128,9 +128,10 @@ mat<R, C> mat<R, C>::operator-(mat<R, C> m) const {
     return out;
 }
 
-template <uint8_t R, uint8_t C>
-template <uint8_t inR, uint8_t inC>
-mat<MAX(R, inR), MAX(C, inC)> mat<R, C>::operator*(mat<inR, inC> m) const {
+template <uint8_t R, uint8_t C, typename T>
+template <uint8_t inR, uint8_t inC, typename inT>
+mat<MAX(R, inR), MAX(C, inC)>
+mat<R, C, T>::operator*(mat<inR, inC, inT> m) const {
     mat<MAX(R, inR), MAX(C, inC)> out;
 
     if (C != inR)
@@ -146,10 +147,10 @@ mat<MAX(R, inR), MAX(C, inC)> mat<R, C>::operator*(mat<inR, inC> m) const {
     return out;
 }
 
-template <uint8_t R, uint8_t C>
-template <uint8_t inD>
-vec<inD> mat<R, C>::operator*(vec<inD> v) const {
-    vec<inD> out;
+template <uint8_t R, uint8_t C, typename T>
+template <uint8_t inD, typename inT>
+vec<inD, inT> mat<R, C, T>::operator*(vec<inD, inT> v) const {
+    vec<inD, inT> out;
 
     // TODO
 
@@ -158,25 +159,25 @@ vec<inD> mat<R, C>::operator*(vec<inD> v) const {
 
 // Assignment Operators
 
-template <uint8_t R, uint8_t C>
-template <uint8_t inR, uint8_t inC>
-void mat<R, C>::operator=(mat<inR, inC> m) {
+template <uint8_t R, uint8_t C, typename T>
+template <uint8_t inR, uint8_t inC, typename inT>
+void mat<R, C, T>::operator=(mat<inR, inC, inT> m) {
     for (int r = 0; r < R; r++)
         for (int c = 0; c < C; c++)
             this->data[r][c] = r < inR && c < inC ? m.data[r][c] : 0;
 }
 
-template <uint8_t R, uint8_t C>
-template <uint8_t inR, uint8_t inC>
-void mat<R, C>::operator*=(mat<inR, inC> m) {
+template <uint8_t R, uint8_t C, typename T>
+template <uint8_t inR, uint8_t inC, typename inT>
+void mat<R, C, T>::operator*=(mat<inR, inC, inT> m) {
     *this = *this * m;
 }
 
 // Relational Operators
 
-template <uint8_t R, uint8_t C>
-template <uint8_t inR, uint8_t inC>
-bool mat<R, C>::operator==(mat<inR, inC> m) const {
+template <uint8_t R, uint8_t C, typename T>
+template <uint8_t inR, uint8_t inC, typename inT>
+bool mat<R, C, T>::operator==(mat<inR, inC, inT> m) const {
     for (int r = 0; r < std::min(R, inR); r++)
         for (int c = 0; c < std::min(C, inC); c++)
             if (this->data[r][c] != m.data[r][c])
@@ -184,9 +185,9 @@ bool mat<R, C>::operator==(mat<inR, inC> m) const {
     return true;
 }
 
-template <uint8_t R, uint8_t C>
-template <uint8_t inR, uint8_t inC>
-bool mat<R, C>::operator!=(mat<inR, inC> m) const {
+template <uint8_t R, uint8_t C, typename T>
+template <uint8_t inR, uint8_t inC, typename inT>
+bool mat<R, C, T>::operator!=(mat<inR, inC, inT> m) const {
     for (int r = 0; r < std::min(R, inR); r++)
         for (int c = 0; c < std::min(C, inC); c++)
             if (this->data[r][c] == m.data[r][c])
@@ -196,29 +197,30 @@ bool mat<R, C>::operator!=(mat<inR, inC> m) const {
 
 // Other Operators
 
-template <uint8_t R, uint8_t C>
-matT mat<R, C>::operator()(uint8_t row, uint8_t col) const {
+template <uint8_t R, uint8_t C, typename T>
+T mat<R, C, T>::operator()(uint8_t row, uint8_t col) const {
     return this->data[row % R][col % C];
 }
 
-template <uint8_t R, uint8_t C>
-matT &mat<R, C>::operator()(uint8_t row, uint8_t col) {
+template <uint8_t R, uint8_t C, typename T>
+T &mat<R, C, T>::operator()(uint8_t row, uint8_t col) {
     return this->data[row % R][col % C];
 }
 
 // Functions (Instance Methods)
 
-template <uint8_t R, uint8_t C> bool mat<R, C>::isSquare() const {
+template <uint8_t R, uint8_t C, typename T>
+bool mat<R, C, T>::isSquare() const {
     return R == C;
 }
 
 void inverse();
 
-matT sum();
+// T sum();
 
 // Functions (Static)
 
-template <uint8_t R, uint8_t C> mat<R, R> mat<R, C>::identity() {
+template <uint8_t R, uint8_t C, typename T> mat<R, R> mat<R, C, T>::identity() {
     mat<R> out;
 
     for (uint8_t rc = 0; rc < R; rc++)
@@ -229,9 +231,9 @@ template <uint8_t R, uint8_t C> mat<R, R> mat<R, C>::identity() {
 
 // Functions (Dimension-Specific)
 
-template <uint8_t R, uint8_t C>
-mat<4> mat<R, C>::perspective(float fovrads, float aspect, float near,
-                              float far) {
+template <uint8_t R, uint8_t C, typename T>
+mat<4> mat<R, C, T>::perspective(float fovrads, float aspect, float near,
+                                 float far) {
     float tanHalfFov = tan(fovrads / 2.0f);
 
     mat<4> out;
@@ -243,9 +245,9 @@ mat<4> mat<R, C>::perspective(float fovrads, float aspect, float near,
     return out;
 }
 
-template <uint8_t R, uint8_t C>
-mat<4> mat<R, C>::ortho(float left, float right, float bottom, float top,
-                        float near, float far) {
+template <uint8_t R, uint8_t C, typename T>
+mat<4> mat<R, C, T>::ortho(float left, float right, float bottom, float top,
+                           float near, float far) {
     mat<4> out = identity();
     out.data[0][0] = 2.0f / (right - left);
     out.data[1][1] = 2.0f / (top - bottom);
@@ -256,8 +258,8 @@ mat<4> mat<R, C>::ortho(float left, float right, float bottom, float top,
     return out;
 }
 
-template <uint8_t R, uint8_t C>
-mat<4> mat<R, C>::lookat(vec<3> pos, vec<3> target, vec<3> up) {
+template <uint8_t R, uint8_t C, typename T>
+mat<4> mat<R, C, T>::lookat(vec<3> pos, vec<3> target, vec<3> up) {
     vec<3> f = (target - pos).normalize();
     vec<3> s = vec<3>::cross(f, up).normalize();
     vec<3> u = vec<3>::cross(s, f);
