@@ -10,14 +10,14 @@ namespace EngineToolkit {
 // Constructors & Destructor
 
 Image::Image() {
-  this->width = 0, this->height = 0, this->channels = 0, this->size = 0;
+  this->size = {0}, this->channels = 0;
   this->data = nullptr;
 }
 
 Image::Image(const char *path) { *this = load(path); }
 Image::Image(Image const &image) { *this = image; }
 Image::~Image() {
-  this->width = 0, this->height = 0, this->channels = 0, this->size = 0;
+  this->size = {0}, this->channels = 0, this->size = 0;
   this->data = nullptr;
   free(this->data);
 }
@@ -27,12 +27,14 @@ Image::~Image() {
 void Image::operator=(const Image image) {
   free(this->data);
 
-  this->width = image.width, this->height = image.height;
+  this->size = image.size;
   this->channels = image.channels;
   this->size = image.size;
 
-  this->data = (unsigned char *)malloc(this->size);
-  memcpy(this->data, image.data, image.width * image.height * image.channels);
+  this->data =
+      (unsigned char *)malloc(this->size->x * this->size->y * this->channels);
+  memcpy(this->data, image.data,
+         image.size->x * image.size->y * image.channels);
 }
 
 // Relational Operators (Image Size)
@@ -47,39 +49,44 @@ bool Image::operator<=(const Image &v) const { return this->size <= v.size; }
 // Other Operator
 
 unsigned char *Image::operator()(uint32_t x, uint32_t y) const {
-  return &this->data[(std::min(x, this->width - 1) +
-                      std::min(y, this->height - 1) * width) *
+  return &this->data[(std::min(x, this->size->x - 1) +
+                      std::min(y, this->size->y - 1) * this->size->x) *
                      channels];
 }
 
 // Functions (Instance Methods)
 
-bool Image::resize(uint32_t newWidth, uint32_t newHeight,
-                   uint32_t newChannels) {
-
-  if (newWidth == 0)
-    newWidth = this->width;
-  if (newHeight == 0)
-    newHeight = this->height;
+// Return Resized Copy
+Image Image::resized(vec<2, uint32_t> newSize, uint32_t newChannels) const {
+  if (newSize->x == 0)
+    newSize->x = this->size->x;
+  if (newSize->y == 0)
+    newSize->y = this->size->y;
   if (newChannels == 0)
     newChannels = this->channels;
-  uint32_t newSize = newWidth * newHeight * newChannels;
 
-  if (this->width == newWidth && this->height == newHeight &&
-      this->channels == newChannels && this->size == newSize)
-    return true;
+  Image out;
 
-  unsigned char *newData = (unsigned char *)malloc(newSize);
+  out.size = newSize;
+  out.channels = newChannels;
+  out.data =
+      (unsigned char *)malloc(this->size->x * this->size->y * this->channels);
 
   // Copy Data
-  // TODO
+  // TODO: copy data
 
-  free(this->data);
-  this->width = newWidth, this->height = newHeight;
-  this->channels = newChannels, this->size = newSize;
-  this->data = newData;
+  return out;
+}
 
-  return false;
+bool Image::resize(vec<2, uint32_t> newSize, uint32_t newChannels) {
+  Image out = resized(newSize, newChannels);
+
+  if (out.size != newSize || out.channels != newChannels)
+    return false;
+
+  *this = out;
+
+  return true;
 }
 
 bool Image::save(const char *path, ImageType type) {
@@ -87,6 +94,10 @@ bool Image::save(const char *path, ImageType type) {
   return false;
 
   switch (type) {
+  case ImageType::AUTO: {
+
+  } break;
+
   case ImageType::PNG: {
   } break;
 
@@ -102,17 +113,17 @@ bool Image::save(const char *path, ImageType type) {
 
 // Functions (Static)
 
-Image Image::load(const char *path) {
+Image Image::load(const char *path, ImageType type) {
   Image out;
 
-  int width, height, channels;
-  if (!(out.data = stbi_load(path, &width, &height, &channels, 0))) {
+  vec<2, int> size;
+  int channels;
+  if (!(out.data = stbi_load(path, &size->x, &size->y, &channels, 0))) {
     printf("failed to load image\n");
     return out;
   }
 
-  out.width = width;
-  out.height = height;
+  out.size = size;
   out.channels = channels;
 
   return out;
