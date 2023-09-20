@@ -8,15 +8,13 @@ using namespace EngineToolkit;
 int main() {
   Image img = Image::loadPNG("../../../../examples/image/test.png");
 
-  printf("asd\n");
-
   // Initialize GLFW
   if (!glfwInit()) {
     return -1;
   }
 
   // Create tex windowed mode window and its OpenGL context
-  GLFWwindow *window = glfwCreateWindow(800, 600, "Image Loading", NULL, NULL);
+  GLFWwindow *window = glfwCreateWindow(600, 600, "Image Loading", NULL, NULL);
   if (!window) {
     glfwTerminate();
     return -1;

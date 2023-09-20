@@ -15,8 +15,8 @@ Image::Image() {
   this->data = nullptr;
 }
 
-Image::Image(const char *path) { *this = load(path); }
-Image::Image(Image const &image) { *this = image; }
+// Image::Image(const char *path) { *this = load(path); }
+// Image::Image(Image const &image) { *this = image; }
 Image::~Image() {
   this->size = {0}, this->channels = 0, this->size = 0;
 
@@ -121,6 +121,8 @@ bool Image::save(const char *path, ImageType type) {
 Image Image::loadPNG(const char *path) {
   Image out;
 
+  // Why tf do i get a segfault when this func() returns "out"???
+
   // Open File
   FILE *f = fopen(path, "rb");
   if (!f) {
@@ -217,7 +219,7 @@ Image Image::loadPNG(const char *path) {
       fprintf(stderr, "Failed to read Chunk CRC\n");
       // fclose(f);
       // free(image);
-      return NULL;
+      // return out;
       fseek(f, 4, SEEK_CUR);
     } else
       chunk.crc = __bswap_32(chunk.crc);
@@ -253,16 +255,8 @@ Image Image::loadPNG(const char *path) {
         return out;
       }
 
-      // printf("ihdr:\n");
-      // printf("%u x %u\n", width, height);
-      // printf("%i %i\n", bitDepth, colorType);
-      // printf("%i %i %i\n", compressionMethod, filterMethod,
-      // interlanceMethod);
-
       // TODO: validate W, H
       // TODO: validate config
-
-      // TODO: Store Info
 
       // TODO: check chunk order
     } break;
@@ -316,12 +310,11 @@ Image Image::loadPNG(const char *path) {
 
     // IEND
     case 4: {
-      printf("iend %zu\n", idat.size);
       reading = false;
       // Decompress Data
       uLong dstSize =
           ihdr.width * ihdr.height * ihdr.bitDepth; // TODO: color type
-      unsigned char dst[dstSize];
+      unsigned char *dst = (unsigned char *)malloc(dstSize);
       int result = uncompress((Bytef *)dst, &dstSize, (const Bytef *)idat.data,
                               idat.size);
 
@@ -336,9 +329,7 @@ Image Image::loadPNG(const char *path) {
       out.size->x = ihdr.width;
       out.size->y = ihdr.height;
       out.channels = 3;
-      out.data = (unsigned char *)malloc(out.size->x * out.size->y * 3);
-      // memcpy(out.data, dst, dstSize);
-      printf("%i\n", ihdr.bitDepth);
+      out.data = dst;
     } break;
     }
   }
@@ -351,7 +342,7 @@ Image Image::loadPNG(const char *path) {
 // Load from JPG File
 Image Image::loadJPG(const char *path) {
   Image out;
-  return {};
+  return out;
 }
 
 Image Image::loadBMP(const char *path) {

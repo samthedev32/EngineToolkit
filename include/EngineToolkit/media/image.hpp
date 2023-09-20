@@ -22,8 +22,8 @@ struct Image {
   // ---- Constructors & Destructor
 
   Image();
-  Image(const char *path);
-  Image(Image const &image);
+  // Image(const char *path);
+  // Image(Image const &image);
 
   ~Image();
 
