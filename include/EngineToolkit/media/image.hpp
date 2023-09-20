@@ -1,9 +1,9 @@
 #pragma once
 
-#include "stb_image.h"
 #include <EngineToolkit/core/vector.hpp>
 
 #include <cstdint>
+#include <string>
 
 namespace EngineToolkit {
 
@@ -46,11 +46,12 @@ struct Image {
 
   // ---- Functions (Instance Methods)
 
-  // Return Resized Copy
-  Image resized(vec<2, uint32_t> newSize, uint32_t newChannels = 0) const;
+  // ---- Transform Image
 
-  // Resize Image
+  Image resized(vec<2, uint32_t> newSize, uint32_t newChannels = 0) const;
   bool resize(vec<2, uint32_t> newSize, uint32_t newChannels = 0);
+
+  bool rotate(int direction);
 
   // Save to File
   bool save(const char *path, ImageType type = ImageType::AUTO);
@@ -59,8 +60,17 @@ struct Image {
 
   // ---- Functions (Static)
 
+  // Load from PNG File
+  static Image loadPNG(const char *path);
+
+  // Load from JPG File
+  static Image loadJPG(const char *path);
+
+  // Load from BMP File
+  static Image loadBMP(const char *path);
+
   // Load From File
-  static Image load(const char *path, ImageType type = ImageType::AUTO);
+  static Image load(std::string path, ImageType type = ImageType::AUTO);
 };
 
 } // namespace EngineToolkit
