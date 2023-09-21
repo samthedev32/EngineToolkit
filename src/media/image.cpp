@@ -255,10 +255,7 @@ Image Image::loadPNG(const char *path) {
         return out;
       }
 
-      // TODO: validate W, H
-      // TODO: validate config
-
-      // TODO: check chunk order
+      // TODO: validate compatibility, check filterMethod, etc
     } break;
 
     // PLTE
@@ -300,7 +297,6 @@ Image Image::loadPNG(const char *path) {
           return out;
         }
         idat.data = d;
-        // TODO: error handling
       }
 
       for (int i = 0; i < chunk.length; i++)
@@ -324,7 +320,31 @@ Image Image::loadPNG(const char *path) {
         return out;
       }
 
+      // TODO: interlancing
+
       // TODO: filtering
+      switch (ihdr.filterMethod) {
+      default:
+      case 0: {
+        // None
+      } break;
+
+      case 1: {
+        // Sub
+      } break;
+
+      case 2: {
+        // Up
+      } break;
+
+      case 3: {
+        // Avarage
+      } break;
+
+      case 4: {
+        // Paeth
+      } break;
+      }
 
       out.size->x = ihdr.width;
       out.size->y = ihdr.height;
@@ -404,7 +424,7 @@ Image Image::load(std::string path, ImageType type) {
     break;
 
   case ImageType::PNG:
-    // out = loadPNG(path.c_str());
+    out = loadPNG(path.c_str());
     break;
 
   case ImageType::JPG:
@@ -412,7 +432,7 @@ Image Image::load(std::string path, ImageType type) {
     break;
 
   case ImageType::BMP:
-    // out = loadBMP(path.c_str());
+    out = loadBMP(path.c_str());
     break;
   }
 

@@ -6,7 +6,8 @@
 using namespace EngineToolkit;
 
 int main() {
-  Image img = Image::loadPNG("../../../../examples/image/test.png");
+  Image img =
+      Image::load("../../../../examples/image/test.png", ImageType::PNG);
 
   // Initialize GLFW
   if (!glfwInit()) {
