@@ -7,8 +7,6 @@
 
 namespace EngineToolkit {
 
-enum class ImageType { AUTO, PNG, JPG, BMP };
-
 struct Image {
   // Size of Image (width, height)
   vec<2, uint32_t> size;
@@ -53,24 +51,10 @@ struct Image {
 
   bool rotate(int direction);
 
-  // Save to File
-  bool save(const char *path, ImageType type = ImageType::AUTO);
-
-  // TODO: (GNU) image manipulating (program)
-
   // ---- Functions (Static)
 
-  // Load from PNG File
-  static Image loadPNG(const char *path);
-
-  // Load from JPG File
-  static Image loadJPG(const char *path);
-
-  // Load from BMP File
-  static Image loadBMP(const char *path);
-
   // Load From File
-  static Image load(std::string path, ImageType type = ImageType::AUTO);
+  static Image load(const char *path);
 };
 
 } // namespace EngineToolkit
