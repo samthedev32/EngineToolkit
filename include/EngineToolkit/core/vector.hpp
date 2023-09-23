@@ -7,14 +7,11 @@
 
 namespace EngineToolkit
 {
-
   // Vector Components
   namespace internal
   {
     template <uint8_t D, typename T>
-    struct vecC
-    {
-    };
+    struct vecC;
   } // namespace internal
 
   // Variable Dimension Vector
@@ -176,6 +173,12 @@ namespace EngineToolkit
         struct
         {
           T u, v;
+        };
+
+        // Width & Height
+        struct
+        {
+          T w, h;
         };
       };
     };
