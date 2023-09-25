@@ -51,7 +51,16 @@ struct Image {
 
   bool rotate(int direction);
 
+  // Save as BMP File
+  bool savePNG(const char *path);
+
+  // Save to File
+  bool save(const char *path);
+
   // ---- Functions (Static)
+
+  // Load From BMP File
+  static Image loadPNG(const char *path);
 
   // Load From File
   static Image load(const char *path);
