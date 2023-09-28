@@ -14,11 +14,10 @@ struct vec2 {
     vec1 data[2];
   };
 
-  // Constructors
+  // Constructors & Destructor
 
   vec2(vec1 xy = 0.0f);
   vec2(vec1 x, vec1 y);
-  // TODO: vec support
 
   ~vec2();
 
@@ -53,9 +52,6 @@ struct vec2 {
 
   void operator++();
   void operator--();
-
-  // vec2 *operator->() { return this; }
-  // const vec2 *operator->() const { return this; }
 
   // Functions (Instance Methods)
 

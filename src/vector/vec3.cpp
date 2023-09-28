@@ -2,7 +2,7 @@
 
 namespace EngineToolkit {
 
-// Constructors
+// Constructors & Destructor
 
 vec3::vec3(vec1 xyz) { this->x = xyz, this->y = xyz, this->z = xyz; }
 vec3::vec3(vec1 x, vec1 y, vec1 z) { this->x = x, this->y = y, this->z = z; }

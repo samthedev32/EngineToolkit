@@ -2,7 +2,7 @@
 
 namespace EngineToolkit {
 
-// Constructors
+// Constructors & Destructor
 
 vec4::vec4(vec1 xyzw) {
   this->x = xyzw, this->y = xyzw, this->z = xyzw, this->w = xyzw;

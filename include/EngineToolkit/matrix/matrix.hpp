@@ -5,6 +5,8 @@
 #include <cstdio>
 #include <vector>
 
+#include "mat4.hpp"
+
 #include <EngineToolkit/math/math.hpp>
 #include <EngineToolkit/vector/vector.hpp>
 
@@ -21,6 +23,12 @@ template <uint8_t R, uint8_t C = R, typename T = float> struct mat {
   mat(T v = 0);
   mat(std::vector<std::vector<T>> m);
   template <uint8_t inR, uint8_t inC, typename inT> mat(mat<inR, inC, inT> m);
+
+  mat(mat4 m) {
+    for (uint8_t r = 0; r < R; r++)
+      for (uint8_t c = 0; c < C; c++)
+        this->data[r][c] = (r < 4 && c < 4) ? m.data[r][c] : 0;
+  }
 
   ~mat();
 

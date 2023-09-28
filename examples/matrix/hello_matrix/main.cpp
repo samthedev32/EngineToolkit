@@ -4,11 +4,20 @@
 using namespace EngineToolkit;
 
 int main() {
-  mat<4> id = mat<4>::perspective(1.0472f, 16.0f / 9, 0.1f, 100.0f);
+  mat4 a = mat4::identity();
+  mat<4> b(a);
 
-  for (uint8_t i = 0; i < 4; i++) {
-    for (uint8_t j = 0; j < 4; j++)
-      printf("%.2f ", id(i, j));
+  printf("Fast:\n");
+  for (int r = 0; r < 4; r++) {
+    for (int c = 0; c < 4; c++)
+      printf("%f ", a(r, c));
+    printf("\n");
+  }
+
+  printf("Flexible:\n");
+  for (int r = 0; r < 4; r++) {
+    for (int c = 0; c < 4; c++)
+      printf("%f ", b(r, c));
     printf("\n");
   }
 

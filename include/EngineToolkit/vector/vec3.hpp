@@ -18,11 +18,10 @@ struct vec3 {
     vec1 data[3];
   };
 
-  // Constructors
+  // Constructors & Destructor
 
   vec3(vec1 xyz = 0.0f);
   vec3(vec1 x, vec1 y, vec1 z);
-  // TODO: vec support
 
   ~vec3();
 
@@ -57,9 +56,6 @@ struct vec3 {
 
   void operator++();
   void operator--();
-
-  // vec3 *operator->() { return this; }
-  // const vec3 *operator->() const { return this; }
 
   // Functions (Instance Methods)
 

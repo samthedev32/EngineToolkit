@@ -18,11 +18,10 @@ struct vec4 {
     vec1 data[4];
   };
 
-  // Constructors
+  // Constructors & Destructor
 
   vec4(vec1 xyzw = 0.0f);
   vec4(vec1 x, vec1 y, vec1 z, vec1 w = 0.0f);
-  // TODO: vec support
 
   ~vec4();
 
@@ -57,9 +56,6 @@ struct vec4 {
 
   void operator++();
   void operator--();
-
-  // vec4 *operator->() { return this; }
-  // const vec4 *operator->() const { return this; }
 
   // Functions (Instance Methods)
 
