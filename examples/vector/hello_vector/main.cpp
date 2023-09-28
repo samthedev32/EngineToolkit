@@ -6,19 +6,19 @@
 using namespace EngineToolkit;
 
 int main() {
-  vec<3> a(0);
+  vec3 a;
+
+  a.x = 2;
+  a.y = 7.67;
+  a.z = 45.1;
+  vec<3> b(a);
+
+  printf("Fast:     ");
   for (int i = 0; i < 3; i++)
-    a[i] = (i + 1) * 2;
+    printf("%.2f ", a[i]);
 
-  vec<2> b = a;
-  b += a * b;
-  // b += 3.0f;
-
-  fvec2 c;
-  c->x = 2;
-  c->y = 3;
-
-  b = c * 2;
-
-  printf("%f %f\n", b->x, b->y);
+  printf("\nFlexible: ");
+  for (int i = 0; i < 3; i++)
+    printf("%.2f ", b[i]);
+  printf("\n");
 }

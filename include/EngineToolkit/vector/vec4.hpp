@@ -32,7 +32,6 @@ struct vec4 {
   vec4 operator-(const vec4 &v) const;
   vec4 operator*(const vec4 &v) const;
   vec4 operator/(const vec4 &v) const;
-  vec4 operator%(const vec4 &v) const;
 
   // Assignment Operators
 
@@ -41,7 +40,6 @@ struct vec4 {
   void operator-=(const vec4 &v);
   void operator*=(const vec4 &v);
   void operator/=(const vec4 &v);
-  void operator%=(const vec4 &v);
 
   // Relational Operators
 

@@ -32,7 +32,6 @@ struct vec3 {
   vec3 operator-(const vec3 &v) const;
   vec3 operator*(const vec3 &v) const;
   vec3 operator/(const vec3 &v) const;
-  vec3 operator%(const vec3 &v) const;
 
   // Assignment Operators
 
@@ -41,7 +40,6 @@ struct vec3 {
   void operator-=(const vec3 &v);
   void operator*=(const vec3 &v);
   void operator/=(const vec3 &v);
-  void operator%=(const vec3 &v);
 
   // Relational Operators
 

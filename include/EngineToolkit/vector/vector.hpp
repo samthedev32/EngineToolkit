@@ -16,7 +16,7 @@ namespace internal {
 template <uint8_t D, typename T> struct vecC;
 } // namespace internal
 
-// Variable Dimension Vector
+// Slow, but more flexible Vector
 template <uint8_t D = 3, typename T = float> struct vec {
   static_assert(D != 0, "Null-Vectors are not supported");
 
@@ -32,7 +32,9 @@ template <uint8_t D = 3, typename T = float> struct vec {
   template <typename... Args> vec(Args... args);
   template <uint8_t inD, typename inT> vec(vec<inD, inT> v);
 
-  // TODO: vec1, vec2, vec3 & vec4 constructors
+  vec(vec2 v) { *this = vec(v.x, v.y); }
+  vec(vec3 v) { *this = vec(v.x, v.y, v.z); }
+  vec(vec4 v) { *this = vec(v.x, v.y, v.z, v.w); }
 
   ~vec();
 

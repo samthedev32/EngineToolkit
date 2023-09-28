@@ -1,6 +1,6 @@
-add_subdirectory(log)
+add_subdirectory(debug)
 
 add_subdirectory(vector)
 add_subdirectory(matrix)
 
-add_subdirectory(image)
+add_subdirectory(media)
