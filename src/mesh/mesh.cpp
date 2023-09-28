@@ -30,15 +30,15 @@ Model Model::load(const char *path) {
     if (c == 2) {
       if (!strcmp(index, "v")) {
         vec3 vertex;
-        sscanf(data, "%f %f %f", &vertex.x, &vertex.y, &vertex.z);
+        sscanf(data, "%f %f %f", &vertex->x, &vertex->y, &vertex->z);
         vertices.push_back(vertex);
       } else if (!strcmp(index, "vt")) {
         vec2 texCoord;
-        sscanf(data, "%f %f %*f", &texCoord.x, &texCoord.y);
+        sscanf(data, "%f %f %*f", &texCoord->x, &texCoord->y);
         texCoords.push_back(texCoord);
       } else if (!strcmp(index, "vn")) {
         vec3 normal;
-        sscanf(data, "%f %f %f", &normal.x, &normal.y, &normal.z);
+        sscanf(data, "%f %f %f", &normal->x, &normal->y, &normal->z);
         normals.push_back(normal);
       } else if (!strcmp(index, "f")) {
         int v[4], vt[4], vn[4];

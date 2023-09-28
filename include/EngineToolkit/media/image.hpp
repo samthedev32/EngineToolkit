@@ -1,17 +1,18 @@
 #pragma once
 
-#include <EngineToolkit/core/vector.hpp>
+#include <EngineToolkit/vector/vector.hpp>
 
 #include <cstdint>
 #include <string>
 
 namespace EngineToolkit {
 
+// 2D Image/Texture
 struct Image {
-  // Size of Image (width, height)
+  // Size of Image
   vec<2, uint32_t> size;
 
-  // Channels of Image (Red, Green, Blue, Alpha)
+  // Number of Channels
   uint8_t channels;
 
   // RAW Image Data
@@ -59,9 +60,14 @@ struct Image {
 
   // ---- Functions (Static)
 
-  // Load From BMP File
-  static Image loadPNG(const char *path);
+private:
+  static bool isPNG(FILE *f);
+  static bool isBMP(FILE *f);
 
+  static Image loadPNG(FILE *f);
+  static Image loadBMP(FILE *f);
+
+public:
   // Load From File
   static Image load(const char *path);
 };

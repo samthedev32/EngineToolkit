@@ -11,8 +11,11 @@ namespace UI {
 
 enum class Alignment { Center, Start, End, Top, Bottom };
 
+enum class Type { Box };
+
 struct Element {
   Alignment alignment;
+  Type type;
   vec<2> position;
   vec<2> size;
 };

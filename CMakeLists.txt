@@ -6,18 +6,20 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 # Source Files
 set(SOURCES
     # Log
-    src/log/log.cpp
+    src/debug/log.cpp
 
     # Vector
-    # src/vector/vec1.cpp
-    # src/vector/vec2.cpp
-    # src/vector/vec3.cpp
-    # src/vector/vec4.cpp
+    src/vector/vec1.cpp
+    src/vector/vec2.cpp
+    src/vector/vec3.cpp
+    src/vector/vec4.cpp
+    src/vector/vector.cpp
 
     # Matrix
     # src/matrix/mat2.cpp
     # src/matrix/mat3.cpp
-    # src/matrix/mat4.cpp
+    src/matrix/mat4.cpp
+    src/matrix/matrix.cpp
 
     # Mesh
     # src/mesh/mesh.cpp

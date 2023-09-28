@@ -15,7 +15,7 @@ public:
   // Clear Layout
   void clear();
 
-  void box();
+  // ---- User Input
 
   void Button();
   void Switch();
@@ -26,22 +26,37 @@ public:
 
   void TextField();
 
+  void Slider();
+  void Spinner();
+
+  // ---- Media
+
   void Image();
   void Icon();
   void Video();
 
   void Text();
 
-  void slider();
-  void spinner();
-  void list();
-  void card();
+  // ---- Design & Feedback
+
+  void Box();
 
   void Divider();
   void Padding();
 
-  void progressbar();
-  void progresscircle();
+  void ProgressBar();
+  void ProgressCircle();
+
+  // ---- Container
+
+  void Card();
+  void Column();
+  void Row();
+  void ColumnList();
+  void RowList();
+  void Drawer();
+
+  // ---- MISC
 
   void radio();     // search & see list: UI Elements
   void accordion(); // search & see list: UI Element List

@@ -1,4 +1,4 @@
-#include <EngineToolkit/core/vector.hpp>
+#include <EngineToolkit/vector/vector.hpp>
 #include <cstdio>
 
 #include <EngineToolkit/math/math.hpp>
