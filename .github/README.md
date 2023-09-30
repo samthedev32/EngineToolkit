@@ -7,15 +7,19 @@
 
 This Library is made to be at the core of my Game Engines
 
-It replaces a lot of libraries, like:
+It aims to replace libraries, like:
 - [GLM](https://github.com/g-truc/glm) (vectors & matrices)
 - [stb_image](https://github.com/nothings/stb/blob/master/stb_image.h) (image loading)
+- [GLFW](https://www.glfw.org/) (windowing)
 
 ### Features
 
-- [Logger](../include/EngineToolkit/log)
-- [Variable Dimensional Vectors](../include/EngineToolkit/vector)
-- [Variable Dimensional Matrices](../include/EngineToolkit/matrix)
+- [Logger](../include/EngineToolkit/debug/log.hpp)
+- [Vectors](../include/EngineToolkit/vector)
+- [Matrices](../include/EngineToolkit/matrix)
+- [Image Loading](../include/EngineToolkit/media/image.hpp)
+- [Mesh Loading](../include/EngineToolkit/mesh/mesh.hpp)
+- [UI Building](../include/EngineToolkit/UI/ui.hpp)
 
 ## Documentation
 

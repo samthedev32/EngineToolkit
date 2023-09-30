@@ -21,16 +21,16 @@ struct Image {
   // ---- Constructors & Destructor
 
   Image();
-  // Image(const char *path);
-  // Image(Image const &image);
+  Image(const char *path);
+  Image(Image const &image);
 
   ~Image();
 
-  // ---- Assignment Operator
+  // Assignment Operator
 
   void operator=(const Image image);
 
-  // ---- Relational Operators (Image Size)
+  // Relational Operators (Image Size)
 
   bool operator==(const Image &v) const;
   bool operator!=(const Image &v) const;
@@ -39,26 +39,17 @@ struct Image {
   bool operator>=(const Image &v) const;
   bool operator<=(const Image &v) const;
 
-  // ---- Other Operator
+  // Other Operator
 
   unsigned char *operator()(uint32_t x, uint32_t y) const;
 
-  // ---- Functions (Instance Methods)
+  Image resize(vec<2, uint32_t> newSize, uint32_t newChannels = 0) const;
 
-  // ---- Transform Image
+  // enum class Rotation { Clockwise, CounterClockwise };
+  // enum class Orientation { Landscape, Portrait };
 
-  Image resized(vec<2, uint32_t> newSize, uint32_t newChannels = 0) const;
-  bool resize(vec<2, uint32_t> newSize, uint32_t newChannels = 0);
-
-  bool rotate(int direction);
-
-  // Save as BMP File
-  bool savePNG(const char *path);
-
-  // Save to File
-  bool save(const char *path);
-
-  // ---- Functions (Static)
+  // Image rotate(Rotation rotation);
+  // Image flip(Orientation orientation);
 
 private:
   static bool isPNG(FILE *f);
@@ -67,9 +58,11 @@ private:
   static Image loadPNG(FILE *f);
   static Image loadBMP(FILE *f);
 
+  bool savePNG(const char *path);
+
 public:
-  // Load From File
   static Image load(const char *path);
+  bool save(const char *path);
 };
 
 } // namespace EngineToolkit

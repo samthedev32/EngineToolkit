@@ -6,8 +6,14 @@
 using namespace EngineToolkit;
 
 int main() {
-  Image img = Image::load("../../../../examples/image/test.png");
-
+  // Image img = Image::load("../../../../examples/image/test.png");
+  Image img("../../../../examples/media/test.png");
+  for (int i = 0; i < img.size->w; i++)
+    for (int j = 0; j < img.size->h; j++) {
+      img(i, j)[0] += 128;
+      img(i, j)[1] += 128;
+      img(i, j)[2] += 128;
+    }
   // Initialize GLFW
   if (!glfwInit()) {
     return -1;
@@ -45,13 +51,13 @@ int main() {
 
     // Render tex quad with the texture
     glBegin(GL_QUADS);
-    glTexCoord2f(0.0f, 0.0f);
-    glVertex2f(-0.5f, -0.5f);
-    glTexCoord2f(1.0f, 0.0f);
-    glVertex2f(0.5f, -0.5f);
-    glTexCoord2f(1.0f, 1.0f);
-    glVertex2f(0.5f, 0.5f);
     glTexCoord2f(0.0f, 1.0f);
+    glVertex2f(-0.5f, -0.5f);
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex2f(0.5f, -0.5f);
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex2f(0.5f, 0.5f);
+    glTexCoord2f(0.0f, 0.0f);
     glVertex2f(-0.5f, 0.5f);
     glEnd();
 
