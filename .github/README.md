@@ -71,4 +71,4 @@ It aims to replace libraries, like:
 
 ## License
 
-This Project is licensed under the [zlib License](https://opensource.org/license/zlib-license-php/)
+This project is licensed under the [Apache-2.0 License](LICENSE) - see the [LICENSE](LICENSE) file for details.
