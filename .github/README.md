@@ -2,8 +2,7 @@
 
 ## About
 
-> [!IMPORTANT]
-> This project is **still under development**, and is not ready just yet
+> [!IMPORTANT] This project is **still under development**, and is not ready just yet
 
 This Library is made to be at the core of my Game Engines
 
@@ -14,15 +13,27 @@ It aims to replace libraries, like:
 
 ### Features
 
-* - [x] [Logger](../include/EngineToolkit/debug/log.hpp)
-* - [x] [Vectors](../include/EngineToolkit/vector)
-* - [x] [Matrices](../include/EngineToolkit/matrix)
-* - [ ] [Media](../include/EngineToolkit/media)
-  * - [ ] [Image I/O](../include/EngineToolkit/media/image.hpp)
-  * - [ ] [Audio I/O](../include/EngineToolkit/media/audio.hpp)
-  * - [ ] [Video I/O](../include/EngineToolkit/media/video.hpp)
-* - [ ] [Mesh Loading](../include/EngineToolkit/mesh/mesh.hpp)
-* - [ ] [UI Building](../include/EngineToolkit/UI/ui.hpp)
+* - [ ] Debug
+  * - [x] [Logger](../include/EngineToolkit/debug/log.hpp)
+  * - [ ] Profiler
+* - [ ] Math
+  * - [x] [Vectors](../include/EngineToolkit/vector)
+  * - [x] [Matrices](../include/EngineToolkit/matrix)
+  * - [ ] Quaternions
+  * - [ ] Perlin Noise
+  * - [ ] Random Number
+  * - [ ] Collision Detection
+* - [ ] Media I/O
+  * - [ ] [Image](../include/EngineToolkit/media/image.hpp)
+  * - [ ] [Audio](../include/EngineToolkit/media/audio.hpp)
+  * - [ ] [Video](../include/EngineToolkit/media/video.hpp)
+* - [ ] Model I/O
+  * - [ ] [Material](../include/EngineToolkit/model/material.hpp)
+  * - [ ] [Model](../include/EngineToolkit/model/model.hpp)
+
+* - [ ] [UI Builder](../include/EngineToolkit/UI/ui.hpp)
+
+> [!NOTE] and more!
 
 ## Documentation
 
