@@ -14,15 +14,15 @@ It aims to replace libraries, like:
 
 ### Features
 
-- [x] [Logger](../include/EngineToolkit/debug/log.hpp)
-- [x] [Vectors](../include/EngineToolkit/vector)
-- [x] [Matrices](../include/EngineToolkit/matrix)
-- [ ] [Media](../include/EngineToolkit/media)
-  - - [ ] [Image I/O](../include/EngineToolkit/media/image.hpp)
-  - - [ ] [Audio I/O](../include/EngineToolkit/media/audio.hpp)
-  - - [ ] [Video I/O](../include/EngineToolkit/media/video.hpp)
-- [ ] [Mesh Loading](../include/EngineToolkit/mesh/mesh.hpp)
-- [ ] [UI Building](../include/EngineToolkit/UI/ui.hpp)
+* - [x] [Logger](../include/EngineToolkit/debug/log.hpp)
+* - [x] [Vectors](../include/EngineToolkit/vector)
+* - [x] [Matrices](../include/EngineToolkit/matrix)
+* - [ ] [Media](../include/EngineToolkit/media)
+  * - [ ] [Image I/O](../include/EngineToolkit/media/image.hpp)
+  * - [ ] [Audio I/O](../include/EngineToolkit/media/audio.hpp)
+  * - [ ] [Video I/O](../include/EngineToolkit/media/video.hpp)
+* - [ ] [Mesh Loading](../include/EngineToolkit/mesh/mesh.hpp)
+* - [ ] [UI Building](../include/EngineToolkit/UI/ui.hpp)
 
 ## Documentation
 
