@@ -5,12 +5,14 @@
 > [!IMPORTANT]
 > This project is **still under development**, and is not ready just yet
 
-This Library is made to be at the core of my Game Engines
+This library is a core platform for Game Engines
 
 It aims to replace libraries, like:
-- [GLM](https://github.com/g-truc/glm) (vectors & matrices)
-- [stb_image](https://github.com/nothings/stb/blob/master/stb_image.h) (image loading)
+- [GLM](https://glm.g-truc.net/0.9.9/) (mathematics)
 - [GLFW](https://www.glfw.org/) (windowing)
+- [STB libs](https://github.com/nothings/stb/) (asset loading)
+- [Assimp](https://assimp.org/) (asset loading)
+- [ImGui](https://www.dearimgui.com/) (GUI rendering, sort-of)
 
 ### Features
 
@@ -28,6 +30,7 @@ It aims to replace libraries, like:
   * - [ ] [Image](../include/EngineToolkit/media/image.hpp)
   * - [ ] [Audio](../include/EngineToolkit/media/audio.hpp)
   * - [ ] [Video](../include/EngineToolkit/media/video.hpp)
+  * - [ ] Font
 * - [ ] Model I/O
   * - [ ] [Material](../include/EngineToolkit/model/material.hpp)
   * - [ ] [Model](../include/EngineToolkit/model/model.hpp)
@@ -35,7 +38,7 @@ It aims to replace libraries, like:
 * - [ ] [UI Builder](../include/EngineToolkit/UI/ui.hpp)
 
 > [!NOTE]
-> and more!
+> and a lot more!
 
 ## Documentation
 
@@ -65,18 +68,6 @@ It aims to replace libraries, like:
 ### Usage
 
 > TODO
-
-### For Devs
-
-<details>
-<summary>Namespaces</summary>
-
-| Namespace | Description |
-| --------- | ----------- |
-| `EngineToolkit` | Library-Level Namespace |
-| `EngineToolkit::internal` | Internal Types, Functions, etc |
-
-</details>
 
 ## License
 
