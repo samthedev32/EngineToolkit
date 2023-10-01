@@ -2,7 +2,8 @@
 
 ## About
 
-> [!IMPORTANT] This project is **still under development**, and is not ready just yet
+> [!IMPORTANT]
+> This project is **still under development**, and is not ready just yet
 
 This Library is made to be at the core of my Game Engines
 
@@ -33,7 +34,8 @@ It aims to replace libraries, like:
 
 * - [ ] [UI Builder](../include/EngineToolkit/UI/ui.hpp)
 
-> [!NOTE] and more!
+> [!NOTE]
+> and more!
 
 ## Documentation
 
