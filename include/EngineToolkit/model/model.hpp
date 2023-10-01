@@ -1,7 +1,8 @@
 #pragma once
 
-#include <EngineToolkit/core/vector.hpp>
-#include <EngineToolkit/mesh/material.hpp>
+#include "material.hpp"
+
+#include <EngineToolkit/vector/vector.hpp>
 
 #include <cstdint>
 #include <vector>
@@ -9,9 +10,9 @@
 namespace EngineToolkit {
 
 struct Vertex {
-  vec<3> position;
-  vec<2> texCoord;
-  vec<3> normal;
+  vec3 position;
+  vec2 texCoord;
+  vec3 normal;
 };
 
 struct Model {

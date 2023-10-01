@@ -14,12 +14,12 @@ It aims to replace libraries, like:
 
 ### Features
 
-- [Logger](../include/EngineToolkit/debug/log.hpp)
-- [Vectors](../include/EngineToolkit/vector)
-- [Matrices](../include/EngineToolkit/matrix)
-- [Image Loading](../include/EngineToolkit/media/image.hpp)
-- [Mesh Loading](../include/EngineToolkit/mesh/mesh.hpp)
-- [UI Building](../include/EngineToolkit/UI/ui.hpp)
+- [x] [Logger](../include/EngineToolkit/debug/log.hpp)
+- [x] [Vectors](../include/EngineToolkit/vector)
+- [x] [Matrices](../include/EngineToolkit/matrix)
+- [ ] [Image Loading](../include/EngineToolkit/media/image.hpp)
+- [ ] [Mesh Loading](../include/EngineToolkit/mesh/mesh.hpp)
+- [ ] [UI Building](../include/EngineToolkit/UI/ui.hpp)
 
 ## Documentation
 
