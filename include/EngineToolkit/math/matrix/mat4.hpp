@@ -1,6 +1,6 @@
 #pragma once
 
-#include <EngineToolkit/vector/vec3.hpp>
+#include <EngineToolkit/math/vector/vec3.hpp>
 
 namespace EngineToolkit {
 

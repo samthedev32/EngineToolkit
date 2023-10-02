@@ -8,7 +8,7 @@
 #include "mat4.hpp"
 
 #include <EngineToolkit/math/math.hpp>
-#include <EngineToolkit/vector/vector.hpp>
+#include <EngineToolkit/math/vector/vector.hpp>
 
 namespace EngineToolkit {
 
@@ -64,6 +64,8 @@ template <uint8_t R, uint8_t C = R, typename T = float> struct mat {
 
   // Functions (Instance Methods)
 
+  mat4 mat4() const;
+
   bool isSquare() const;
   void inverse();
 
@@ -93,8 +95,8 @@ template <uint8_t R, uint8_t C = R, typename T = float> struct mat {
 // Constructors & Destructor
 
 template <uint8_t R, uint8_t C, typename T> mat<R, C, T>::mat(T v) {
-  for (int r = 0; r < R; r++)
-    for (int c = 0; c < C; c++)
+  for (uint8_t r = 0; r < R; r++)
+    for (uint8_t c = 0; c < C; c++)
       this->data[r][c] = v;
 }
 
@@ -169,8 +171,8 @@ vec<inD, inT> mat<R, C, T>::operator*(vec<inD, inT> v) const {
 template <uint8_t R, uint8_t C, typename T>
 template <uint8_t inR, uint8_t inC, typename inT>
 void mat<R, C, T>::operator=(mat<inR, inC, inT> m) {
-  for (int r = 0; r < R; r++)
-    for (int c = 0; c < C; c++)
+  for (uint8_t r = 0; r < R; r++)
+    for (uint8_t c = 0; c < C; c++)
       this->data[r][c] = r < inR && c < inC ? m.data[r][c] : 0;
 }
 
@@ -185,8 +187,8 @@ void mat<R, C, T>::operator*=(mat<inR, inC, inT> m) {
 template <uint8_t R, uint8_t C, typename T>
 template <uint8_t inR, uint8_t inC, typename inT>
 bool mat<R, C, T>::operator==(mat<inR, inC, inT> m) const {
-  for (int r = 0; r < std::min(R, inR); r++)
-    for (int c = 0; c < std::min(C, inC); c++)
+  for (uint8_t r = 0; r < std::min(R, inR); r++)
+    for (uint8_t c = 0; c < std::min(C, inC); c++)
       if (this->data[r][c] != m.data[r][c])
         return false;
   return true;
@@ -195,8 +197,8 @@ bool mat<R, C, T>::operator==(mat<inR, inC, inT> m) const {
 template <uint8_t R, uint8_t C, typename T>
 template <uint8_t inR, uint8_t inC, typename inT>
 bool mat<R, C, T>::operator!=(mat<inR, inC, inT> m) const {
-  for (int r = 0; r < std::min(R, inR); r++)
-    for (int c = 0; c < std::min(C, inC); c++)
+  for (uint8_t r = 0; r < std::min(R, inR); r++)
+    for (uint8_t c = 0; c < std::min(C, inC); c++)
       if (this->data[r][c] == m.data[r][c])
         return false;
   return true;
@@ -215,6 +217,16 @@ T &mat<R, C, T>::operator()(uint8_t row, uint8_t col) {
 }
 
 // Functions (Instance Methods)
+
+template <uint8_t R, uint8_t C, typename T> mat4 mat<R, C, T>::mat4() const {
+  struct mat4 out;
+
+  for (uint8_t r = 0; r < 4; r++)
+    for (uint8_t c = 0; c < 4; c++)
+      out.data[r][c] = (r < R && c < C) ? this->data[r][c] : 0;
+
+  return out;
+}
 
 template <uint8_t R, uint8_t C, typename T>
 bool mat<R, C, T>::isSquare() const {

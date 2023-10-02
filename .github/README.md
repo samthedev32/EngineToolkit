@@ -7,10 +7,12 @@
 
 This library is a core platform for Game Engines
 
+It is designed to contain every essential tool that a Game Engine would require
+
 It aims to replace libraries, like:
 - [GLM](https://glm.g-truc.net/0.9.9/) (mathematics)
 - [GLFW](https://www.glfw.org/) (windowing)
-- [STB libs](https://github.com/nothings/stb/) (asset loading)
+- [STB libraries](https://github.com/nothings/stb/) (asset loading)
 - [Assimp](https://assimp.org/) (asset loading)
 - [ImGui](https://www.dearimgui.com/) (GUI rendering, sort-of)
 
@@ -20,9 +22,9 @@ It aims to replace libraries, like:
   * - [x] [Logger](../include/EngineToolkit/debug/log.hpp)
   * - [ ] Profiler
 * - [ ] Math
-  * - [x] [Vectors](../include/EngineToolkit/vector)
-  * - [x] [Matrices](../include/EngineToolkit/matrix)
-  * - [ ] Quaternions
+  * - [x] [Vectors](../include/EngineToolkit/math/vector)
+  * - [x] [Matrices](../include/EngineToolkit/math/matrix)
+  * - [ ] [Quaternions](../include/EngineToolkit/math/quaternion.hpp)
   * - [ ] Perlin Noise
   * - [ ] Random Number
   * - [ ] Collision Detection
@@ -31,11 +33,13 @@ It aims to replace libraries, like:
   * - [ ] [Audio](../include/EngineToolkit/media/audio.hpp)
   * - [ ] [Video](../include/EngineToolkit/media/video.hpp)
   * - [ ] Font
+  * - [ ] Vector Image
 * - [ ] Model I/O
   * - [ ] [Material](../include/EngineToolkit/model/material.hpp)
   * - [ ] [Model](../include/EngineToolkit/model/model.hpp)
 
 * - [ ] [UI Builder](../include/EngineToolkit/UI/ui.hpp)
+* - [ ] Scripting Engine
 
 > [!NOTE]
 > and a lot more!
@@ -67,7 +71,18 @@ It aims to replace libraries, like:
 
 ### Usage
 
-> TODO
+| Namespace       | Description            |
+| --------------- | ---------------------- |
+| `EngineToolkit` | Main Project Namespace |
+
+| Type Name               | Description                                 |
+| ----------------------- | ------------------------------------------- |
+| `vec2`, `vec3` & `vec4` | Fast (`float`) Vectors     (recommended)    |
+| `mat3` & `mat4`         | Fast (`float`) Matrices    (recommended)    |
+| `vec`                   | Slower, more convenient & flexible Vectors  |
+| `mat`                   | Slower, more convenient & flexible Matrices |
+| `vec`                   | Slower, more convenient & flexible Vectors  |
+| `Quaternion`            | Quaternions                                 |
 
 ## License
 

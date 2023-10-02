@@ -1,4 +1,4 @@
-#include <EngineToolkit/vector/vec2.hpp>
+#include <EngineToolkit/math/vector/vec2.hpp>
 
 namespace EngineToolkit {
 

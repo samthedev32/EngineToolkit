@@ -2,6 +2,7 @@
 
 #include <EngineToolkit/vector/vector.hpp>
 
+#include <cstdint>
 #include <string>
 #include <unordered_map>
 
@@ -11,11 +12,12 @@ struct Material {
   typedef std::unordered_map<std::string, Material> MTL;
 
   // Data
-  struct {
-    vec<3> ambient, diffuse, specular; // Ka, Kd, Ks
-  } color;
-  float Tr;
-  vec<3> Tf;
+  vec<3> Ka, Kd, Ks;
+  float Ns, Ni;
+  float d;
+  uint8_t illum;
+
+  Image map_Ka, map_Kd, map_Ks;
   // TODO
 
   // Load Wavefront MTL File

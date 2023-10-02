@@ -97,6 +97,10 @@ template <uint8_t D = 3, typename T = float> struct vec {
 
   // Functions (Instance Methods)
 
+  vec2 vec2() const;
+  vec3 vec3() const;
+  vec4 vec4() const;
+
   T length() const;
   vec normalize() const;
   vec clamp(vec min, vec max) const;
@@ -203,7 +207,7 @@ template <typename T> struct vecC<4, T> {
 // Constructors & Destructor
 
 template <uint8_t D, typename T> vec<D, T>::vec(std::vector<T> v) {
-  for (int i = 0; i < D; i++)
+  for (uint8_t i = 0; i < D; i++)
     this->data[i] = i < v.size() ? v[i] : 0;
 }
 
@@ -411,6 +415,20 @@ template <uint8_t D, typename T> void vec<D, T>::operator++() { *this += 1.0f; }
 template <uint8_t D, typename T> void vec<D, T>::operator--() { *this -= 1.0f; }
 
 // Functions (Instance Methods)
+
+template <uint8_t D, typename T> vec2 vec<D, T>::vec2() const {
+  return {D > 0 ? this->data[0] : 0, D > 1 ? this->data[1] : 0};
+}
+
+template <uint8_t D, typename T> vec3 vec<D, T>::vec3() const {
+  return {D > 0 ? this->data[0] : 0, D > 1 ? this->data[1] : 0,
+          D > 2 ? this->data[2] : 0};
+}
+
+template <uint8_t D, typename T> vec4 vec<D, T>::vec4() const {
+  return {D > 0 ? this->data[0] : 0, D > 1 ? this->data[1] : 0,
+          D > 2 ? this->data[2] : 0, D > 3 ? this->data[3] : 0};
+}
 
 template <uint8_t D, typename T> T vec<D, T>::length() const {
   return sqrtf(dot(*this, *this));

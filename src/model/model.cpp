@@ -1,4 +1,4 @@
-#include <EngineToolkit/mesh/mesh.hpp>
+#include <EngineToolkit/model/model.hpp>
 
 #include <cstdint>
 #include <cstdio>
@@ -6,21 +6,26 @@
 
 namespace EngineToolkit {
 
-Model Model::load(const char *path) {
+Model::OBJ Model::load(const char *path) {
+  OBJ out;
+
+  // Open File
+
   FILE *f = fopen(path, "r");
 
   if (!f) {
-    fprintf(stderr, "Failed to open file\n");
-    return {};
+    printf("Failed to open file\n");
+    return out;
   }
+
+  // Load Model
 
   std::vector<vec3> vertices;
   std::vector<vec2> texCoords;
   std::vector<vec3> normals;
 
-  Model model;
+  std::string cursor;
 
-  // Load Model
   char line[256];
   while (fgets(line, sizeof(line), f)) {
     char index[8];
@@ -28,17 +33,26 @@ Model Model::load(const char *path) {
     int c = sscanf(line, "%7s %[^\n]s", index, data);
 
     if (c == 2) {
-      if (!strcmp(index, "v")) {
+      if (!strcmp(index, "o")) {
+        // Define New Object
+        char name[64];
+        int c = sscanf(data, "%63s", name);
+        if (c == 1 && out.count(name) == 0) {
+          out.insert(name, {});
+          cursor = name;
+        } else
+          printf("object already exists\n");
+      } else if (!strcmp(index, "v")) {
         vec3 vertex;
-        sscanf(data, "%f %f %f", &vertex->x, &vertex->y, &vertex->z);
+        sscanf(data, "%f %f %f", &vertex.x, &vertex.y, &vertex.z);
         vertices.push_back(vertex);
       } else if (!strcmp(index, "vt")) {
         vec2 texCoord;
-        sscanf(data, "%f %f %*f", &texCoord->x, &texCoord->y);
+        sscanf(data, "%f %f %*f", &texCoord.x, &texCoord.y);
         texCoords.push_back(texCoord);
       } else if (!strcmp(index, "vn")) {
         vec3 normal;
-        sscanf(data, "%f %f %f", &normal->x, &normal->y, &normal->z);
+        sscanf(data, "%f %f %f", &normal.x, &normal.y, &normal.z);
         normals.push_back(normal);
       } else if (!strcmp(index, "f")) {
         int v[4], vt[4], vn[4];
@@ -57,7 +71,7 @@ Model Model::load(const char *path) {
         }
 
         if (parts != 3)
-          fprintf(stderr, "Face is not a Tri (%i)\n", parts);
+          printf("Face is not a Tri (%i)\n", parts);
         else {
           // TODO: duplicate face optimization
           for (int i = 0; i < 3; i++) {
@@ -65,19 +79,19 @@ Model Model::load(const char *path) {
             vertex.position = vertices[v[i] - 1];
             vertex.texCoord = texCoords[vt[i] - 1];
 
-            model.vertices.push_back(vertex);
-            model.indices.push_back(model.vertices.size() - 1);
+            out[cursor].vertices.push_back(vertex);
+            out[cursor].indices.push_back(out[cursor].vertices.size() - 1);
           }
         }
       }
     }
   }
 
-  if (model.indices.size() < 3) {
-    fprintf(stderr, "No triangles were loaded\n");
+  if (out[cursor].indices.size() < 3) {
+    printf("No triangles were loaded\n");
   }
 
-  return model;
+  return out;
 }
 
 } // namespace EngineToolkit
