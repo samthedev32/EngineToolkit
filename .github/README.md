@@ -33,7 +33,7 @@ It aims to replace libraries, like:
   * - [ ] [Audio](../include/EngineToolkit/media/audio.hpp)
   * - [ ] [Video](../include/EngineToolkit/media/video.hpp)
   * - [ ] Font
-  * - [ ] Vector Image
+  * - [ ] Vector Image (?)
 * - [ ] Model I/O
   * - [ ] [Material](../include/EngineToolkit/model/material.hpp)
   * - [ ] [Model](../include/EngineToolkit/model/model.hpp)
@@ -42,7 +42,7 @@ It aims to replace libraries, like:
 * - [ ] Scripting Engine
 
 > [!NOTE]
-> and a lot more!
+> and a lot more features later!
 
 ## Documentation
 

@@ -21,6 +21,8 @@ set(SOURCES
     src/math/matrix/mat4.cpp
     src/math/matrix/matrix.cpp
 
+    src/math/quaternion.cpp
+
     # Mesh
     # src/mesh/mesh.cpp
 

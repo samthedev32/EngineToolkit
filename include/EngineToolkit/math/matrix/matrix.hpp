@@ -64,7 +64,7 @@ template <uint8_t R, uint8_t C = R, typename T = float> struct mat {
 
   // Functions (Instance Methods)
 
-  mat4 mat4() const;
+  mat4 toMat4() const;
 
   bool isSquare() const;
   void inverse();
@@ -218,7 +218,7 @@ T &mat<R, C, T>::operator()(uint8_t row, uint8_t col) {
 
 // Functions (Instance Methods)
 
-template <uint8_t R, uint8_t C, typename T> mat4 mat<R, C, T>::mat4() const {
+template <uint8_t R, uint8_t C, typename T> mat4 mat<R, C, T>::toMat4() const {
   struct mat4 out;
 
   for (uint8_t r = 0; r < 4; r++)

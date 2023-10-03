@@ -97,9 +97,9 @@ template <uint8_t D = 3, typename T = float> struct vec {
 
   // Functions (Instance Methods)
 
-  vec2 vec2() const;
-  vec3 vec3() const;
-  vec4 vec4() const;
+  vec2 toVec2() const;
+  vec3 toVec3() const;
+  vec4 toVec4() const;
 
   T length() const;
   vec normalize() const;
@@ -416,16 +416,16 @@ template <uint8_t D, typename T> void vec<D, T>::operator--() { *this -= 1.0f; }
 
 // Functions (Instance Methods)
 
-template <uint8_t D, typename T> vec2 vec<D, T>::vec2() const {
+template <uint8_t D, typename T> vec2 vec<D, T>::toVec2() const {
   return {D > 0 ? this->data[0] : 0, D > 1 ? this->data[1] : 0};
 }
 
-template <uint8_t D, typename T> vec3 vec<D, T>::vec3() const {
+template <uint8_t D, typename T> vec3 vec<D, T>::toVec3() const {
   return {D > 0 ? this->data[0] : 0, D > 1 ? this->data[1] : 0,
           D > 2 ? this->data[2] : 0};
 }
 
-template <uint8_t D, typename T> vec4 vec<D, T>::vec4() const {
+template <uint8_t D, typename T> vec4 vec<D, T>::toVec4() const {
   return {D > 0 ? this->data[0] : 0, D > 1 ? this->data[1] : 0,
           D > 2 ? this->data[2] : 0, D > 3 ? this->data[3] : 0};
 }
