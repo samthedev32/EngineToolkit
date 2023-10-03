@@ -24,7 +24,7 @@ It aims to replace libraries, like:
 * - [ ] Math
   * - [x] [Vectors](../include/EngineToolkit/math/vector)
   * - [x] [Matrices](../include/EngineToolkit/math/matrix)
-  * - [ ] [Quaternions](../include/EngineToolkit/math/quaternion.hpp)
+  * - [x] [Quaternions](../include/EngineToolkit/math/quaternion)
   * - [ ] Perlin Noise
   * - [ ] Random Number
   * - [ ] Collision Detection
@@ -82,7 +82,7 @@ It aims to replace libraries, like:
 | `vec`                   | Slower, more convenient & flexible Vectors  |
 | `mat`                   | Slower, more convenient & flexible Matrices |
 | `vec`                   | Slower, more convenient & flexible Vectors  |
-| `Quaternion`            | Quaternions                                 |
+| `quat`                  | Quaternions                                 |
 
 ## License
 
