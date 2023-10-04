@@ -1,6 +1,6 @@
 #pragma once
 
-#include <EngineToolkit/core/vector.hpp>
+#include <EngineToolkit/math/vector/vec2.hpp>
 
 #include <string>
 #include <unordered_map>
@@ -16,8 +16,8 @@ enum class Type { Box };
 struct Element {
   Alignment alignment;
   Type type;
-  vec<2> position;
-  vec<2> size;
+  vec2 position;
+  vec2 size;
 };
 
 // UI Layout
