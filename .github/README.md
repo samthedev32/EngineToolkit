@@ -14,7 +14,9 @@ It aims to replace libraries, like:
 - [GLFW](https://www.glfw.org) (windowing)
 - [STB libraries](https://github.com/nothings/stb) (asset loading)
 - [Assimp](https://assimp.org) (asset loading)
-- [ImGui](https://www.dearimgui.com) (GUI rendering, sort-of)
+
+> [!NOTE]
+> in their defense, I've used them before A LOT, and they are more stable, specialized & probable faster than this library :)
 
 ### Features
 
