@@ -10,39 +10,37 @@ This library is a core platform for Game Engines
 It is designed to contain every essential tool that a Game Engine would require
 
 It aims to replace libraries, like:
-- [GLM](https://glm.g-truc.net/0.9.9/) (mathematics)
-- [GLFW](https://www.glfw.org/) (windowing)
-- [STB libraries](https://github.com/nothings/stb/) (asset loading)
-- [Assimp](https://assimp.org/) (asset loading)
-- [ImGui](https://www.dearimgui.com/) (GUI rendering, sort-of)
+- [GLM](https://glm.g-truc.net/0.9.9) (mathematics)
+- [GLFW](https://www.glfw.org) (windowing)
+- [STB libraries](https://github.com/nothings/stb) (asset loading)
+- [Assimp](https://assimp.org) (asset loading)
+- [ImGui](https://www.dearimgui.com) (GUI rendering, sort-of)
 
 ### Features
 
-* - [ ] Debug
+* - [ ] [Debug](../include/EngineToolkit/debug)
   * - [x] [Logger](../include/EngineToolkit/debug/log.hpp)
   * - [ ] Profiler
-* - [ ] Math
+* - [ ] [Math](../include/EngineToolkit/math)
   * - [x] [Vectors](../include/EngineToolkit/math/vector)
   * - [x] [Matrices](../include/EngineToolkit/math/matrix)
   * - [x] [Quaternions](../include/EngineToolkit/math/quaternion)
-  * - [ ] Perlin Noise
-  * - [ ] Random Number
+  * - [ ] [Noise Generator](../include/EngineToolkit/math/noise)
+  * - [ ] [Number Generator](../include/EngineToolkit/math/random)
   * - [ ] Collision Detection
-* - [ ] Media I/O
+* - [ ] [Media](../include/EngineToolkit/media)
   * - [ ] [Image](../include/EngineToolkit/media/image.hpp)
   * - [ ] [Audio](../include/EngineToolkit/media/audio.hpp)
   * - [ ] [Video](../include/EngineToolkit/media/video.hpp)
   * - [ ] Font
   * - [ ] Vector Image (?)
-* - [ ] Model I/O
+* - [ ] Model
   * - [ ] [Material](../include/EngineToolkit/model/material.hpp)
   * - [ ] [Model](../include/EngineToolkit/model/model.hpp)
-
-* - [ ] [UI Builder](../include/EngineToolkit/UI/ui.hpp)
-* - [ ] Scripting Engine
-
-> [!NOTE]
-> and a lot more features later!
+* - [ ] [UI](../include/EngineToolkit/UI)
+  * - [ ] [UI Builder](../include/EngineToolkit/UI/ui.hpp)
+* - [ ] Misc
+  * - [ ] Scripting Engine
 
 ## Documentation
 
