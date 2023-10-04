@@ -12,30 +12,32 @@ namespace Log {
 
 // Get Current String Time (yyyy.MM.dd HH:mm:ss)
 void stime(char *str) {
+  // Get Time
   time_t rawtime;
   struct tm *timeinfo;
   time(&rawtime);
   timeinfo = localtime(&rawtime);
 
+  // Create String
   sprintf(str, "%04d.%02d.%02d %02d:%02d:%02d", timeinfo->tm_year + 1900,
           timeinfo->tm_mon + 1, timeinfo->tm_mday, timeinfo->tm_hour,
           timeinfo->tm_min, timeinfo->tm_sec);
 }
 
 void vcustom(char type, const char *tag, const char *message, va_list args) {
-  // TODO: tag cutting
-
   char msg[1024];
   char date[32];
   stime(date);
 
+  // Prepare for Tag Cutting
   bool cutTag = strlen(tag) > maxTagLen;
   uint8_t tagLen = maxTagLen - (cutTag ? 3 : 0);
 
+  // Create String
   sprintf(msg, "[%19s] %-*.*s%s [%c]  %s\n", date, tagLen, tagLen, tag,
           cutTag ? "..." : "", type, message);
 
-  // Print Out
+  // Print Message
   vprintf(msg, args);
 
   // TODO: Write to File
