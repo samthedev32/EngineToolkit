@@ -1,20 +1,23 @@
 #include <EngineToolkit/debug/log.hpp>
 #include <bits/types/time_t.h>
 #include <cstdarg>
+#include <cstdint>
 #include <cstdio>
+#include <cstring>
 #include <ctime>
 
 namespace EngineToolkit {
 
 namespace Log {
 
+// Get Current String Time (yyyy.MM.dd HH:mm:ss)
 void stime(char *str) {
   time_t rawtime;
   struct tm *timeinfo;
   time(&rawtime);
   timeinfo = localtime(&rawtime);
 
-  sprintf(str, "%d.%d.%d %d:%d:%d", timeinfo->tm_year + 1900,
+  sprintf(str, "%04d.%02d.%02d %02d:%02d:%02d", timeinfo->tm_year + 1900,
           timeinfo->tm_mon + 1, timeinfo->tm_mday, timeinfo->tm_hour,
           timeinfo->tm_min, timeinfo->tm_sec);
 }
@@ -26,7 +29,11 @@ void vcustom(char type, const char *tag, const char *message, va_list args) {
   char date[32];
   stime(date);
 
-  sprintf(msg, "[%s] %s [%c]  %s\n", date, tag, type, message);
+  bool cutTag = strlen(tag) > maxTagLen;
+  uint8_t tagLen = maxTagLen - (cutTag ? 3 : 0);
+
+  sprintf(msg, "[%19s] %-*.*s%s [%c]  %s\n", date, tagLen, tagLen, tag,
+          cutTag ? "..." : "", type, message);
 
   // Print Out
   vprintf(msg, args);

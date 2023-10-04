@@ -5,6 +5,9 @@ namespace EngineToolkit {
 // Logger
 namespace Log {
 
+// Maximum Length of Debug Tag
+const int maxTagLen = 16;
+
 // Log Debug Information, only visible for DEBUG Builds
 void debug(const char *tag, const char *message, ...);
 
