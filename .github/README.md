@@ -16,7 +16,7 @@ It aims to replace libraries, like:
 - [Assimp](https://assimp.org) (asset loading)
 
 > [!NOTE]
-> in their defense, I've used them before A LOT, and they are more stable, specialized & probable faster than this library :)
+> I've used them A LOT before; they are more stable, specialized & probably faster
 
 ### Features
 
