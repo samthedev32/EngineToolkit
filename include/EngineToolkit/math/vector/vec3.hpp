@@ -15,6 +15,14 @@ struct vec3 {
       vec1 r, g, b;
     };
 
+    struct {
+      vec1 u, v, w;
+    };
+
+    struct {
+      vec1 width, height, depth;
+    };
+
     vec1 data[3];
   };
 

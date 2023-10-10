@@ -1,12 +1,10 @@
 #pragma once
 
+#include <EngineToolkit/debug/debug.hpp>
 #include <EngineToolkit/math/math.hpp>
 
-#include <EngineToolkit/log/log.hpp>
+namespace EngineToolkit {
 
-#include <EngineToolkit/core/matrix.hpp>
-#include <EngineToolkit/core/vector.hpp>
+// TODO
 
-#include <EngineToolkit/media/image.hpp>
-
-namespace EngineToolkit {} // namespace EngineToolkit
+} // namespace EngineToolkit

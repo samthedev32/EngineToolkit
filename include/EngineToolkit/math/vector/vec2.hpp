@@ -11,6 +11,14 @@ struct vec2 {
       vec1 x, y;
     };
 
+    struct {
+      vec1 u, v;
+    };
+
+    struct {
+      vec1 width, height;
+    };
+
     vec1 data[2];
   };
 

@@ -20,14 +20,17 @@ struct Vertex {
 // TODO: migrate to ONLY glTF (json & bin)
 
 struct Model {
-  typedef std::unordered_map<std::string, Model> OBJ;
-
   std::vector<Vertex> vertices;
   std::vector<uint16_t> indices;
 
   Material::MTL material;
 
-  static OBJ load(const char *path);
+  struct OBJ {
+    std::unordered_map<std::string, Model> model;
+    std::unordered_map<std::string, Material> material;
+
+    static OBJ load(const char *path);
+  };
 };
 
 } // namespace EngineToolkit

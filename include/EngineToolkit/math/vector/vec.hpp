@@ -163,9 +163,9 @@ template <typename T> struct vecC<2, T> {
       T u, v;
     };
 
-    // Width & Height
+    // Size
     struct {
-      T w, h;
+      T width, height;
     };
   };
 };
@@ -186,6 +186,11 @@ template <typename T> struct vecC<3, T> {
     // TexCoord
     struct {
       T u, v, w;
+    };
+
+    // Size
+    struct {
+      T width, height, depth;
     };
   };
 };

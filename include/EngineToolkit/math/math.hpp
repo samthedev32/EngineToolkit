@@ -2,6 +2,8 @@
 
 #include <cmath>
 
+#include "vector/vec.hpp"
+
 // Radian-Degree Conversion Functions
 #define rads(d) (d * M_PI / 180.0f)
 #define degs(r) (r * 180.0f / M_PI)

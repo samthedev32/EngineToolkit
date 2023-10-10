@@ -46,13 +46,13 @@ quat quat::operator-(const quat &v) const { return this->q - v.q; }
 
 quat quat::operator*(const quat &v) const {
   // Hamilton Product
-  // TODO: verify
+  // TODO: fix
   return {this->q.w * v.q.x + this->q.x * v.q.w + this->q.y * v.q.z -
               this->q.z * v.q.y,
-          this->q.w * v.q.y - this->q.x * v.q.z + this->q.y * v.q.w +
-              this->q.z * v.q.x,
-          this->q.w * v.q.z + this->q.x * v.q.y - this->q.y * v.q.x +
-              this->q.z * v.q.w,
+          this->q.w * v.q.y + this->q.y * v.q.w + this->q.z * v.q.x -
+              this->q.x * v.q.z,
+          this->q.w * v.q.z + this->q.z * v.q.w + this->q.x * v.q.y -
+              this->q.y * v.q.x,
           this->q.w * v.q.w - this->q.x * v.q.x - this->q.y * v.q.y -
               this->q.z * v.q.z};
 }

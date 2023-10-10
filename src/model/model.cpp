@@ -6,7 +6,7 @@
 
 namespace EngineToolkit {
 
-Model::OBJ Model::load(const char *path) {
+Model::OBJ Model::OBJ::load(const char *path) {
   OBJ out;
 
   // Open File

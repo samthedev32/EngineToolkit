@@ -3,7 +3,7 @@
 ## About
 
 > [!IMPORTANT]
-> This project is **still under development**, and is not ready just yet
+> This project is **still under development**, and is not ready *just yet*
 
 This library is a core platform for Game Engines
 
@@ -15,20 +15,17 @@ It aims to replace libraries, like:
 - [STB libraries](https://github.com/nothings/stb) (asset loading)
 - [Assimp](https://assimp.org) (asset loading)
 
-> [!NOTE]
-> I've used them A LOT before; they are more stable, specialized & probably faster
-
 ### Features
 
 * - [ ] [Debug](../include/EngineToolkit/debug)
-  * - [x] [Logger](../include/EngineToolkit/debug/log.hpp)
+  * - [x] [Log](../include/EngineToolkit/debug/log.hpp)
   * - [ ] Profiler
 * - [ ] [Math](../include/EngineToolkit/math)
   * - [x] [Vectors](../include/EngineToolkit/math/vector)
   * - [x] [Matrices](../include/EngineToolkit/math/matrix)
   * - [x] [Quaternions](../include/EngineToolkit/math/quaternion)
   * - [ ] [Noise Generator](../include/EngineToolkit/math/noise)
-  * - [ ] [Number Generator](../include/EngineToolkit/math/random)
+  * - [ ] [Random Number Generator](../include/EngineToolkit/math/random)
   * - [ ] Collision Detection
 * - [ ] [Media](../include/EngineToolkit/media)
   * - [ ] [Image](../include/EngineToolkit/media/image.hpp)
@@ -36,52 +33,33 @@ It aims to replace libraries, like:
   * - [ ] [Video](../include/EngineToolkit/media/video.hpp)
   * - [ ] Font
   * - [ ] Vector Image (?)
-* - [ ] Model
+* - [ ] Scene
+  * - [ ] Scene
+  * - [ ] Transform
+  * - [ ] Spacial Partitioning
   * - [ ] [Material](../include/EngineToolkit/model/material.hpp)
   * - [ ] [Model](../include/EngineToolkit/model/model.hpp)
 * - [ ] [UI](../include/EngineToolkit/UI)
   * - [ ] [UI Builder](../include/EngineToolkit/UI/ui.hpp)
 * - [ ] Misc
   * - [ ] Scripting Engine
+  * - [ ] Clock
 
 ## Documentation
 
-### Setup
-
-<details>
-<summary>Linux (Debian Based)</summary>
-
-> TODO
-
-</details>
-
-<details>
-<summary>Linux (Arch Based)</summary>
-
-> TODO
-
-</details>
-
-<details>
-<summary>Windows</summary>
-
-> TODO
-
-</details>
-
 ### Usage
 
+Namespaces
 | Namespace       | Description            |
 | --------------- | ---------------------- |
 | `EngineToolkit` | Main Project Namespace |
 
+Types
 | Type Name               | Description                                 |
 | ----------------------- | ------------------------------------------- |
-| `vec2`, `vec3` & `vec4` | Fast (`float`) Vectors     (recommended)    |
-| `mat3` & `mat4`         | Fast (`float`) Matrices    (recommended)    |
-| `vec`                   | Slower, more convenient & flexible Vectors  |
-| `mat`                   | Slower, more convenient & flexible Matrices |
-| `vec`                   | Slower, more convenient & flexible Vectors  |
+| `vec2`, `vec3` & `vec4` | Fast (`float`) Vectors                      |
+| `mat3` & `mat4`         | Fast (`float`) Matrices                     |
+| `vec` & `mat`           | Vector & Matrix Templates                   |
 | `quat`                  | Quaternions                                 |
 
 ## License

@@ -1,6 +1,7 @@
 #pragma once
 
-#include <EngineToolkit/vector/vector.hpp>
+#include <EngineToolkit/math/math.hpp>
+#include <EngineToolkit/media/image.hpp>
 
 #include <cstdint>
 #include <string>

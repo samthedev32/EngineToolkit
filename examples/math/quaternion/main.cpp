@@ -8,7 +8,7 @@ int main(int argc, char *argv[]) {
 
   printf("Quaternion: %f %f %f %f\n", q.q.x, q.q.y, q.q.z, q.q.w);
 
-  vec3 e = q.toVec3();
+  vec3 e = (q * q).toVec3();
 
   printf("Euler: %f %f %f\n", e.x, e.y, e.z);
 

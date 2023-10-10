@@ -5,7 +5,7 @@ namespace EngineToolkit {
 // Logger
 namespace Log {
 
-// Maximum Length of Debug Tag
+// Cut-off Length of Tag
 const int maxTagLen = 16;
 
 // Log Debug Information, only visible for DEBUG Builds
