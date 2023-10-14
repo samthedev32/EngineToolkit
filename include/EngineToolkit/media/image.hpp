@@ -1,13 +1,12 @@
 #pragma once
 
-#include <EngineToolkit/math/vector/vec.hpp>
+#include <EngineToolkit/math/math.hpp>
 
 #include <cstdint>
 #include <string>
 
 namespace EngineToolkit {
 
-// 2D Image/Texture
 struct Image {
   // Size of Image
   vec<2, uint32_t> size;
@@ -18,7 +17,7 @@ struct Image {
   // RAW Image Data
   unsigned char *data;
 
-  // ---- Constructors & Destructor
+  // Constructors & Destructor
 
   Image();
   Image(const char *path);
@@ -26,17 +25,23 @@ struct Image {
 
   ~Image();
 
-  // Assignment Operator
+  // Operators
 
   void operator=(const Image image);
-
-  // Other Operator
-
   unsigned char *operator()(uint32_t x, uint32_t y) const;
 
-  // Functions (Static)
+private:
+  static bool isPNG(FILE *f);
+  static bool isBMP(FILE *f);
 
+  static Image loadPNG(FILE *f);
+  static Image loadBMP(FILE *f);
+
+  bool savePNG(const char *path);
+
+public:
   static Image load(const char *path);
+  bool save(const char *path);
 };
 
 } // namespace EngineToolkit

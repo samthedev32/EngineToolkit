@@ -9,19 +9,7 @@ set(SOURCES
     src/debug/log.cpp
 
     # Math
-
-    src/math/vector/vec.cpp
-    src/math/vector/vec1.cpp
-    src/math/vector/vec2.cpp
-    src/math/vector/vec3.cpp
-    src/math/vector/vec4.cpp
-
-    # src/matrix/mat2.cpp
-    src/math/matrix/mat.cpp
-    src/math/matrix/mat3.cpp
-    src/math/matrix/mat4.cpp
-
-    src/math/quaternion/quat.cpp
+    src/math/quat.cpp
 
     # Mesh
     # src/mesh/mesh.cpp
@@ -31,7 +19,7 @@ set(SOURCES
 )
 
 # Libraries
-set(LIBRARIES m)
+set(LIBRARIES m z)
 
 # Project (Library)
 project(EngineToolkit VERSION 0.1.0 LANGUAGES C CXX)

@@ -6,64 +6,64 @@ namespace EngineToolkit {
 
 namespace UI {
 
+struct Modifier {
+  // TODO
+};
+
 // Layout Builder
 class LayoutPrototype {
 public:
-  // Build Layout
-  Layout build();
+  // ---- Containers
 
-  // Clear Layout
-  void clear();
+  LayoutPrototype Card(LayoutPrototype content);
+
+  LayoutPrototype Column(LayoutPrototype content);
+  LayoutPrototype Row(LayoutPrototype content);
+
+  LayoutPrototype ColumnList(LayoutPrototype content);
+  LayoutPrototype RowList(LayoutPrototype content);
+
+  LayoutPrototype Drawer(LayoutPrototype content);
 
   // ---- User Input
 
-  void Button();
-  void Switch();
-  void Joystick();
+  LayoutPrototype Button();
+  LayoutPrototype Switch();
+  LayoutPrototype Joystick();
 
-  void CheckBox();
-  void RadioButton();
+  LayoutPrototype CheckBox();
+  LayoutPrototype RadioButton();
 
-  void TextField();
+  LayoutPrototype TextField();
 
-  void Slider();
-  void Spinner();
+  LayoutPrototype Slider();
+  LayoutPrototype Spinner();
 
   // ---- Media
 
-  void Image();
-  void Icon();
-  void Video();
+  LayoutPrototype Image();
+  LayoutPrototype Icon();
+  LayoutPrototype Video();
 
-  void Text();
+  LayoutPrototype Text();
 
   // ---- Design & Feedback
 
-  void Box();
+  LayoutPrototype Box();
 
-  void Divider();
-  void Padding();
+  LayoutPrototype Divider();
+  LayoutPrototype Padding();
 
-  void ProgressBar();
-  void ProgressCircle();
-
-  // ---- Container
-
-  void Card();
-  void Column();
-  void Row();
-  void ColumnList();
-  void RowList();
-  void Drawer();
-
-  // ---- MISC
-
-  void radio();     // search & see list: UI Elements
-  void accordion(); // search & see list: UI Element List
+  LayoutPrototype ProgressBar();
+  LayoutPrototype ProgressCircle();
 
   // TODO
 
+  // Build Layout
+  Layout build();
+
 private:
+  // std::vector<Element> element;
   // TODO
 };
 

@@ -2,7 +2,7 @@
 
 #include <cmath>
 
-#include "vector/vec.hpp"
+#include "quat.hpp"
 
 // Radian-Degree Conversion Functions
 #define rads(d) (d * M_PI / 180.0f)
@@ -13,6 +13,6 @@
 #define MAX(a, b) (a < b ? b : a)
 
 // Sigmoid Function
-#define sig(x) 1.0 / (1.0 + pow(M_E, -x))
+#define sig(x) (1.0 / (1.0 + pow(M_E, -x)))
 
 namespace EngineToolkit {}; // namespace EngineToolkit

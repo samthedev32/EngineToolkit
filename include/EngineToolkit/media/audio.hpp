@@ -1,7 +1,5 @@
 #pragma once
 
-#include <EngineToolkit/vector/vector.hpp>
-
 #include <cstdint>
 #include <string>
 
@@ -9,9 +7,6 @@ namespace EngineToolkit {
 
 // Audio
 struct Audio {
-  // Size of Image
-  vec<2, uint32_t> size;
-
   uint8_t channels, sampleRate;
 
   float *data;

@@ -4,7 +4,7 @@
 
 namespace EngineToolkit {
 
-Material::MTL Material::load(const char *path) {
+Material::MTL Material::MTL::load(const char *path) {
   MTL out;
 
   // Open File
@@ -30,8 +30,8 @@ Material::MTL Material::load(const char *path) {
         // Define New Material
         char name[64];
         int c = sscanf(data, "%63s", name);
-        if (c == 1 && out.count(name) == 0) {
-          out.insert(name, {});
+        if (c == 1 && out.material.count(name) == 0) {
+          out.material.insert(name, {});
           cursor = name;
         } else
           printf("material already exists\n");

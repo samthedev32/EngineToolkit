@@ -1,25 +1,27 @@
 #pragma once
 
-#include <EngineToolkit/math/vector/vec3.hpp>
-#include <EngineToolkit/math/vector/vec4.hpp>
-
-#include <EngineToolkit/math/matrix/mat3.hpp>
-#include <EngineToolkit/math/matrix/mat4.hpp>
+#include "mat.hpp"
 
 namespace EngineToolkit {
 
 // Quaternions
 struct quat {
-  vec4 q;
+  union {
+    vec<4> q;
+
+    struct {
+      float x, y, z, w;
+    };
+  };
 
   // Constructors & Destructor
 
   quat();
-  quat(vec1 x, vec1 y, vec1 z, vec1 w);
-  quat(vec3 euler);
-  quat(vec4 q);
-  quat(mat3 m);
-  quat(mat4 m);
+  quat(float x, float y, float z, float w);
+  quat(vec<3> euler);
+  quat(vec<4> q);
+  quat(mat<3> m);
+  quat(mat<4> m);
 
   ~quat();
 
@@ -49,24 +51,24 @@ struct quat {
 
   // Other Operators
 
-  vec1 operator[](uint8_t i) const;
-  vec1 &operator[](uint8_t i);
+  float operator[](uint8_t i) const;
+  float &operator[](uint8_t i);
 
   // Functions (Instance Methods)
 
-  vec1 length() const;
+  float length() const;
   quat normalize() const;
   quat conjugate() const;
   quat inverse() const;
 
-  vec3 toVec3() const;
-  mat3 toMat3() const;
-  mat4 toMat4() const;
+  vec<3> toVec3() const;
+  mat<3> toMat3() const;
+  mat<4> toMat4() const;
 
   // Functions (Static)
 
-  static quat slerp(quat a, quat b, vec1 blend);
-  static quat nlerp(quat a, quat b, vec1 blend);
+  static quat slerp(quat a, quat b, float blend);
+  static quat nlerp(quat a, quat b, float blend);
 };
 
 } // namespace EngineToolkit

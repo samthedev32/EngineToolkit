@@ -37,8 +37,8 @@ Model::OBJ Model::OBJ::load(const char *path) {
         // Define New Object
         char name[64];
         int c = sscanf(data, "%63s", name);
-        if (c == 1 && out.count(name) == 0) {
-          out.insert(name, {});
+        if (c == 1 && out.model.count(name) == 0) {
+          out.model.insert(name, {});
           cursor = name;
         } else
           printf("object already exists\n");
@@ -79,15 +79,21 @@ Model::OBJ Model::OBJ::load(const char *path) {
             vertex.position = vertices[v[i] - 1];
             vertex.texCoord = texCoords[vt[i] - 1];
 
-            out[cursor].vertices.push_back(vertex);
-            out[cursor].indices.push_back(out[cursor].vertices.size() - 1);
+            out.model[cursor].vertices.push_back(vertex);
+            out.model[cursor].indices.push_back(
+                out.model[cursor].vertices.size() - 1);
           }
         }
+      } else if (!strcmp(index, "mtllib")) {
+        out.material = Material::MTL::load(data);
+        // TODO: something i guess?
+      } else if (!strcmp(index, "usemtl")) {
+        // Use Selected Material
       }
     }
   }
 
-  if (out[cursor].indices.size() < 3) {
+  if (out.model[cursor].indices.size() < 3) {
     printf("No triangles were loaded\n");
   }
 

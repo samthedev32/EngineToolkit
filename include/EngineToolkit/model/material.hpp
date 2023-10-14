@@ -10,9 +10,6 @@
 namespace EngineToolkit {
 
 struct Material {
-  typedef std::unordered_map<std::string, Material> MTL;
-
-  // Data
   vec<3> Ka, Kd, Ks;
   float Ns, Ni;
   float d;
@@ -21,8 +18,12 @@ struct Material {
   Image map_Ka, map_Kd, map_Ks;
   // TODO
 
-  // Load Wavefront MTL File
-  static MTL load(const char *path);
+  // Wavefront MTL
+  struct MTL {
+    std::unordered_map<std::string, Material> material;
+
+    static MTL load(const char *path);
+  };
 };
 
 } // namespace EngineToolkit

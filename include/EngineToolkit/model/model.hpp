@@ -2,7 +2,7 @@
 
 #include "material.hpp"
 
-#include <EngineToolkit/math/vector/vector.hpp>
+#include <EngineToolkit/math/vector/vec.hpp>
 
 #include <cstdint>
 #include <string>
@@ -17,17 +17,16 @@ struct Vertex {
   vec3 normal;
 };
 
-// TODO: migrate to ONLY glTF (json & bin)
-
 struct Model {
   std::vector<Vertex> vertices;
   std::vector<uint16_t> indices;
 
-  Material::MTL material;
-
+  // Wavefront OBJ
   struct OBJ {
     std::unordered_map<std::string, Model> model;
-    std::unordered_map<std::string, Material> material;
+    Material::MTL material;
+
+    // TODO: material maps
 
     static OBJ load(const char *path);
   };
