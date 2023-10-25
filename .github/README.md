@@ -3,17 +3,18 @@
 ## About
 
 > [!IMPORTANT]
-> This project is **still under development**, and is not ready *just yet*
+> This library is **still under development**, and is not ready *just yet*
 
 This library is a core platform for Game Engines
 
-It is designed to contain every essential tool that a Game Engine would require
+It is designed to contain every essential tool that a Game Engine needs
 
 It aims to replace libraries, like:
 - [GLM](https://glm.g-truc.net/0.9.9) (mathematics)
 - [GLFW](https://www.glfw.org) (windowing)
 - [STB libraries](https://github.com/nothings/stb) (asset loading)
 - [Assimp](https://assimp.org) (asset loading)
+- [Dear ImGui](https://www.dearimgui.com) (UI Building / Rendering(sortof))
 
 ### Features
 
@@ -21,47 +22,54 @@ It aims to replace libraries, like:
   * - [x] [Log](../include/EngineToolkit/debug/log.hpp)
   * - [ ] Profiler
 * - [ ] [Math](../include/EngineToolkit/math)
-  * - [x] [Vectors](../include/EngineToolkit/math/vector)
-  * - [x] [Matrices](../include/EngineToolkit/math/matrix)
-  * - [x] [Quaternions](../include/EngineToolkit/math/quaternion)
+  * - [x] [Vectors](../include/EngineToolkit/math/vec.hpp)
+  * - [x] [Matrices](../include/EngineToolkit/math/mat.hpp)
+  * - [x] [Quaternions](../include/EngineToolkit/math/quat.hpp)
   * - [ ] [Noise Generator](../include/EngineToolkit/math/noise)
   * - [ ] [Random Number Generator](../include/EngineToolkit/math/random)
   * - [ ] Collision Detection
 * - [ ] [Media](../include/EngineToolkit/media)
   * - [ ] [Image](../include/EngineToolkit/media/image.hpp)
   * - [ ] [Audio](../include/EngineToolkit/media/audio.hpp)
-  * - [ ] [Video](../include/EngineToolkit/media/video.hpp)
+  * - [ ] [Video](../include/EngineToolkit/media/video.hpp) (?)
   * - [ ] Font
-  * - [ ] Vector Image (?)
+
+  * - [ ] Image Stream (?)
+  * - [ ] Audio Stream
+  * - [ ] Video Stream
 * - [ ] Scene
   * - [ ] Scene
   * - [ ] Transform
   * - [ ] Spacial Partitioning
   * - [ ] [Material](../include/EngineToolkit/model/material.hpp)
   * - [ ] [Model](../include/EngineToolkit/model/model.hpp)
-* - [ ] [UI](../include/EngineToolkit/UI)
-  * - [ ] [UI Builder](../include/EngineToolkit/UI/ui.hpp)
 * - [ ] Misc
   * - [ ] Scripting Engine
   * - [ ] Clock
+  * - [ ] [UI Builder](../include/EngineToolkit/UI)
+
+<!-- TODO: README-s in feature folders, added into `.gitignore` -->
 
 ## Documentation
 
 ### Usage
 
-Namespaces
+Project-Level namespace: `EngineToolkit`
+
+Sub-Namespaces
 | Namespace       | Description            |
 | --------------- | ---------------------- |
-| `EngineToolkit` | Main Project Namespace |
+| `UI`            | UI Builder             |
+
+<!-- TODO: more namespaces -->
 
 Types
 | Type Name               | Description                                 |
 | ----------------------- | ------------------------------------------- |
-| `vec2`, `vec3` & `vec4` | Fast (`float`) Vectors                      |
-| `mat3` & `mat4`         | Fast (`float`) Matrices                     |
-| `vec` & `mat`           | Vector & Matrix Templates                   |
-| `quat`                  | Quaternions                                 |
+| `vec`, `mat` & `quat`   | Vectors, Matrices & Quaternions             |
+
+<!-- TODO: more types -->
 
 ## License
 
-This project is licensed under the [Apache 2.0 License](LICENSE) - see the [LICENSE](LICENSE) file for details.
+This library is licensed under the [Apache 2.0 License](LICENSE) - see the [LICENSE](LICENSE) file for details.

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0.0)
 set(CMAKE_C_STANDARD 11)
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 
 # Source Files
@@ -15,7 +15,9 @@ set(SOURCES
     # src/mesh/mesh.cpp
 
     # Media
-    src/media/image.cpp
+    src/media/image/common.cpp
+    src/media/image/load.cpp
+    src/media/image/save.cpp
 )
 
 # Libraries

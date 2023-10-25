@@ -1,0 +1,7 @@
+AlignConsecutiveAssignments: false
+AlignConsecutiveDeclarations: false
+AllowShortFunctionsOnASingleLine: None
+BreakBeforeBinaryOperators: All
+ColumnLimit: 100
+IndentWidth: 2
+UseTab: Never

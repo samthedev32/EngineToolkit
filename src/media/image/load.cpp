@@ -3,7 +3,10 @@
 #include <cstdio>
 #include <cstring>
 #include <string>
+#include <zconf.h>
 #include <zlib.h>
+
+namespace EngineToolkit {
 
 template <typename T, typename... Args> bool isOneOf(T a, Args... args) {
   T values[] = {static_cast<T>(args)...};
@@ -11,47 +14,6 @@ template <typename T, typename... Args> bool isOneOf(T a, Args... args) {
     if (a == values[i])
       return true;
   return false;
-}
-
-namespace EngineToolkit {
-
-// Constructors & Destructor
-
-Image::Image() {
-  this->size = {0}, this->channels = 0;
-  this->data = nullptr;
-}
-
-Image::Image(const char *path) { *this = load(path); }
-Image::Image(Image const &image) { *this = image; } // FIXME: may cause segfault
-Image::~Image() {
-  this->size = {0}, this->channels = 0, this->size = 0;
-
-  free(this->data);
-  this->data = nullptr;
-}
-
-// Assignment Operator
-
-void Image::operator=(const Image image) {
-  free(this->data);
-
-  this->size = image.size;
-  this->channels = image.channels;
-
-  this->data = (typeof(this->data))malloc(this->size->x * this->size->y *
-                                          this->channels);
-  // TODO: error handling
-  memcpy(this->data, image.data,
-         image.size->x * image.size->y * image.channels);
-}
-
-// Other Operator
-
-unsigned char *Image::operator()(uint32_t x, uint32_t y) const {
-  return &this->data[(MIN(x, this->size->x - 1) +
-                      MIN(y, this->size->y - 1) * this->size->x) *
-                     channels];
 }
 
 bool Image::isPNG(FILE *f) {
@@ -312,6 +274,11 @@ Image Image::loadPNG(FILE *f) {
         return out;
       }
 
+      switch (ihdr.filterMethod) {
+      default:
+        break;
+      }
+
       out.size = {ihdr.width, ihdr.height};
       out.channels = 3;
       out.data = dst;
@@ -372,14 +339,13 @@ Image Image::load(const char *path) {
     return out;
   }
 
-  // Determine Type
-  if (isPNG(f)) {
+  // Determine File Type
+  if (isPNG(f))
     out = loadPNG(f);
-  } else if (isBMP(f)) {
+  else if (isBMP(f))
     out = loadBMP(f);
-  } else {
+  else
     printf("failed to identify file type\n");
-  }
 
   fclose(f);
   return out;

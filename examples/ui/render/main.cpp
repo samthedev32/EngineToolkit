@@ -1,4 +1,4 @@
-#include <EngineToolkit/media/image.hpp>
+#include <EngineToolkit/UI/ui.hpp>
 
 #include <GL/gl.h>
 #include <GLFW/glfw3.h>
@@ -6,7 +6,21 @@
 using namespace EngineToolkit;
 
 int main() {
-  Image img("../../../../examples/media/test.bmp");
+  UI::LayoutPrototype prototype;
+
+  // prototype.Box(NULL, UI::Modifier().size(1));
+
+  // prototype.Column([] {
+  //   UI::LayoutPrototype l;
+  //   l.Button();
+  //   return l;
+  // });
+
+  // UI::Layout layout = prototype.build();
+
+  // TODO
+
+  // Draw UI
 
   // Initialize GLFW
   if (!glfwInit()) {
@@ -23,11 +37,11 @@ int main() {
   // Make the window's context current
   glfwMakeContextCurrent(window);
 
-  GLuint tex;
-  glGenTextures(1, &tex);
-  glBindTexture(GL_TEXTURE_2D, tex);
-  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, img.size->x, img.size->y, 0, GL_RGB, GL_UNSIGNED_BYTE,
-               img.data);
+  // GLuint tex;
+  // glGenTextures(1, &tex);
+  // glBindTexture(GL_TEXTURE_2D, tex);
+  // glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, img.size->x, img.size->y, 0, GL_RGB, GL_UNSIGNED_BYTE,
+  //  img.data);
 
   // Set texture parameters
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
@@ -41,17 +55,17 @@ int main() {
     // Clear the buffer
     glClear(GL_COLOR_BUFFER_BIT);
 
-    glBindTexture(GL_TEXTURE_2D, tex);
+    // glBindTexture(GL_TEXTURE_2D, tex);
 
     // Render tex quad with the texture
     glBegin(GL_QUADS);
-    glTexCoord2f(0.0f, 0.0f);
+    // glTexCoord2f(0.0f, 1.0f);
     glVertex2f(-0.5f, -0.5f);
-    glTexCoord2f(1.0f, 0.0f);
+    // glTexCoord2f(1.0f, 1.0f);
     glVertex2f(0.5f, -0.5f);
-    glTexCoord2f(1.0f, 1.0f);
+    // glTexCoord2f(1.0f, 0.0f);
     glVertex2f(0.5f, 0.5f);
-    glTexCoord2f(0.0f, 1.0f);
+    // glTexCoord2f(0.0f, 0.0f);
     glVertex2f(-0.5f, 0.5f);
     glEnd();
 
@@ -63,7 +77,7 @@ int main() {
   }
 
   // Cleanup
-  glDeleteTextures(1, &tex);
+  // glDeleteTextures(1, &tex);
   glfwTerminate();
 
   return 0;

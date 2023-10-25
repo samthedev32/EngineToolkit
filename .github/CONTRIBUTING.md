@@ -7,6 +7,8 @@
 - try to keep backwards-compatibility
 - features should not have known bugs
 - changes must be documented
+- new features should be logical & easy to use
+- platform-specific features should be avoided
 
 ## Format
 

@@ -1,29 +1,48 @@
 #pragma once
 
 #include "Layout.hpp"
+#include "Modifier.hpp"
 
 namespace EngineToolkit {
 
 namespace UI {
 
-struct Modifier {
-  // TODO
+enum class Alignment { Center, Start, End, Top, Bottom };
+enum class Arrangement { Center, CenterVertically, CenterHorizontally };
+
+struct Element {
+  Alignment alignment;
+  Arrangement arrangement;
+
+  std::vector<Element> content;
+
+  vec<2> position;
+
+  vec<2> space, size;
 };
+
+// LayoutPrototype Function Arguments
+#define CONTENT LayoutPrototype (*content)(void) = NULL
+#define MODIFIER Modifier modifier = {}
 
 // Layout Builder
 class LayoutPrototype {
 public:
   // ---- Containers
 
-  LayoutPrototype Card(LayoutPrototype content);
+  LayoutPrototype Box(CONTENT, MODIFIER);
 
-  LayoutPrototype Column(LayoutPrototype content);
-  LayoutPrototype Row(LayoutPrototype content);
+  LayoutPrototype Column(CONTENT, MODIFIER);
+  LayoutPrototype Row(CONTENT, MODIFIER);
 
-  LayoutPrototype ColumnList(LayoutPrototype content);
-  LayoutPrototype RowList(LayoutPrototype content);
+  // LayoutPrototype ColumnList(LayoutPrototype (*content)(void));
+  // LayoutPrototype RowList(LayoutPrototype (*content)(void));
 
-  LayoutPrototype Drawer(LayoutPrototype content);
+  // LayoutPrototype Drawer(LayoutPrototype (*content)(void));
+
+  // ---- Basic
+
+  LayoutPrototype Card();
 
   // ---- User Input
 
@@ -49,10 +68,8 @@ public:
 
   // ---- Design & Feedback
 
-  LayoutPrototype Box();
-
   LayoutPrototype Divider();
-  LayoutPrototype Padding();
+  LayoutPrototype Spacer();
 
   LayoutPrototype ProgressBar();
   LayoutPrototype ProgressCircle();
@@ -63,9 +80,12 @@ public:
   Layout build();
 
 private:
-  // std::vector<Element> element;
+  std::vector<Element> element;
   // TODO
 };
+
+#undef CONTENT
+#undef MODIFIER
 
 } // namespace UI
 

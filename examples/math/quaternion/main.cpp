@@ -1,16 +1,16 @@
-#include <EngineToolkit/math/quaternion/quat.hpp>
+#include <EngineToolkit/math/quat.hpp>
 #include <cstdio>
 
 using namespace EngineToolkit;
 
 int main(int argc, char *argv[]) {
-  quat q(vec3(0, 90, 0));
+  quat q(vec<3>(0, 90, 0));
 
-  printf("Quaternion: %f %f %f %f\n", q.q.x, q.q.y, q.q.z, q.q.w);
+  printf("Quaternion: %f %f %f %f\n", q.x, q.y, q.z, q.w);
 
-  vec3 e = (q * q).toVec3();
+  vec<3> e = (q * q).toVec3();
 
-  printf("Euler: %f %f %f\n", e.x, e.y, e.z);
+  printf("Euler: %f %f %f\n", e->x, e->y, e->z);
 
   return 0;
 }
