@@ -1,6 +1,6 @@
 ```mermaid
 graph LR;
-%% Container Types
+Container Types
     Box --> Row;
     Box --> Column;
     Box --> Drawer;
@@ -8,7 +8,7 @@ graph LR;
     Row-->RowList;
     Column-->ColumnList;
 
-%% Visual Types
+Visual Types
     Card-->Button;
     Card-->Switch;
     Card-->Joystick;
