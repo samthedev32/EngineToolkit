@@ -7,14 +7,13 @@
 #include <vector>
 
 namespace EngineToolkit {
-
 namespace UI {
 
-// UI Layout
+// Performance-Optimized UI Layout
 struct Layout {
-  // TODO
+public:
+  std::vector<int> elements;
 };
 
 } // namespace UI
-
 } // namespace EngineToolkit

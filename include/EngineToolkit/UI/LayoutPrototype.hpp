@@ -4,7 +4,6 @@
 #include "Modifier.hpp"
 
 namespace EngineToolkit {
-
 namespace UI {
 
 enum class Alignment { Center, Start, End, Top, Bottom };
@@ -25,15 +24,15 @@ struct Element {
 #define CONTENT LayoutPrototype (*content)(void) = NULL
 #define MODIFIER Modifier modifier = {}
 
-// Layout Builder
+// Layout Prototype to build Layouts
 class LayoutPrototype {
 public:
   // ---- Containers
 
-  LayoutPrototype Box(CONTENT, MODIFIER);
+  LayoutPrototype &Box(CONTENT, MODIFIER);
 
-  LayoutPrototype Column(CONTENT, MODIFIER);
-  LayoutPrototype Row(CONTENT, MODIFIER);
+  // LayoutPrototype &Column(CONTENT, MODIFIER);
+  // LayoutPrototype &Row(CONTENT, MODIFIER);
 
   // LayoutPrototype ColumnList(LayoutPrototype (*content)(void));
   // LayoutPrototype RowList(LayoutPrototype (*content)(void));
@@ -42,37 +41,37 @@ public:
 
   // ---- Basic
 
-  LayoutPrototype Card();
+  LayoutPrototype &Card();
 
   // ---- User Input
 
-  LayoutPrototype Button();
-  LayoutPrototype Switch();
-  LayoutPrototype Joystick();
+  // LayoutPrototype &Button();
+  // LayoutPrototype &Switch();
+  // LayoutPrototype &Joystick();
 
-  LayoutPrototype CheckBox();
-  LayoutPrototype RadioButton();
+  // LayoutPrototype &CheckBox();
+  // LayoutPrototype &RadioButton();
 
-  LayoutPrototype TextField();
+  // LayoutPrototype &TextField();
 
-  LayoutPrototype Slider();
-  LayoutPrototype Spinner();
+  // LayoutPrototype &Slider();
+  // LayoutPrototype &Spinner();
 
-  // ---- Media
+  // // ---- Media
 
-  LayoutPrototype Image();
-  LayoutPrototype Icon();
-  LayoutPrototype Video();
+  // LayoutPrototype &Image();
+  // LayoutPrototype &Icon();
+  // LayoutPrototype &Video();
 
-  LayoutPrototype Text();
+  // LayoutPrototype &Text();
 
-  // ---- Design & Feedback
+  // // ---- Design & Feedback
 
-  LayoutPrototype Divider();
-  LayoutPrototype Spacer();
+  // LayoutPrototype &Divider();
+  // LayoutPrototype &Spacer();
 
-  LayoutPrototype ProgressBar();
-  LayoutPrototype ProgressCircle();
+  // LayoutPrototype &ProgressBar();
+  // LayoutPrototype &ProgressCircle();
 
   // TODO
 
@@ -88,5 +87,4 @@ private:
 #undef MODIFIER
 
 } // namespace UI
-
 } // namespace EngineToolkit

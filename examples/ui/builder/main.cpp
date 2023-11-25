@@ -1,3 +1,5 @@
+#include "EngineToolkit/UI/Layout.hpp"
+#include "EngineToolkit/UI/LayoutPrototype.hpp"
 #include <EngineToolkit/UI/ui.hpp>
 
 using namespace EngineToolkit;

@@ -3,11 +3,12 @@
 #include <EngineToolkit/math/vec.hpp>
 
 namespace EngineToolkit {
-
 namespace UI {
 
-#define ETK_CALLBACK_ONCLICK 0
-// TODO: more callback flags
+enum {
+  ETK_CALLBACK_ONCLICK = 0,
+  // TODO: more callbacks
+};
 
 // Modifier Callback Function Arguments
 #define CALLBACK bool (*func)(uint32_t)
@@ -75,5 +76,4 @@ struct Modifier {
 #undef CALLBACK
 
 } // namespace UI
-
 } // namespace EngineToolkit

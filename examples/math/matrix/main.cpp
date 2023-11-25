@@ -1,7 +1,7 @@
 #include <EngineToolkit/math/mat.hpp>
 #include <cstdio>
 
-using namespace EngineToolkit;
+// using namespace EngineToolkit;
 
 int main() {
   mat<4> a = mat<4>::identity();

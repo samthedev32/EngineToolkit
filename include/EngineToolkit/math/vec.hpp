@@ -3,19 +3,20 @@
 #include <cstdint>
 #include <vector>
 
-namespace EngineToolkit {
+// NOTE:
+// most compilers CAN vectorize this library (tested)
+// it means the `for` loops will not be treated as loops
 
-// Vector Types
-typedef float vec_t;
-typedef uint8_t vecS_t;
+// Vector Size Type
+typedef uint8_t vec_t;
 
 // Vector Components
 namespace internal {
-template <vecS_t D, typename T> struct vecC;
+template <vec_t D, typename T> struct vecC;
 } // namespace internal
 
-// Slow, but more flexible Vector
-template <vecS_t D = 3, typename T = vec_t> struct vec {
+// Variable Dimension Vector
+template <vec_t D = 3, typename T = float> struct vec {
   static_assert(D != 0, "Null-Size Vectors are not supported");
 
   union {
@@ -28,22 +29,17 @@ template <vecS_t D = 3, typename T = vec_t> struct vec {
 
   vec(std::vector<T> v);
   template <typename... Args> vec(Args... args);
-  template <vecS_t inD, typename inT> vec(vec<inD, inT> v);
+  template <vec_t inD, typename inT>  vec(vec<inD, inT> v);
 
   ~vec();
 
   // Arithmetic Operators
 
-  template <vecS_t inD, typename inT>
-  vec<D, T> operator+(const vec<inD, inT> &v) const;
-  template <vecS_t inD, typename inT>
-  vec<D, T> operator-(const vec<inD, inT> &v) const;
-  template <vecS_t inD, typename inT>
-  vec<D, T> operator*(const vec<inD, inT> &v) const;
-  template <vecS_t inD, typename inT>
-  vec<D, T> operator/(const vec<inD, inT> &v) const;
-  template <vecS_t inD, typename inT>
-  vec<D, T> operator%(const vec<inD, inT> &v) const;
+  template <vec_t inD, typename inT> vec<D, T> operator+(const vec<inD, inT> &v) const;
+  template <vec_t inD, typename inT> vec<D, T> operator-(const vec<inD, inT> &v) const;
+  template <vec_t inD, typename inT> vec<D, T> operator*(const vec<inD, inT> &v) const;
+  template <vec_t inD, typename inT> vec<D, T> operator/(const vec<inD, inT> &v) const;
+  template <vec_t inD, typename inT> vec<D, T> operator%(const vec<inD, inT> &v) const;
 
   vec<D, T> operator*(const T &v) const;
   vec<D, T> operator/(const T &v) const;
@@ -51,37 +47,31 @@ template <vecS_t D = 3, typename T = vec_t> struct vec {
 
   // Assignment Operators
 
-  template <vecS_t inD, typename inT> void operator=(const vec<inD, inT> &v);
-  template <vecS_t inD, typename inT> void operator+=(const vec<inD, inT> &v);
-  template <vecS_t inD, typename inT> void operator-=(const vec<inD, inT> &v);
-  template <vecS_t inD, typename inT> void operator*=(const vec<inD, inT> &v);
-  template <vecS_t inD, typename inT> void operator/=(const vec<inD, inT> &v);
-  template <vecS_t inD, typename inT> void operator%=(const vec<inD, inT> &v);
+  template <vec_t inD, typename inT> vec<D, T>& operator=(const vec<inD, inT> &v);
+  template <vec_t inD, typename inT> void operator+=(const vec<inD, inT> &v);
+  template <vec_t inD, typename inT> void operator-=(const vec<inD, inT> &v);
+  template <vec_t inD, typename inT> void operator*=(const vec<inD, inT> &v);
+  template <vec_t inD, typename inT> void operator/=(const vec<inD, inT> &v);
+  template <vec_t inD, typename inT> void operator%=(const vec<inD, inT> &v);
 
-  void operator=(const T &v);
+  vec<D, T>& operator=(const T &v);
   void operator*=(const T &v);
   void operator/=(const T &v);
   void operator%=(const T &v);
 
   // Relational Operators
 
-  template <vecS_t inD, typename inT>
-  bool operator==(const vec<inD, inT> &v) const;
-  template <vecS_t inD, typename inT>
-  bool operator!=(const vec<inD, inT> &v) const;
-  template <vecS_t inD, typename inT>
-  bool operator>(const vec<inD, inT> &v) const;
-  template <vecS_t inD, typename inT>
-  bool operator<(const vec<inD, inT> &v) const;
-  template <vecS_t inD, typename inT>
-  bool operator>=(const vec<inD, inT> &v) const;
-  template <vecS_t inD, typename inT>
-  bool operator<=(const vec<inD, inT> &v) const;
+  template <vec_t inD, typename inT> bool operator==(const vec<inD, inT> &v) const;
+  template <vec_t inD, typename inT> bool operator!=(const vec<inD, inT> &v) const;
+  template <vec_t inD, typename inT> bool operator>(const vec<inD, inT> &v) const;
+  template <vec_t inD, typename inT> bool operator<(const vec<inD, inT> &v) const;
+  template <vec_t inD, typename inT> bool operator>=(const vec<inD, inT> &v) const;
+  template <vec_t inD, typename inT> bool operator<=(const vec<inD, inT> &v) const;
 
   // Other Operators
 
-  T operator[](vecS_t i) const;
-  T &operator[](vecS_t i);
+  T operator[](vec_t i) const;
+  T &operator[](vec_t i);
 
   void operator++();
   void operator--();
@@ -91,9 +81,9 @@ template <vecS_t D = 3, typename T = vec_t> struct vec {
 
   // Functions (Instance Methods)
 
-  T length() const;
-  vec normalize() const;
-  vec clamp(vec min, vec max) const;
+  [[nodiscard]] T length() const;
+  [[nodiscard]] vec normalize() const;
+  [[nodiscard]] vec clamp(vec min, vec max) const;
 
   // Functions (Static)
 
@@ -103,11 +93,11 @@ template <vecS_t D = 3, typename T = vec_t> struct vec {
 
   // Functions (Dimension-Specific)
 
-  static vec<3> cross(vec<3> a, vec<3> b);
+  static vec<3> cross(const vec<3>& a, const vec<3>& b);
 };
 
 #ifdef VECTOR_TYPES
-// Simple Vectors (usually same as fvec)
+// Simple Vectors (same as fvec)
 typedef vec<1> vec1;
 typedef vec<2> vec2;
 typedef vec<3> vec3;
@@ -167,14 +157,14 @@ template <typename T> struct vecC<3, T> {
       T x, y, z;
     };
 
-    // Color
-    struct {
-      T r, g, b;
-    };
-
     // TexCoord
     struct {
       T u, v, w;
+    };
+
+    // Color
+    struct {
+      T red, green, blue;
     };
 
     // Size
@@ -194,7 +184,7 @@ template <typename T> struct vecC<4, T> {
 
     // Color
     struct {
-      T r, g, b, a;
+      T red, green, blue, alpha;
     };
   };
 };
@@ -203,229 +193,177 @@ template <typename T> struct vecC<4, T> {
 
 // Constructors & Destructor
 
-template <vecS_t D, typename T> vec<D, T>::vec(std::vector<T> v) {
-  for (vecS_t i = 0; i < D; i++)
+template <vec_t D, typename T> vec<D, T>::vec(std::vector<T> v) {
+  for (vec_t i = 0; i < D; i++)
     this->data[i] = i < v.size() ? v[i] : 0;
 }
 
-template <vecS_t D, typename T>
-template <typename... Args>
-vec<D, T>::vec(Args... args) {
+template <vec_t D, typename T> template <typename... Args> vec<D, T>::vec(Args... args) {
   T values[] = {static_cast<T>(args)...};
-  for (vecS_t i = 0; i < D; i++)
-    this->data[i] = sizeof...(args) == 1
-                        ? values[0]
-                        : (i < sizeof...(args) ? values[i] : 0);
+  for (vec_t i = 0; i < D; i++)
+    this->data[i] = sizeof...(args) == 1 ? values[0] : (i < sizeof...(args) ? values[i] : 0);
 }
 
-template <vecS_t D, typename T>
-template <vecS_t inD, typename inT>
-vec<D, T>::vec(vec<inD, inT> v) {
-  *this = v;
-}
+template <vec_t D, typename T> template <vec_t inD, typename inT> vec<D, T>::vec(vec<inD, inT> v) { *this = v; }
 
-template <vecS_t D, typename T> vec<D, T>::~vec() {}
+template <vec_t D, typename T> vec<D, T>::~vec() {}
 
 // Arithmetic Operators
 
-template <vecS_t D, typename T>
-template <vecS_t inD, typename inT>
-vec<D, T> vec<D, T>::operator+(const vec<inD, inT> &v) const {
+template <vec_t D, typename T> template <vec_t inD, typename inT> vec<D, T> vec<D, T>::operator+(const vec<inD, inT> &v) const {
   vec<D, T> ret;
-  for (vecS_t i = 0; i < std::min(D, inD); i++)
+  for (vec_t i = 0; i < std::min(D, inD); i++)
     ret.data[i] = this->data[i] + v.data[i];
   return ret;
 }
 
-template <vecS_t D, typename T>
-template <vecS_t inD, typename inT>
-vec<D, T> vec<D, T>::operator-(const vec<inD, inT> &v) const {
+template <vec_t D, typename T> template <vec_t inD, typename inT> vec<D, T> vec<D, T>::operator-(const vec<inD, inT> &v) const {
   vec<D, T> ret;
-  for (vecS_t i = 0; i < std::min(D, inD); i++)
+  for (vec_t i = 0; i < std::min(D, inD); i++)
     ret.data[i] = this->data[i] - v.data[i];
   return ret;
 }
 
-template <vecS_t D, typename T>
-template <vecS_t inD, typename inT>
-vec<D, T> vec<D, T>::operator*(const vec<inD, inT> &v) const {
+template <vec_t D, typename T> template <vec_t inD, typename inT> vec<D, T> vec<D, T>::operator*(const vec<inD, inT> &v) const {
   vec<D, T> ret;
-  for (vecS_t i = 0; i < std::min(D, inD); i++)
+  for (vec_t i = 0; i < std::min(D, inD); i++)
     ret.data[i] = this->data[i] * v.data[i];
   return ret;
 }
 
-template <vecS_t D, typename T>
-template <vecS_t inD, typename inT>
-vec<D, T> vec<D, T>::operator/(const vec<inD, inT> &v) const {
+template <vec_t D, typename T> template <vec_t inD, typename inT> vec<D, T> vec<D, T>::operator/(const vec<inD, inT> &v) const {
   vec<D, T> ret;
-  for (vecS_t i = 0; i < std::min(D, inD); i++)
+  for (vec_t i = 0; i < std::min(D, inD); i++)
     ret.data[i] = this->data[i] / v.data[i];
   return ret;
 }
 
-template <vecS_t D, typename T>
-template <vecS_t inD, typename inT>
-vec<D, T> vec<D, T>::operator%(const vec<inD, inT> &v) const {
+template <vec_t D, typename T> template <vec_t inD, typename inT> vec<D, T> vec<D, T>::operator%(const vec<inD, inT> &v) const {
   vec<D, T> ret;
-  for (vecS_t i = 0; i < std::min(D, inD); i++)
+  for (vec_t i = 0; i < std::min(D, inD); i++)
     ret.data[i] = this->data[i] % v.data[i];
   return ret;
 }
 
-template <vecS_t D, typename T>
-vec<D, T> vec<D, T>::operator*(const T &v) const {
+template <vec_t D, typename T> vec<D, T> vec<D, T>::operator*(const T &v) const {
   vec<D, T> out;
-  for (vecS_t i = 0; i < D; i++)
+  for (vec_t i = 0; i < D; i++)
     out.data[i] = this->data[i] * v;
   return out;
 }
 
-template <vecS_t D, typename T>
-vec<D, T> vec<D, T>::operator/(const T &v) const {
+template <vec_t D, typename T> vec<D, T> vec<D, T>::operator/(const T &v) const {
   vec<D, T> out;
-  for (vecS_t i = 0; i < D; i++)
+  for (vec_t i = 0; i < D; i++)
     out.data[i] = this->data[i] / v;
   return out;
 }
 
-template <vecS_t D, typename T>
-vec<D, T> vec<D, T>::operator%(const T &v) const {
+template <vec_t D, typename T> vec<D, T> vec<D, T>::operator%(const T &v) const {
   vec<D, T> out;
-  for (vecS_t i = 0; i < D; i++)
+  for (vec_t i = 0; i < D; i++)
     out.data[i] = this->data[i] % v;
   return out;
 }
 
 // Assignment Operators
 
-template <vecS_t D, typename T>
-template <vecS_t inD, typename inT>
-void vec<D, T>::operator=(const vec<inD, inT> &v) {
-  for (vecS_t i = 0; i < D; i++)
+template <vec_t D, typename T> template <vec_t inD, typename inT> vec<D, T>& vec<D, T>::operator=(const vec<inD, inT> &v) {
+  for (vec_t i = 0; i < D; i++)
     this->data[i] = i < inD ? v.data[i] : 0;
+
+  return *this;
 }
 
-template <vecS_t D, typename T>
-template <vecS_t inD, typename inT>
-void vec<D, T>::operator+=(const vec<inD, inT> &v) {
+template <vec_t D, typename T> template <vec_t inD, typename inT> void vec<D, T>::operator+=(const vec<inD, inT> &v) {
   *this = *this + v;
 }
 
-template <vecS_t D, typename T>
-template <vecS_t inD, typename inT>
-void vec<D, T>::operator-=(const vec<inD, inT> &v) {
+template <vec_t D, typename T> template <vec_t inD, typename inT> void vec<D, T>::operator-=(const vec<inD, inT> &v) {
   *this = *this - v;
 }
 
-template <vecS_t D, typename T>
-template <vecS_t inD, typename inT>
-void vec<D, T>::operator*=(const vec<inD, inT> &v) {
+template <vec_t D, typename T> template <vec_t inD, typename inT> void vec<D, T>::operator*=(const vec<inD, inT> &v) {
   *this = *this * v;
 }
 
-template <vecS_t D, typename T>
-template <vecS_t inD, typename inT>
-void vec<D, T>::operator/=(const vec<inD, inT> &v) {
+template <vec_t D, typename T> template <vec_t inD, typename inT> void vec<D, T>::operator/=(const vec<inD, inT> &v) {
   *this = *this / v;
 }
 
-template <vecS_t D, typename T>
-template <vecS_t inD, typename inT>
-void vec<D, T>::operator%=(const vec<inD, inT> &v) {
+template <vec_t D, typename T> template <vec_t inD, typename inT> void vec<D, T>::operator%=(const vec<inD, inT> &v) {
   *this = *this % v;
 }
 
-template <vecS_t D, typename T> void vec<D, T>::operator=(const T &v) {
-  for (vecS_t i = 0; i < D; i++)
+template <vec_t D, typename T> vec<D, T>& vec<D, T>::operator=(const T &v) {
+  for (vec_t i = 0; i < D; i++)
     this->data[i] = v;
+
+  return *this;
 }
 
-template <vecS_t D, typename T> void vec<D, T>::operator*=(const T &v) {
-  *this = *this * v;
-}
+template <vec_t D, typename T> void vec<D, T>::operator*=(const T &v) { *this = *this * v; }
 
-template <vecS_t D, typename T> void vec<D, T>::operator/=(const T &v) {
-  *this = *this / v;
-}
+template <vec_t D, typename T> void vec<D, T>::operator/=(const T &v) { *this = *this / v; }
 
-template <vecS_t D, typename T> void vec<D, T>::operator%=(const T &v) {
-  *this = *this % v;
-}
+template <vec_t D, typename T> void vec<D, T>::operator%=(const T &v) { *this = *this % v; }
 
 // Relational Operators
 
-template <vecS_t D, typename T>
-template <vecS_t inD, typename inT>
-bool vec<D, T>::operator==(const vec<inD, inT> &v) const {
-  for (vecS_t i = 0; i < D; i++)
+template <vec_t D, typename T> template <vec_t inD, typename inT> bool vec<D, T>::operator==(const vec<inD, inT> &v) const {
+  for (vec_t i = 0; i < D; i++)
     if (this->data[i] != v.data[i])
       return false;
   return true;
 }
 
-template <vecS_t D, typename T>
-template <vecS_t inD, typename inT>
-bool vec<D, T>::operator!=(const vec<inD, inT> &v) const {
-  for (vecS_t i = 0; i < D; i++)
+template <vec_t D, typename T> template <vec_t inD, typename inT> bool vec<D, T>::operator!=(const vec<inD, inT> &v) const {
+  for (vec_t i = 0; i < D; i++)
     if (this->data[i] == v.data[i])
       return false;
   return true;
 }
 
-template <vecS_t D, typename T>
-template <vecS_t inD, typename inT>
-bool vec<D, T>::operator>(const vec<inD, inT> &v) const {
+template <vec_t D, typename T> template <vec_t inD, typename inT> bool vec<D, T>::operator>(const vec<inD, inT> &v) const {
+  // TODO
   return false;
 }
 
-template <vecS_t D, typename T>
-template <vecS_t inD, typename inT>
-bool vec<D, T>::operator<(const vec<inD, inT> &v) const {
+template <vec_t D, typename T> template <vec_t inD, typename inT> bool vec<D, T>::operator<(const vec<inD, inT> &v) const {
+  // TODO
   return false;
 }
 
-template <vecS_t D, typename T>
-template <vecS_t inD, typename inT>
-bool vec<D, T>::operator>=(const vec<inD, inT> &v) const {
+template <vec_t D, typename T> template <vec_t inD, typename inT> bool vec<D, T>::operator>=(const vec<inD, inT> &v) const {
+  // TODO
   return false;
 }
 
-template <vecS_t D, typename T>
-template <vecS_t inD, typename inT>
-bool vec<D, T>::operator<=(const vec<inD, inT> &v) const {
+template <vec_t D, typename T> template <vec_t inD, typename inT> bool vec<D, T>::operator<=(const vec<inD, inT> &v) const {
+  // TODO
   return false;
 }
 
 // Other Operators
 
-template <vecS_t D, typename T> T vec<D, T>::operator[](vecS_t i) const {
-  return this->data[i % D];
-}
+template <vec_t D, typename T> T vec<D, T>::operator[](vec_t i) const { return this->data[i % D]; }
 
-template <vecS_t D, typename T> T &vec<D, T>::operator[](vecS_t i) {
-  return this->data[i % D];
-}
+template <vec_t D, typename T> T &vec<D, T>::operator[](vec_t i) { return this->data[i % D]; }
 
-template <vecS_t D, typename T> void vec<D, T>::operator++() { *this += 1.0f; }
+template <vec_t D, typename T> void vec<D, T>::operator++() { *this += 1.0f; }
 
-template <vecS_t D, typename T> void vec<D, T>::operator--() { *this -= 1.0f; }
+template <vec_t D, typename T> void vec<D, T>::operator--() { *this -= 1.0f; }
 
 // Functions (Instance Methods)
 
-template <vecS_t D, typename T> T vec<D, T>::length() const {
-  return sqrtf(dot(*this, *this));
-}
+template <vec_t D, typename T> T vec<D, T>::length() const { return sqrtf(dot(*this, *this)); }
 
-template <vecS_t D, typename T> vec<D, T> vec<D, T>::normalize() const {
-  return *this / this->length();
-}
+template <vec_t D, typename T> vec<D, T> vec<D, T>::normalize() const { return *this / this->length(); }
 
-template <vecS_t D, typename T>
-vec<D, T> vec<D, T>::clamp(vec<D, T> min, vec<D, T> max) const {
+template <vec_t D, typename T> vec<D, T> vec<D, T>::clamp(vec<D, T> min, vec<D, T> max) const {
   vec<D, T> out;
 
-  for (vecS_t i = 0; i < D; i++) {
+  for (vec_t i = 0; i < D; i++) {
     if (this->data[i] < min.data[i])
       out.data[i] = min.data[i];
     else if (this->data[i] > max.data[i])
@@ -439,30 +377,29 @@ vec<D, T> vec<D, T>::clamp(vec<D, T> min, vec<D, T> max) const {
 
 // Functions (Static)
 
-template <vecS_t D, typename T> T vec<D, T>::distance(vec a, vec b) {
+template <vec_t D, typename T> T vec<D, T>::distance(vec a, vec b) {
   T out;
 
   vec<D, T> dist = a - b;
-  for (vecS_t i = 0; i < D; i++)
+  for (vec_t i = 0; i < D; i++)
     out += dist[i] * dist[i];
 
   return sqrt(out);
 }
 
-template <vecS_t D, typename T> T vec<D, T>::dot(vec a, vec b) {
+template <vec_t D, typename T> T vec<D, T>::dot(vec a, vec b) {
   T out;
 
-  for (vecS_t i = 0; i < D; i++)
+  for (vec_t i = 0; i < D; i++)
     out += a[i] * b[i];
 
   return out;
 }
 
-template <vecS_t D, typename T>
-vec<D, T> vec<D, T>::lerp(vec<D, T> a, vec<D, T> b, T blend) {
+template <vec_t D, typename T> vec<D, T> vec<D, T>::lerp(vec<D, T> a, vec<D, T> b, T blend) {
   vec<D, T> out;
 
-  for (vecS_t i = 0; i < D; i++)
+  for (vec_t i = 0; i < D; i++)
     out[i] = a.data[i] + (b.data[i] - a.data[i]) * blend;
 
   return out;
@@ -470,10 +407,7 @@ vec<D, T> vec<D, T>::lerp(vec<D, T> a, vec<D, T> b, T blend) {
 
 // Functions (Dimension-Specific)
 
-template <vecS_t D, typename T> vec<3> vec<D, T>::cross(vec<3> a, vec<3> b) {
-  return std::vector<T>({a.data[1] * b.data[2] - a.data[2] * b.data[1],
-                         a.data[2] * b.data[0] - a.data[0] * b.data[2],
+template <vec_t D, typename T> vec<3> vec<D, T>::cross(const vec<3>& a, const vec<3>& b) {
+  return std::vector<T>({a.data[1] * b.data[2] - a.data[2] * b.data[1], a.data[2] * b.data[0] - a.data[0] * b.data[2],
                          a.data[0] * b.data[1] - a.data[1] * b.data[0]});
 }
-
-} // namespace EngineToolkit

@@ -8,7 +8,7 @@ namespace UI {
 #define CONTENT LayoutPrototype (*content)(void)
 #define MODIFIER Modifier modifier
 
-LayoutPrototype LayoutPrototype::Box(CONTENT, MODIFIER) {
+LayoutPrototype &LayoutPrototype::Box(CONTENT, MODIFIER) {
   LayoutPrototype lp = content();
 
   Element box;
@@ -23,13 +23,13 @@ LayoutPrototype LayoutPrototype::Box(CONTENT, MODIFIER) {
   return *this;
 }
 
-LayoutPrototype LayoutPrototype::Column(CONTENT, MODIFIER) {
+LayoutPrototype &LayoutPrototype::Column(CONTENT, MODIFIER) {
   LayoutPrototype lp = content();
 
   return *this;
 }
 
-LayoutPrototype LayoutPrototype::Row(CONTENT, MODIFIER) {
+LayoutPrototype &LayoutPrototype::Row(CONTENT, MODIFIER) {
   LayoutPrototype lp = content();
 
   return *this;
