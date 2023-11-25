@@ -1,13 +1,14 @@
 ```mermaid
-graph TD;
-    Box-->Row;
-    Box-->Column;
+graph LR;
+%% Container Types
+    Box --> Row;
+    Box --> Column;
+    Box --> Drawer;
 
     Row-->RowList;
     Column-->ColumnList;
 
-    Box-->Drawer;
-
+%% Visual Types
     Card-->Button;
     Card-->Switch;
     Card-->Joystick;
