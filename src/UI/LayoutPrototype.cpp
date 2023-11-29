@@ -9,28 +9,14 @@ namespace UI {
 #define MODIFIER Modifier modifier
 
 LayoutPrototype &LayoutPrototype::Box(CONTENT, MODIFIER) {
-  LayoutPrototype lp = content();
-
-  Element box;
-  box.alignment = Alignment::Center;
-  box.content = content().element;
+  Container box;
 
   box.position = {};
   box.size = {};
 
-  this->element.push_back(box);
+  box.content = content().elements;
 
-  return *this;
-}
-
-LayoutPrototype &LayoutPrototype::Column(CONTENT, MODIFIER) {
-  LayoutPrototype lp = content();
-
-  return *this;
-}
-
-LayoutPrototype &LayoutPrototype::Row(CONTENT, MODIFIER) {
-  LayoutPrototype lp = content();
+  elements.push_back(box);
 
   return *this;
 }

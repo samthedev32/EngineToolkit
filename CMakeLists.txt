@@ -18,6 +18,8 @@ set(SOURCES
     src/media/image/common.cpp
     src/media/image/load.cpp
     src/media/image/save.cpp
+
+    src/UI/LayoutPrototype.cpp
 )
 
 # Libraries

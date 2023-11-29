@@ -3,21 +3,28 @@
 #include "Layout.hpp"
 #include "Modifier.hpp"
 
+#include <variant>
+
 namespace EngineToolkit {
 namespace UI {
 
 enum class Alignment { Center, Start, End, Top, Bottom };
 enum class Arrangement { Center, CenterVertically, CenterHorizontally };
 
-struct Element {
-  Alignment alignment;
-  Arrangement arrangement;
+struct Elements {
+  vec<2, float> position, size;
 
+  std::string type;
+};
+
+struct Container;
+
+typedef std::variant<Elements, Container> Element;
+
+struct Container {
+  vec<2, float> position, size;
   std::vector<Element> content;
-
-  vec<2> position;
-
-  vec<2> space, size;
+  // TODO
 };
 
 // LayoutPrototype Function Arguments
@@ -79,7 +86,7 @@ public:
   Layout build();
 
 private:
-  std::vector<Element> element;
+  std::vector<Element> elements;
   // TODO
 };
 
