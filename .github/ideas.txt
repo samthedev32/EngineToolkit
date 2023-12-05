@@ -1,0 +1,8 @@
+UI Builder:
+    - 
+
+UI Renderer:
+    - texts are rendered to textures, stored in a map (key is usage time), fixed number, oldests get re-rendered for different texts; on android in a low-memory event the # of texts can decrease (all the way to 0)
+    - drawers and stuff like that gets rendered to a separate layer/texture; not re-rendered unless content is updates
+
+    

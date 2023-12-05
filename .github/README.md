@@ -16,6 +16,10 @@ It aims to replace libraries, like:
 - [Assimp](https://assimp.org) (asset loading)
 - [Dear ImGui](https://www.dearimgui.com) (UI Building / Rendering(sortof))
 
+> [!NOTE]
+> In the [ideas.txt](ideas.txt) file, you can find some concepts in mind for different parts of the library
+> They may be dumb, but also you may find some good ideas there; you are free to use any of them!
+
 ### Features
 
 * - [ ] [Debug](../include/EngineToolkit/debug)
@@ -41,6 +45,7 @@ It aims to replace libraries, like:
   * - [ ] Scene
   * - [ ] Transform
   * - [ ] Spacial Partitioning
+  * - [ ] Entity Component System
   * - [ ] [Material](../include/EngineToolkit/model/material.hpp)
   * - [ ] [Model](../include/EngineToolkit/model/model.hpp)
 * - [ ] Misc

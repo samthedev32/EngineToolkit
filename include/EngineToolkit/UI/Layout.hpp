@@ -9,10 +9,24 @@
 namespace EngineToolkit {
 namespace UI {
 
-// Performance-Optimized UI Layout
+// Layout Component
+struct Component {
+  uint32_t typeID;
+
+  // Position and size are proportional to the parent container
+  vec<2, float> position, size;
+};
+
+// UI Layout
 struct Layout {
 public:
-  std::vector<int> elements;
+  // [type - name] table
+  std::unordered_map<uint32_t, std::string> table;
+
+  std::vector<Component> components;
+
+  bool save(const char *path);
+  static Layout load(const char *path);
 };
 
 } // namespace UI

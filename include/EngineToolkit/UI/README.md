@@ -16,10 +16,15 @@ Core Elements:
 Element Inheritance
 ```mermaid
 graph LR;
+%% Core Types
+    Element
+    Container
+
 %% Container Types
-    Box --> Row;
-    Box --> Column;
-    Box --> Drawer;
+    Container --> Box;
+    Container --> Row;
+    Container --> Column;
+    Container --> Drawer;
 
     Row --> RowList;
     Column --> ColumnList;

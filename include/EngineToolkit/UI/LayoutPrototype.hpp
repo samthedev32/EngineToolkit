@@ -1,45 +1,62 @@
 #pragma once
 
 #include "Layout.hpp"
-#include "Modifier.hpp"
 
 #include <variant>
 
 namespace EngineToolkit {
 namespace UI {
 
-enum class Alignment { Center, Start, End, Top, Bottom };
+enum class Alignment { None, Vertical, Horizontal };
 enum class Arrangement { Center, CenterVertically, CenterHorizontally };
 
-struct Elements {
+struct Element {
+  vec<2, float> ratio;
   vec<2, float> position, size;
 
   std::string type;
 };
 
-struct Container;
-
-typedef std::variant<Elements, Container> Element;
+enum class ContainerType { Box = 0, Column, Row, Map };
 
 struct Container {
-  vec<2, float> position, size;
-  std::vector<Element> content;
-  // TODO
-};
+  ContainerType type;
+  Alignment alignment = Alignment::Horizontal;
 
-// LayoutPrototype Function Arguments
-#define CONTENT LayoutPrototype (*content)(void) = NULL
-#define MODIFIER Modifier modifier = {}
+  std::vector<struct Element> elements;
+  std::vector<struct Container> containers;
+
+  vec<2, float> position, size;
+
+  Layout build();
+};
 
 // Layout Prototype to build Layouts
 class LayoutPrototype {
 public:
+  LayoutPrototype(ContainerType canvasType = ContainerType::Box);
+
+  // ---- Core
+
+  LayoutPrototype &Container(LayoutPrototype content, ContainerType type);
+  LayoutPrototype &Element(std::string id);
+
   // ---- Containers
 
-  LayoutPrototype &Box(CONTENT, MODIFIER);
+  LayoutPrototype &Box(LayoutPrototype content);
 
-  // LayoutPrototype &Column(CONTENT, MODIFIER);
-  // LayoutPrototype &Row(CONTENT, MODIFIER);
+  // TODO:
+  // 2 core types: Container & Element
+  // Must-Haves: Box, Column, Row
+  //             Card, etc.            TODO: define!
+  // everything builds on the types,
+  // the build function defines the container types,
+  // and the renderer defines the element types available
+  // builder may assign UUIDs to each type of element,
+  // then give renderer a map of UUIDs and names
+
+  // LayoutPrototype &Column(LayoutPrototype &content);
+  // LayoutPrototype &Row(LayoutPrototype &content);
 
   // LayoutPrototype ColumnList(LayoutPrototype (*content)(void));
   // LayoutPrototype RowList(LayoutPrototype (*content)(void));
@@ -86,8 +103,7 @@ public:
   Layout build();
 
 private:
-  std::vector<Element> elements;
-  // TODO
+  struct Container canvas;
 };
 
 #undef CONTENT

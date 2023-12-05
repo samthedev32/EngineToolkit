@@ -19,7 +19,9 @@ set(SOURCES
     src/media/image/load.cpp
     src/media/image/save.cpp
 
+    # UI
     src/UI/LayoutPrototype.cpp
+    src/UI/Layout.cpp
 )
 
 # Libraries
