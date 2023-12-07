@@ -20,8 +20,9 @@ set(SOURCES
     src/media/image/save.cpp
 
     # UI
-    src/UI/LayoutPrototype.cpp
     src/UI/Layout.cpp
+    src/UI/Element.cpp
+    src/UI/LayoutPrototype.cpp
 )
 
 # Libraries

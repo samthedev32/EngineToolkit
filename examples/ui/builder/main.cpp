@@ -8,38 +8,34 @@
 
 using namespace EngineToolkit;
 
-void asd(UI::LayoutPrototype lp);
-
 int main() {
-  // UI::LayoutPrototype prototype;
+  UI::LayoutPrototype prototype(UI::Arrangement::Vertical);
 
-  // prototype.Box([&] {
-  //   UI::LayoutPrototype p;
+  prototype.Box([&] {
+    UI::LayoutPrototype p(UI::Arrangement::Horizontal);
 
-  //   p.Element("card");
-  //   p.Element("card");
-  //   p.Element("card");
+    p.Element("card");
+    p.Element("card");
+    p.Box([&] {
+      UI::LayoutPrototype p(UI::Arrangement::Vertical);
 
-  //   return p;
-  // }());
+      p.Element("card");
+      p.Element("card");
 
-  // prototype.Element("card");
-  // prototype.Element("carda");
-  // prototype.Element("card");
-  // prototype.Element("card");
+      return p;
+    }());
 
-  // prototype.Box(NULL, UI::Modifier().size(1));
+    return p;
+  }());
 
-  // prototype.Column([] {
-  //   UI::LayoutPrototype l;
-  //   l.Button();
-  //   return l;
-  // });
+  prototype.Element("card");
+  prototype.Element("card");
+  prototype.Element("card");
 
-  // UI::Layout layout = prototype.build();
-  // layout.save("test.layout");
+  UI::Layout layout = prototype.build();
+  layout.save("test.layout");
 
-  UI::Layout layout = UI::Layout::load("test.layout");
+  // UI::Layout layout = UI::Layout::load("test.layout");
 
   // TODO
 
@@ -86,31 +82,27 @@ int main() {
     glColor3f(1.0f, 1.0f, 1.0f);
 
     const vec<2, float> center = {0.0f, 0.0f};
-    const vec<2, float> size = {1.0f, 1.0f};
+    vec<2, float> size = {1.0f, (float)wsize->width / wsize->height};
 
     // Render tex quad with the texture
     glBegin(GL_QUADS);
-    // glTexCoord2f(0.0f, 1.0f);
     glVertex2f(center->x - size->x / 2.0f, center->y - size->y / 2.0f);
-    // glTexCoord2f(1.0f, 1.0f);
     glVertex2f(center->x - size->x / 2.0f, center->y + size->y / 2.0f);
-    // glTexCoord2f(1.0f, 0.0f);
     glVertex2f(center->x + size->x / 2.0f, center->y + size->y / 2.0f);
-    // glTexCoord2f(0.0f, 0.f);
     glVertex2f(center->x + size->x / 2.0f, center->y - size->y / 2.0f);
     glEnd();
 
     // Draw UI Bounding Rects
     for (auto c : layout.components) {
 
-      srand(c.typeID * 9686);
+      // srand(c.typeID * 9686);
 
       float x = (center->x - size->x / 2.0f) + c.position->x * size->x;
       float y = (center->y + size->y / 2.0f) - c.position->y * size->y;
       // NOTE: y is different from x since gpus start from the left-bottom corner
       // and UI in general from the top-left
-      float w = c.size->width;
-      float h = c.size->height;
+      float w = c.size->width * size->width;
+      float h = c.size->height * size->height;
 
       // Generate Color for each UI element
       // since we set the same seed every frame,
@@ -119,13 +111,9 @@ int main() {
 
       // Render tex quad with the texture
       glBegin(GL_QUADS);
-      // glTexCoord2f(0.0f, 1.0f);
       glVertex2f(x - w / 2, y - h / 2);
-      // glTexCoord2f(1.0f, 1.0f);
       glVertex2f(x - w / 2, y + h / 2);
-      // glTexCoord2f(1.0f, 0.0f);
       glVertex2f(x + w / 2, y + h / 2);
-      // glTexCoord2f(0.0f, 0.0f);
       glVertex2f(x + w / 2, y - h / 2);
       glEnd();
     }

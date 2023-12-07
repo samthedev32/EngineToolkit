@@ -9,6 +9,10 @@ It aims to be efficient, flexible and easy-to-use
 ## Layout Prototype
 > TODO
 
+Pre-Defined Element Types
+- canvas: main ui layout canvas
+- container: non-visual container
+
 Core Elements:
 - Box (Container)
 - Card (Visual)

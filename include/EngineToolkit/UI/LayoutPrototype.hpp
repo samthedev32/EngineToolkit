@@ -1,44 +1,18 @@
 #pragma once
 
-#include "Layout.hpp"
-
-#include <variant>
+#include "Element.hpp"
 
 namespace EngineToolkit {
 namespace UI {
 
-enum class Alignment { None, Vertical, Horizontal };
-enum class Arrangement { Center, CenterVertically, CenterHorizontally };
-
-struct Element {
-  vec<2, float> ratio;
-  vec<2, float> position, size;
-
-  std::string type;
-};
-
-enum class ContainerType { Box = 0, Column, Row, Map };
-
-struct Container {
-  ContainerType type;
-  Alignment alignment = Alignment::Horizontal;
-
-  std::vector<struct Element> elements;
-  std::vector<struct Container> containers;
-
-  vec<2, float> position, size;
-
-  Layout build();
-};
-
 // Layout Prototype to build Layouts
 class LayoutPrototype {
 public:
-  LayoutPrototype(ContainerType canvasType = ContainerType::Box);
+  LayoutPrototype(Arrangement arrangement = Arrangement::None);
 
   // ---- Core
 
-  LayoutPrototype &Container(LayoutPrototype content, ContainerType type);
+  LayoutPrototype &Container(LayoutPrototype content, Arrangement arrangement);
   LayoutPrototype &Element(std::string id);
 
   // ---- Containers
@@ -103,7 +77,7 @@ public:
   Layout build();
 
 private:
-  struct Container canvas;
+  struct Element canvas;
 };
 
 #undef CONTENT

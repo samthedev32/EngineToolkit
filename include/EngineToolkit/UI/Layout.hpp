@@ -25,7 +25,10 @@ public:
 
   std::vector<Component> components;
 
+  // Save Layout
   bool save(const char *path);
+
+  // Load Layout
   static Layout load(const char *path);
 };
 

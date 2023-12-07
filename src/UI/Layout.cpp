@@ -1,7 +1,7 @@
 #pragma once
 
 #include <EngineToolkit/UI/Layout.hpp>
-#include <string.h>
+#include <cstring>
 
 namespace EngineToolkit {
 namespace UI {
