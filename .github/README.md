@@ -28,14 +28,15 @@ It aims to replace libraries, like:
 * - [ ] [Math](../include/EngineToolkit/math)
   * - [x] [Vectors](../include/EngineToolkit/math/vec.hpp)
   * - [x] [Matrices](../include/EngineToolkit/math/mat.hpp)
-  * - [x] [Quaternions](../include/EngineToolkit/math/quat.hpp)
+  * - [-] [Quaternions](../include/EngineToolkit/math/quat.hpp)
   * - [ ] [Noise Generator](../include/EngineToolkit/math/noise)
   * - [ ] [Random Number Generator](../include/EngineToolkit/math/random)
-  * - [ ] Collision Detection
+  * - [ ] Physics
+    * - [ ] Collision Detection
 * - [ ] [Media](../include/EngineToolkit/media)
   * - [ ] [Image](../include/EngineToolkit/media/image.hpp)
-  * - [ ] [Audio](../include/EngineToolkit/media/audio.hpp)
-  * - [ ] [Video](../include/EngineToolkit/media/video.hpp) (?)
+  * - [ ] Audio
+  * - [ ] Video (?)
   * - [ ] Font
 
   * - [ ] Image Stream (?)

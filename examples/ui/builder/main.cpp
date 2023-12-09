@@ -39,8 +39,6 @@ int main() {
 
   // TODO
 
-  printf("%zu\n", layout.table.size());
-
   // Init Window
   if (!glfwInit()) {
     printf("Failed to initialize GLFW\n");

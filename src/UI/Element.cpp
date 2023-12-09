@@ -7,7 +7,7 @@ Layout Element::build() {
   Layout out;
 
   // NOTE: will be a per-element modifier
-  vec<2, float> padding = {0.02f};
+  vec<2, float> padding = {0.0f};
 
   // Clear temporary and permanent tables
   std::unordered_map<std::string, uint32_t> table;
@@ -54,16 +54,15 @@ Layout Element::build() {
     } else
       type = table[children[i].type];
 
-    // TODO Build Children Here
     Component component;
     component.typeID = type;
     component.position = corner + size / 2.0f;
     component.size = size;
     out.components.push_back(component);
 
+    // TODO Build Children Here
     Layout l = children[i].build();
     for (auto ll : l.components) {
-      printf("%f %f\n", ll.position->x, ll.position->y);
       ll.position = corner + ll.position * size;
       ll.size *= size;
       out.components.push_back(ll);
