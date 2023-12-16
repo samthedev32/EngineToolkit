@@ -8,6 +8,8 @@
 
 using namespace EngineToolkit;
 
+// WARNING: this file is in active development; it WILL change
+
 int main() {
   UI::LayoutPrototype prototype(UI::Arrangement::Vertical);
 

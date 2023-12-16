@@ -1,7 +1,6 @@
 #include <EngineToolkit/UI/Element.hpp>
 
-namespace EngineToolkit {
-namespace UI {
+namespace EngineToolkit::UI {
 
 Layout Element::build() {
   Layout out;
@@ -17,6 +16,7 @@ Layout Element::build() {
     vec<2, float> corner; // top-left corner
     vec<2, float> size;
 
+    //
     switch (arrangement) {
     case Arrangement::Horizontal:
       size->width = (1.0f - padding->width - children.size() * padding->width) / children.size();
@@ -74,5 +74,4 @@ Layout Element::build() {
   return out;
 }
 
-} // namespace UI
-} // namespace EngineToolkit
+} // namespace EngineToolkit::UI

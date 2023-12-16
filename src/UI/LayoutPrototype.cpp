@@ -12,8 +12,7 @@ namespace UI {
 
 LayoutPrototype::LayoutPrototype(Arrangement arrangement) {
   // Set Up Canvas
-  canvas.ratio = {};                  // TODO maybe definable
-  canvas.position = canvas.size = {}; // undefined
+  canvas.ratio = {}; // TODO maybe definable
   canvas.arrangement = arrangement;
   canvas.children.clear();
   canvas.type = "canvas";

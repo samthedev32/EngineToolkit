@@ -1,8 +1,19 @@
 UI Builder:
-    - 
+    - ui elements only have ratios, but not actual sizes
+        - if something doesn't have a ratio (ratio == 0), it gets the max available space
+        - if something has a ratio, it gets assigned the largest available space it can fit in
+    - ui elements types are defined by flags (uint32_t)
+        - first 1024 or so are preserved for internal use
+            - cannot be user-defined
+            - can be checked with a binary & operator
+            - if unknown to renderer, should log an error
+        - the rest are user-definable
+            - user-defined render scripts
 
 UI Renderer:
     - texts are rendered to textures, stored in a map (key is usage time), fixed number, oldests get re-rendered for different texts; on android in a low-memory event the # of texts can decrease (all the way to 0)
     - drawers and stuff like that gets rendered to a separate layer/texture; not re-rendered unless content is updates
 
-    
+Common:
+    - Un-Pack
+        - a .sh script that unpacks a specific part of the library

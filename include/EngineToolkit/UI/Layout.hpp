@@ -6,8 +6,7 @@
 #include <unordered_map>
 #include <vector>
 
-namespace EngineToolkit {
-namespace UI {
+namespace EngineToolkit::UI {
 
 // Layout Component
 struct Component {
@@ -32,5 +31,4 @@ public:
   static Layout load(const char *path);
 };
 
-} // namespace UI
-} // namespace EngineToolkit
+} // namespace EngineToolkit::UI
