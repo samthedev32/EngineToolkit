@@ -43,6 +43,12 @@ private:
 public:
   static Image load(const char *path);
   bool save(const char *path);
+
+  enum { Vertically, Horizontally };
+  enum { Clockvise, CounterClockvise };
+
+  void flip(typeof(Vertically) orientation = Vertically);
+  void rotate(typeof(Clockvise) direction = Clockvise);
 };
 
 } // namespace EngineToolkit

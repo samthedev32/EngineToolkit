@@ -15,9 +15,12 @@ set(SOURCES
     # src/mesh/mesh.cpp
 
     # Media
+
+    ## Image
     src/media/image/common.cpp
     src/media/image/load.cpp
     src/media/image/save.cpp
+    src/media/image/transform.cpp
 
     # UI
     src/UI/Layout.cpp

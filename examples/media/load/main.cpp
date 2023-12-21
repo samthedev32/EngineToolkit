@@ -8,6 +8,9 @@ using namespace EngineToolkit;
 int main() {
   Image img("../../../../examples/media/test.bmp");
 
+  img.flip(Image::Horizontally);
+  // img.rotate();
+
   // Initialize GLFW
   if (!glfwInit()) {
     return -1;
@@ -26,7 +29,7 @@ int main() {
   GLuint tex;
   glGenTextures(1, &tex);
   glBindTexture(GL_TEXTURE_2D, tex);
-  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, img.size->x, img.size->y, 0, GL_RGB, GL_UNSIGNED_BYTE,
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, img.size->x, img.size->y, 0, GL_BGR, GL_UNSIGNED_BYTE,
                img.data);
 
   // Set texture parameters
