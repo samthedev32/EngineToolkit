@@ -16,13 +16,13 @@ int main() {
   prototype.Box([&] {
     UI::LayoutPrototype p(UI::Arrangement::Horizontal);
 
-    p.Element("card");
-    p.Element("card");
+    p.Element("card", 1);
+    p.Element("card", 1);
     p.Box([&] {
       UI::LayoutPrototype p(UI::Arrangement::Vertical);
 
-      p.Element("card");
-      p.Element("card");
+      p.Element("card", 1);
+      p.Element("card", 1);
 
       return p;
     }());
@@ -30,12 +30,12 @@ int main() {
     return p;
   }());
 
-  prototype.Element("card");
-  prototype.Element("card");
-  prototype.Element("card");
+  prototype.Element("card", 1);
+  prototype.Element("card", 2);
+  prototype.Element("card", 2);
 
   UI::Layout layout = prototype.build();
-  layout.save("test.layout");
+  // layout.save("test.layout");
 
   // UI::Layout layout = UI::Layout::load("test.layout");
 

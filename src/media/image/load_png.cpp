@@ -31,34 +31,13 @@ bool Image::isPNG(FILE *f) {
   const char magic[] = "\x89PNG\x0D\x0A\x1A\x0A";
 
   // Check Header
-  for (int i = 0; i < 8; i++)
-    if (header[i] != magic[i])
-      return false;
+  if (strncmp(header, magic, 8))
+    return false;
 
   return true;
 }
 
-bool Image::isBMP(FILE *f) {
-  if (!f)
-    return false;
-
-  fseek(f, 0, SEEK_SET);
-
-  // Read Header
-  char header[2];
-  if (!fread(header, 2, 1, f))
-    return false;
-
-  // PNG Magic
-  const char magic[] = "BM";
-
-  // Check Header
-  for (int i = 0; i < 2; i++)
-    if (header[i] != magic[i])
-      return false;
-
-  return true;
-}
+// TODO decompressing algorithm
 
 Image Image::loadPNG(FILE *f) {
   Image out;
@@ -123,7 +102,7 @@ Image Image::loadPNG(FILE *f) {
         printf("Failed to read Chunk Data ('%.4s')\n", chunk.type);
         // if chunk is critical, exit; else ignore
         if (id != 0) {
-          printf("invalid file");
+          printf("invalid file\n");
           return out;
         } else {
           // disable chunk
@@ -170,7 +149,7 @@ Image Image::loadPNG(FILE *f) {
       // valid: 1,2,4,8,16
       case 0: // Each pixel is a grayscale sample
         if (!isOneOf(ihdr.bitDepth, 1, 2, 4, 8, 16)) {
-          printf("invalid bit depth");
+          printf("invalid bit depth\n");
           return out;
         }
         break;
@@ -180,7 +159,7 @@ Image Image::loadPNG(FILE *f) {
       case 4: // Each pixel is a grayscale sample, followed by an alpha sample
       case 6: // Each pixel is an R,G,B triple, followed by an alpha sample
         if (!isOneOf(ihdr.bitDepth, 8, 16)) {
-          printf("invalid bit depth");
+          printf("invalid bit depth\n");
           return out;
         }
         break;
@@ -188,7 +167,7 @@ Image Image::loadPNG(FILE *f) {
         // valid: 1,2,4,8
       case 3: // Each pixel is a palette index; a PLTE chunk must appear
         if (!isOneOf<uint8_t>(ihdr.bitDepth, 1, 2, 4)) {
-          printf("invalid bit depth");
+          printf("invalid bit depth\n");
           return out;
         }
         break;
@@ -262,92 +241,41 @@ Image Image::loadPNG(FILE *f) {
       // TODO: finish up & return image
 
       // Decompress Data
-      uLong dstSize =
-          ihdr.width * ihdr.height * ihdr.bitDepth; // TODO: color type
-      unsigned char *dst =
-          (unsigned char *)malloc(sizeof(unsigned char) * dstSize);
-      int result = uncompress((Bytef *)dst, &dstSize, (const Bytef *)idat.data,
-                              idat.size);
+      uLong dstSize = ihdr.width * ihdr.height * ihdr.bitDepth; // TODO: color type
+      unsigned char *dst = (unsigned char *)malloc(sizeof(unsigned char) * dstSize);
+      int result = uncompress((Bytef *)dst, &dstSize, (const Bytef *)idat.data, idat.size);
 
       if (result) {
         printf("Failed to Decompress Image\n");
         return out;
       }
 
+      // TODO filtering
       switch (ihdr.filterMethod) {
       default:
+      case 0: // None
+        break;
+
+      case 1: // Sub
+        break;
+
+      case 2: // Up
+        break;
+
+      case 3: // Avarage
+        break;
+
+      case 4: // Paeth
         break;
       }
 
       out.size = {ihdr.width, ihdr.height};
-      out.channels = 3;
+      out.channels = 3; // TODO determine channels
       out.data = dst;
     } break;
     }
   }
 
-  return out;
-}
-
-Image Image::loadBMP(FILE *f) {
-  Image out;
-
-  // Skip Magic
-  fseek(f, 0, SEEK_SET);
-
-  // Get Image Info
-  unsigned int dataPos;
-  unsigned int imageSize;
-  unsigned char header[54];
-
-  // Check File
-  if (fread(header, 1, 54, f) != 54) {
-    printf("failed to read bmp header\n");
-    return out;
-  }
-
-  // Read Basic Info
-  dataPos = *(int *)&(header[0x0A]);         // 10
-  imageSize = *(int *)&(header[0x22]);       // 32
-  out.size->width = *(int *)&(header[0x12]); // 18
-  out.size->height = *(int *)&(header[0x16]);
-  out.channels = 3; // TODO: check
-
-  if (imageSize == 0)
-    imageSize = out.size->width * out.size->height * out.channels;
-  if (dataPos == 0)
-    dataPos = 54;
-
-  // Load in image data
-  out.data = (unsigned char *)malloc(sizeof(unsigned char) * imageSize);
-
-  fseek(f, dataPos, SEEK_SET);
-  fread(out.data, 1, imageSize, f);
-
-  // TODO: error handling
-
-  return out;
-}
-
-Image Image::load(const char *path) {
-  Image out;
-
-  // Open File
-  FILE *f = fopen(path, "rb");
-  if (!f) {
-    printf("failed to open file\n");
-    return out;
-  }
-
-  // Determine File Type
-  if (isPNG(f))
-    out = loadPNG(f);
-  else if (isBMP(f))
-    out = loadBMP(f);
-  else
-    printf("failed to identify file type\n");
-
-  fclose(f);
   return out;
 }
 

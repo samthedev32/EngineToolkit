@@ -50,8 +50,9 @@ It aims to replace libraries, like:
   * - [ ] [Material](../include/EngineToolkit/model/material.hpp)
   * - [ ] [Model](../include/EngineToolkit/model/model.hpp)
 * - [ ] Misc
+  * - [ ] Window -er
   * - [ ] Scripting Engine
-  * - [ ] Clock
+  * - [ ] Clock / Timer
   * - [ ] [UI Builder](../include/EngineToolkit/UI)
 
 <!-- TODO: README-s in feature folders, added into `.gitignore` -->

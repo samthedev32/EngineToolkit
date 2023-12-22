@@ -3,7 +3,6 @@
 #include <cstdio>
 #include <cstring>
 #include <string>
-#include <zlib.h>
 
 namespace EngineToolkit {
 
@@ -45,6 +44,44 @@ void Image::operator=(Image const &image) {
 unsigned char *Image::operator()(uint32_t x, uint32_t y) const {
   return &this->data[(MIN(x, this->size->x - 1) + MIN(y, this->size->y - 1) * this->size->x)
                      * channels];
+}
+
+// Other
+
+Image Image::load(const char *path) {
+  Image out;
+
+  // Open File
+  FILE *f = fopen(path, "rb");
+  if (!f) {
+    printf("failed to open file\n");
+    return out;
+  }
+
+  // Determine File Type
+  if (isPNG(f))
+    out = loadPNG(f);
+  else if (isBMP(f))
+    out = loadBMP(f);
+  else
+    printf("failed to identify file type\n");
+
+  fclose(f);
+  return out;
+}
+
+bool Image::save(const char *path) {
+  // Determine File Type
+  const char *ext = strrchr(path, '.');
+
+  // if (!strcmp(ext, ".png"))
+  // return savePNG(path);
+  // else if (!strcmp(ext, ".bmp"))
+  // return saveBMP(path);
+  // else
+  printf("Not Implemented!\n");
+
+  return false;
 }
 
 } // namespace EngineToolkit

@@ -18,9 +18,10 @@ set(SOURCES
 
     ## Image
     src/media/image/common.cpp
-    src/media/image/load.cpp
-    src/media/image/save.cpp
     src/media/image/transform.cpp
+    
+    src/media/image/load_bmp.cpp
+    src/media/image/load_png.cpp
 
     # UI
     src/UI/Layout.cpp

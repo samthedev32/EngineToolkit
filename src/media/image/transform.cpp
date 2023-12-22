@@ -23,32 +23,49 @@ void Image::flip(typeof(Image::Vertically) orientation) {
   }
 }
 
-void Image::rotate(typeof(Image::Clockvise) direction) {
+void Image::rotate(typeof(Image::Clockwise) direction) {
   switch (direction) {
   default:
-  case Image::Clockvise:
+  case Image::Clockwise:
     for (uint32_t x = 0; x < size->width / 2; x++) {
       for (uint32_t y = 0; y < size->height / 2; y++) {
-        // (*this)(x, y)[ch]
-        // (*this)(size->width - y - 1, x)[ch]
-        // (*this)(size->width - x - 1, size->height - y - 1)[ch]
-        // (*this)(x, size->height - y - 1)[ch]
-        for (int ch = 0; ch < channels; ch++) {
-          unsigned char tmp = (*this)(x, y)[ch];
-          (*this)(x, y)[ch] = (*this)(size->height - y - 1, x)[ch];
-          (*this)(size->height - y - 1, x)[ch]
-              = (*this)(size->width - x - 1, size->height - y - 1)[ch];
-          (*this)(size->width - x - 1, size->height - y - 1)[ch]
-              = (*this)(x, size->height - y - 1)[ch];
-          (*this)(x, size->height - y - 1)[ch] = tmp;
+        if ((size->width % 2 && x == size->width / 2)
+            || (size->height % 2 && y == size->height / 2))
+          continue;
 
-          std::swap(size->width, size->height);
+        unsigned char *a = (*this)(x, y);
+        unsigned char *b = (*this)(size->height - y - 1, x);
+        unsigned char *c = (*this)(size->width - x - 1, size->height - y - 1);
+        unsigned char *d = (*this)(y, size->width - x - 1);
+        for (int ch = 0; ch < channels; ch++) {
+          unsigned char tmp = a[ch];
+          a[ch] = b[ch];
+          b[ch] = c[ch];
+          c[ch] = d[ch];
+          d[ch] = tmp;
         }
       }
     }
+    std::swap(size->width, size->height);
     break;
 
-  case Image::CounterClockvise:
+  case Image::CounterClockwise:
+    for (uint32_t x = 0; x < size->width / 2; x++) {
+      for (uint32_t y = 0; y < size->height / 2; y++) {
+        unsigned char *a = (*this)(y, x);
+        unsigned char *b = (*this)(x, size->height - y - 1);
+        unsigned char *c = (*this)(size->height - y - 1, size->width - x - 1);
+        unsigned char *d = (*this)(size->width - x - 1, y);
+        for (int ch = 0; ch < channels; ch++) {
+          unsigned char tmp = a[ch];
+          a[ch] = b[ch];
+          b[ch] = c[ch];
+          c[ch] = d[ch];
+          d[ch] = tmp;
+        }
+      }
+    }
+    std::swap(size->width, size->height);
     break;
   }
 }

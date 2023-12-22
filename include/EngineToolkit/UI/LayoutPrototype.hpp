@@ -8,12 +8,12 @@ namespace UI {
 // Layout Prototype to build Layouts
 class LayoutPrototype {
 public:
-  LayoutPrototype(Arrangement arrangement = Arrangement::None);
+  LayoutPrototype(Arrangement arrangement = Arrangement::Vertical);
 
   // ---- Core
 
   LayoutPrototype &Container(LayoutPrototype content, Arrangement arrangement);
-  LayoutPrototype &Element(std::string id);
+  LayoutPrototype &Element(std::string id, float ratio);
 
   // ---- Containers
 
@@ -74,6 +74,7 @@ public:
   // TODO
 
   // Build Layout
+  void rebuild();
   Layout build();
 
 private:

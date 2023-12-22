@@ -5,71 +5,78 @@ namespace EngineToolkit::UI {
 Layout Element::build() {
   Layout out;
 
-  // NOTE: will be a per-element modifier
-  vec<2, float> padding = {0.0f};
+  std::vector<Layout> ch;
+  std::vector<float> ratios;
+  vec<2, float> sum;
 
-  // Clear temporary and permanent tables
-  std::unordered_map<std::string, uint32_t> table;
-  out.table.clear();
+  // // Build Children
+  // for (int i = 0; i < children.size(); i++) {
+  //   Layout l = children[i].build();
+  //   for (int j = 0; j < l.components.size(); j++) {
+  //     // l.components[j].size
+  //   }
 
-  for (int i = 0; i < children.size(); i++) {
-    vec<2, float> corner; // top-left corner
-    vec<2, float> size;
+  //   ch.push_back(l);
+  //   for (auto ll : l.components) {
+  //     ll.position = corner + ll.position * size;
+  //     ll.size *= size;
+  //     out.components.push_back(ll);
+  //   }
+  // }
 
-    //
-    switch (arrangement) {
-    case Arrangement::Horizontal:
-      size->width = (1.0f - padding->width - children.size() * padding->width) / children.size();
-      size->height = 1.0f - padding->height * 2;
+  // // out.table.merge(l.table);
 
-      corner->x = padding->width + (size->width + padding->width) * i;
-      corner->y = padding->height;
-      break;
+  // vec<2, float> corner; // top-left corner
+  // vec<2, float> size;
 
-    case Arrangement::Vertical:
-      size->width = 1.0f - padding->width * 2;
-      size->height = (1.0f - padding->height - children.size() * padding->height) / children.size();
+  // switch (arrangement) {
+  // case Arrangement::Horizontal:
+  //   size->width = (1.0f - padding->width - children.size() * padding->width) / children.size();
+  //   // size->height = 1.0f - padding->height * 2;
+  //   size->height = size->width / children[i].ratio;
 
-      corner->x = padding->width;
-      corner->y = padding->height + (size->height + padding->height) * i;
-      break;
+  //   corner->x = padding->width + (size->width + padding->width) * i;
+  //   corner->y = padding->height;
+  //   break;
 
-    default:
-    case Arrangement::None:
-      corner = padding;
-      size = vec<2, float>{1.0f} - padding * 2.0f;
-      break;
-    }
+  // case Arrangement::Vertical:
+  //   size->height = (1.0f - padding->height - children.size() * padding->height) /
+  //   children.size();
+  //   // size->width = 1.0f - padding->width * 2;
+  //   size->width = size->height * children[i].ratio;
 
-    uint32_t type = 0;
-    if (table.count(children[i].type) == 0) {
-      type = table.size();
+  //   corner->x = padding->width;
+  //   corner->y = padding->height + (size->height + padding->height) * i;
+  //   break;
 
-      // make sure we do not have duplicates
-      while (out.table.count(type))
-        type++;
+  // default:
+  // case Arrangement::None:
+  //   corner = padding;
+  //   size = (vec<2, float>{1.0f} - padding * 2.0f) * children[i].ratio;
+  //   break;
+  // }
 
-      table[children[i].type] = type;
-      out.table[type] = children[i].type;
-    } else
-      type = table[children[i].type];
+  // // uint32_t type = 0;
+  // // if (table.count(children[i].type) == 0) {
+  // //   type = table.size();
 
-    Component component;
-    component.typeID = type;
-    component.position = corner + size / 2.0f;
-    component.size = size;
-    out.components.push_back(component);
+  // //   // make sure we do not have duplicates
+  // //   while (out.table.count(type))
+  // //     type++;
 
-    // TODO Build Children Here
-    Layout l = children[i].build();
-    for (auto ll : l.components) {
-      ll.position = corner + ll.position * size;
-      ll.size *= size;
-      out.components.push_back(ll);
-    }
+  // //   table[children[i].type] = type;
+  // //   out.table[type] = children[i].type;
+  // // } else
+  // //   type = table[children[i].type];
 
-    out.table.merge(l.table);
-  }
+  // Component component;
+  // component.typeID = children[i].type;
+  // component.position = corner + size / 2.0f;
+  // component.size = size;
+  // out.components.push_back(component);
+
+  // Build Self
+  // TODO: add to `out` Layout
 
   return out;
 }

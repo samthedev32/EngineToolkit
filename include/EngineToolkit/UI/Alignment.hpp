@@ -62,8 +62,6 @@ struct Alignment {
       horizontal = End;
   }
 
-  // TODO: more constructors
-
   /**
    * Constructor to create Alignment using a Combined Type
    */

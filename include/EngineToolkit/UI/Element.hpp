@@ -8,10 +8,10 @@ namespace EngineToolkit::UI {
 /**
  * Arrangement of a Container
  *  - None: Elements are put on top of each other
- *  - Vertical: Elements are placed vertically to each other (row)
- *  - Horizontal: Elements are placed horizontally to each other (column)
+ *  - Vertical (row): Elements are placed vertically to each other
+ *  - Horizontal (column): Elements are placed horizontally to each other
  *
- * TODO: actually usable Arrangement in "Arrangement.hpp"
+ * TODO: space-between (##--##--##), space-around (-##--##--##-), space-evenly (--##--##--##--)
  */
 enum class Arrangement { None, Vertical, Horizontal };
 
@@ -22,23 +22,20 @@ enum class Arrangement { None, Vertical, Horizontal };
 struct Element {
   Alignment alignment;
 
-  float scale = 1.0f; // scale of the element compared to the maximum size
-
-  bool flipRatio = false; // Scale element by width or by height
-  float ratio;            // if flipRatio is... false: ratio=width/height | true: ratio=height/width
-
+  // float ratio = 0; // width / height
+  float ratio;
   vec<2, float> position;
 
   // Container Properties
-  struct {
-    Arrangement arrangement;
-    std::vector<Element> children;
-  };
+  Arrangement arrangement;
+  std::vector<Element> children;
 
-  std::string type;
-  // uint16_t type;
+  uint16_t type;
   // uint16_t subType;
 
+  /**
+   * Build Element & Children
+   */
   Layout build();
 };
 

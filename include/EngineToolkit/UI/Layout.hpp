@@ -31,4 +31,4 @@ public:
   static Layout load(const char *path);
 };
 
-} // namespace EngineToolkit::UI
+}

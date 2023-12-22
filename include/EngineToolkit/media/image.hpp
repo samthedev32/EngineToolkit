@@ -37,18 +37,19 @@ private:
   static Image loadPNG(FILE *f);
   static Image loadBMP(FILE *f);
 
-  bool savePNG(const char *path);
-  bool saveBMP(const char *path);
+  // bool savePNG(const char *path);
+  // bool saveBMP(const char *path);
 
 public:
+  // TODO request #channels
   static Image load(const char *path);
   bool save(const char *path);
 
   enum { Vertically, Horizontally };
-  enum { Clockvise, CounterClockvise };
+  enum { Clockwise, CounterClockwise };
 
   void flip(typeof(Vertically) orientation = Vertically);
-  void rotate(typeof(Clockvise) direction = Clockvise);
+  void rotate(typeof(Clockwise) direction = Clockwise);
 };
 
 } // namespace EngineToolkit
