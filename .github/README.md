@@ -50,7 +50,7 @@ It aims to replace libraries, like:
   * - [ ] [Material](../include/EngineToolkit/model/material.hpp)
   * - [ ] [Model](../include/EngineToolkit/model/model.hpp)
 * - [ ] Misc
-  * - [ ] Window -er
+  * - [ ] [Window](../include/EngineToolkit/window/window.hpp)
   * - [ ] Scripting Engine
   * - [ ] Clock / Timer
   * - [ ] [UI Builder](../include/EngineToolkit/UI)

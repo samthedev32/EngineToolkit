@@ -2,7 +2,6 @@
 
 #include <cstdio>
 #include <cstring>
-#include <string>
 #include <zconf.h>
 #include <zlib.h>
 
@@ -145,32 +144,22 @@ Image Image::loadPNG(FILE *f) {
       }
 
       // Validate Color Type & Bit Depth
-      switch (ihdr.colorType) {
-      // valid: 1,2,4,8,16
-      case 0: // Each pixel is a grayscale sample
-        if (!isOneOf(ihdr.bitDepth, 1, 2, 4, 8, 16)) {
-          printf("invalid bit depth\n");
-          return out;
-        }
-        break;
+      bool palette = ihdr.colorType & 1 << 0;
+      bool color = ihdr.colorType & 1 << 1;
+      bool alpha = ihdr.colorType & 1 << 2;
 
-      // valid: 8,16
-      case 2: // Each pixel is an R,G,B triple
-      case 4: // Each pixel is a grayscale sample, followed by an alpha sample
-      case 6: // Each pixel is an R,G,B triple, followed by an alpha sample
+      if (color && alpha) {
         if (!isOneOf(ihdr.bitDepth, 8, 16)) {
           printf("invalid bit depth\n");
           return out;
         }
-        break;
+      }
 
-        // valid: 1,2,4,8
-      case 3: // Each pixel is a palette index; a PLTE chunk must appear
+      if (palette && color) {
         if (!isOneOf<uint8_t>(ihdr.bitDepth, 1, 2, 4)) {
           printf("invalid bit depth\n");
           return out;
         }
-        break;
       }
 
       // Validate Compression Method
@@ -245,6 +234,11 @@ Image Image::loadPNG(FILE *f) {
       unsigned char *dst = (unsigned char *)malloc(sizeof(unsigned char) * dstSize);
       int result = uncompress((Bytef *)dst, &dstSize, (const Bytef *)idat.data, idat.size);
 
+      out.size = {ihdr.width, ihdr.height};
+      out.channels = 3; // TODO determine channels
+      out.data = (unsigned char *)malloc(sizeof(unsigned char) * out.size->width * out.size->height
+                                         * out.channels);
+
       if (result) {
         printf("Failed to Decompress Image\n");
         return out;
@@ -254,6 +248,7 @@ Image Image::loadPNG(FILE *f) {
       switch (ihdr.filterMethod) {
       default:
       case 0: // None
+
         break;
 
       case 1: // Sub
@@ -268,10 +263,6 @@ Image Image::loadPNG(FILE *f) {
       case 4: // Paeth
         break;
       }
-
-      out.size = {ihdr.width, ihdr.height};
-      out.channels = 3; // TODO determine channels
-      out.data = dst;
     } break;
     }
   }

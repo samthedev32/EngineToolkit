@@ -3,10 +3,12 @@
 #include <GL/gl.h>
 #include <GLFW/glfw3.h>
 
+#include <config.h>
+
 using namespace EngineToolkit;
 
 int main() {
-  Image img("../../../../examples/media/test.png");
+  Image img(pathto("res/test.bmp").c_str());
 
   printf("%i %i\n", img.size->width, img.size->height);
   // img.flip(Image::Horizontally);

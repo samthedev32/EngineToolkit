@@ -1,0 +1,4 @@
+#define EXAMPLES_DIR "${CMAKE_SOURCE_DIR}/examples/"
+
+#include <string>
+#define pathto(file) (std::string(EXAMPLES_DIR) + file)

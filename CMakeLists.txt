@@ -27,10 +27,16 @@ set(SOURCES
     src/UI/Layout.cpp
     src/UI/Element.cpp
     src/UI/LayoutPrototype.cpp
+
+    # ECS
+    src/ecs/ecs.cpp
+
+    # Window
+    src/window/x11.cpp
 )
 
 # Libraries
-set(LIBRARIES m z)
+set(LIBRARIES m z X11)
 
 # Project (Library)
 project(EngineToolkit VERSION 0.1.0 LANGUAGES C CXX)
