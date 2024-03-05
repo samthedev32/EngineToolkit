@@ -77,6 +77,12 @@ public:
   void rebuild();
   Layout build();
 
+  // Convert HTML to LayoutPrototype
+  static LayoutPrototype fromHTML(std::string html);
+
+  // Convert LayoutPrototype to HTML
+  std::string toHTML();
+
 private:
   struct Element canvas;
 };

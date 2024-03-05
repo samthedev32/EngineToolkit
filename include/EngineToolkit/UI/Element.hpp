@@ -34,9 +34,15 @@ struct Element {
   // uint16_t subType;
 
   /**
-   * Build Element & Children
+   * Build Children & Element
    */
   Layout build();
+
+  // Element Properties
+  struct Properties {
+    bool fillMaxWidth, fillMaxHeight;
+    // TODO
+  } properties;
 };
 
 } // namespace EngineToolkit::UI

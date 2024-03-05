@@ -1,14 +1,8 @@
 #include <EngineToolkit/UI/LayoutPrototype.hpp>
 
 #include <algorithm>
-#include <cstdint>
-#include <limits>
-#include <memory>
-#include <stdexcept>
-#include <unordered_map>
 
-namespace EngineToolkit {
-namespace UI {
+namespace EngineToolkit::UI {
 
 LayoutPrototype::LayoutPrototype(Arrangement arrangement) {
   // Set Up Canvas
@@ -80,6 +74,4 @@ Layout LayoutPrototype::build() {
 #undef CONTENT
 #undef MODIFIER
 
-} // namespace UI
-
-} // namespace EngineToolkit
+} // namespace EngineToolkit::UI
