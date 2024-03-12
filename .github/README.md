@@ -2,8 +2,8 @@
 
 ## About
 
-> [!IMPORTANT]
-> This library is **still under development**, and is not ready *just yet*
+> [!WARNING]
+> This library is probably going to be scrapped and its components may get reused in other projects
 
 > [!NOTE]
 > This library may be transformed into a github organization with every component as a standalone repo
