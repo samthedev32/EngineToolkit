@@ -5,9 +5,6 @@
 > [!WARNING]
 > This library is probably going to be scrapped and its components may get reused in other projects
 
-> [!NOTE]
-> This library may be transformed into a github organization with every component as a standalone repo
-
 This library is a core platform for Game Engines
 
 It is designed to contain every essential tool that a Game Engine needs
